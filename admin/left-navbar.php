@@ -50,7 +50,7 @@
   <!-- Brand Logo -->
   <a href="index.php" class="brand-link">
     <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light"><b> MPL Printing </b></span>
+    <span class="brand-text font-weight-light"><b> MLP Printing </b></span>
   </a>
 
   <!-- Sidebar -->
@@ -70,18 +70,34 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="bahan.php" class="nav-link" id="bahan">
+            <i class="nav-icon fas fa-print"></i>
+            <p>
+              Penambahan Bahan
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="stok.php" class="nav-link" id="stok">
-            <i class="nav-icon fas fa-tshirt"></i>
+            <i class="nav-icon fas fa-layer-group"></i>
             <p>
               Stok
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="laporan.php" class="nav-link" id="laporan">
+          <a href="laporan_stok.php" class="nav-link" id="laporan_stok">
             <i class="nav-icon fas fa-file-alt"></i>
             <p>
-              Laporan
+              Laporan Stok
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="laporan_pesanan.php" class="nav-link" id="laporan_pesanan">
+            <i class="nav-icon far fa-file-powerpoint"></i>
+            <p>
+              Laporan Pesanan
             </p>
           </a>
         </li>

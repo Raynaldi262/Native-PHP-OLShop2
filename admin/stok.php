@@ -12,7 +12,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | DataTables</title>
+    <title>Admin | Stok</title>
 
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -46,7 +46,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-left" id="stok">
                                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                                <li class="breadcrumb-item active">Stok</li>
+                                <li class="breadcrumb-item active">Stock</li>
                             </ol>
                         </div>
                     </div>
@@ -61,59 +61,37 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Data Admin PT. Media Langit Persada</h3>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-tambahBahan" id="tambahBahan">
-                                        Tambah Bahan
-                                    </button>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-striped">
+                                    <table id="example1" class="table table-bordered table-striped" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama</th>
-                                                <th>Produk</th>
-                                                <th>Satuan</th>
-                                                <th>Ukuran</th>
-                                                <th>Qty</th>
-                                                <th>Harga</th>
-                                                <th>Deskripsi</th>
+                                                <th>Stok</th>
+                                                <th>Pemakaian <br> (By Sistem)</th>
+                                                <th>Pemakaian <br>(Manual Edit)</th>
+                                                <th>Sisa</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $i = 1;
-                                            while ($data = mysqli_fetch_assoc($getItem)) { ?>
+                                            while ($data = mysqli_fetch_assoc($getItemStok)) { ?>
                                                 <tr>
                                                     <td><?php echo $i ?></td>
                                                     <td><?php echo $data['item_name']; ?></td>
-                                                    <td>
-                                                        <?php
-                                                        $result = [];
-
-                                                        $result[] = getProdukWhere($conn, $data['item_id']);
-                                                        foreach ($result as $datas) {
-                                                            $c = 0;
-                                                            $num = count($datas);   // ada brp data di dlmnya
-
-                                                            foreach ($datas as $value) {
-                                                                if (++$c == $num) { // kalau data trakhir, ga print koma
-                                                                    echo $value['produk_name'];
-                                                                } else { // kalau bukan trakhir print koma
-                                                                    echo $value['produk_name'] . ', ';
-                                                                }
-                                                            }
-                                                        }
-                                                        ?>
-                                                    </td>
-                                                    <td><?php echo $data['item_type']; ?></td>
-                                                    <td><?php echo $data['item_size']; ?></td>
+                                                    <td><?php echo $data['stok']; ?></td>
+                                                    <td><?php echo $data['stock_out']; ?></td>
+                                                    <td><?php echo $data['stock_out_manual']; ?></td>
                                                     <td><?php echo $data['item_qty']; ?></td>
-                                                    <td><?php echo $data['item_price']; ?></td>
-                                                    <td><?php echo $data['item_desc']; ?></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-warning ubahBahan" data-toggle="modal" data-target="#modal-ubahBahan" id="<?php echo $data['item_id']; ?>">
-                                                            Ubah Bahan
+                                                        <button type="button" class="btn btn-success tambah" data-toggle="modal" data-target="#modal-tambah" id="<?php echo $data['item_id']; ?>">
+                                                            <i class="nav-icon fas fa-plus"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger kurang" data-toggle="modal" data-target="#modal-kurang" id="<?php echo $data['item_id']; ?>">
+                                                            <i class="nav-icon fas fa-minus"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -145,73 +123,38 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
     </div>
     <!-- ./wrapper -->
 
-    <!-- modal tambah data -->
-    <div class="modal fade" id="modal-tambahBahan">
+    <!-- modal Tambah Stok -->
+    <div class="modal fade" id="modal-tambah">
         <div class="modal-dialog">
-            <div class="modal-content col-12">
+            <div class="modal-content col-10">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Admin</h4>
+                    <h4 class="modal-title">Penambahan Stok</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="text-align: center;">
                     <form action="../model/AdminStok.php" method="post">
+                        <input type="hidden" name="stok_id" id="stok_id">
                         <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Nama Bahan : </div>
-                            <input type="text" class="form-control" placeholder="Nama Bahan" name="name" required>
-                            <div class="input-group-append">
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Jumlah : </div>
-                            <input type="number" class="form-control col-5" placeholder="Jumlah Bahan" name="qty" min="1" required>
+                            <div class="col-4 input-group-text">Nama Bahan : </div>
+                            <input type="text" class="form-control" name="stok_name" id="stok_name" readonly>
                             <div class="input-group-append">
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Satuan : </div>
-                            <select id="satuan" name="satuan" required>
-                                <option value="METER">Meter</option>
-                                <option value="PCS">PCS</option>
-                            </select>
-                            <div class="input-group-append">
-                            </div>
-                        </div>
-                        <!-- ukuran isinya buat yg ketentuannya pcs - misal a4 a3+ dst -->
-                        <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Ukuran : </div>
-                            <input type="text" class="form-control col-5" placeholder="a3/a4/a5" name="size" id="size" readonly>
+                            <div class="col-4 input-group-text">Stok Tersedia : </div>
+                            <input type="number" class="form-control" name="stok_old" id="stok_old" readonly>
                             <div class="input-group-append">
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Kegunaan : </div>
-                            <select id="desc" name="desc" required>
-                                <option value="BAHAN">Bahan</option>
-                                <option value="FINISHING">Finishing</option>
-                                <option value="KAKI">Kaki</option>
-                            </select>
+                            <div class="col-4 input-group-text">Penambahan: </div>
+                            <input type="number" class="form-control" placeholder="Banyak" name="stok" min="1" required>
                             <div class="input-group-append">
                             </div>
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Harga : </div>
-                            <input type="number" class="form-control" placeholder="Harga Bahan" name="price" min="1" required>
-                            <div class="input-group-append">
-                            </div>
-                        </div>
-                        <div class="input-group mb-2">
-                            <div class="col-12 input-group-text">Produk : </div>
-                            <select id="produk" name="produk[]" class="form-control" multiple="multiple" required>
-                                <?php foreach ($produk as $data) { ?>
-                                    <option value=" <?php echo $data['produk_id']; ?> "><?php echo $data['produk_name']; ?></option>
-                                <?php } ?>
-                            </select>
-                            <div class="input-group-append">
-                            </div>
-                        </div>
-                        <input type="submit" class="btn btn-success" name="insertBahan" value="Tambah Bahan">
+                        <input type="submit" class="btn btn-success" name="add_stok" value="Tambahkan Stok">
                     </form>
                 </div>
             </div>
@@ -219,77 +162,40 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal tambah data -->
+    <!-- /.modal Tambah Stok-->
 
 
-    <!-- modal Edit data -->
-    <div class="modal fade" id="modal-ubahBahan">
+    <div class="modal fade" id="modal-kurang">
         <div class="modal-dialog">
-            <div class="modal-content col-12">
+            <div class="modal-content col-10">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Admin</h4>
+                    <h4 class="modal-title">Pengurangan Stok</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="text-align: center;">
                     <form action="../model/AdminStok.php" method="post">
-                        <input type='hidden' name='id' id='edt_id'>
+                        <input type="hidden" name="stok_id2" id="stok_id2">
                         <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Nama Bahan : </div>
-                            <input type="text" class="form-control" placeholder="Nama Bahan" name="name" id="edt_name">
-                            <div class="input-group-append">
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Satuan : </div>
-                            <select id="edt_satuan" name="satuan">
-                                <option class="satuan" value="PCS">PCS</option>
-                                <option class="satuan" value="METER">Meter</option>
-                            </select>
-                            <div class="input-group-append">
-                            </div>
-                        </div>
-                        <!-- ukuran isinya buat yg ketentuannya pcs - misal a4 a3+ dst -->
-                        <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Ukuran : </div>
-                            <input type="text" class="form-control col-5" placeholder="a3/a4/a5" name="size" id="edt_size" readonly>
+                            <div class="col-4 input-group-text">Nama Bahan : </div>
+                            <input type="text" class="form-control" name="stok_name2" id="stok_name2" readonly>
                             <div class="input-group-append">
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Jumlah : </div>
-                            <input type="number" class="form-control col-5" placeholder="Jumlah Bahan" name="qty" min="1" id="edt_qty">
+                            <div class="col-4 input-group-text">Stok Tersedia : </div>
+                            <input type="number" class="form-control" name="stok_old2" id="stok_old2" readonly>
                             <div class="input-group-append">
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Kegunaan : </div>
-                            <select id="edt_desc" name="desc">
-                                <option class="desc" value="BAHAN">Bahan</option>
-                                <option class="desc" value="FINISHING">Finishing</option>
-                                <option class="desc" value="KAKI">Kaki</option>
-                            </select>
+                            <div class="col-4 input-group-text">Pengurangan: </div>
+                            <input type="number" class="form-control" placeholder="Banyak" name="stok2" min="1" required>
                             <div class="input-group-append">
                             </div>
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Harga : </div>
-                            <input type="number" class="form-control" placeholder="Harga Bahan" name="price" min="1" id="edt_price">
-                            <div class="input-group-append">
-                            </div>
-                        </div>
-                        <div class="input-group mb-2">
-                            <div class="col-12 input-group-text">Produk : </div>
-                            <select id="edt_produk" name="produk[]" class="form-control" multiple="multiple">
-                                <?php foreach ($produk as $data) { ?>
-                                    <option class="produk" value=" <?php echo $data['produk_id']; ?> "><?php echo $data['produk_name']; ?></option>
-                                <?php } ?>
-                            </select>
-                            <div class="input-group-append">
-                            </div>
-                        </div>
-                        <input type="submit" class="btn btn-success" name="editBahan" value="Ubah Bahan">
+                        <input type="submit" class="btn btn-danger" name="dec_stok" value="Kurangkan Stok">
                     </form>
                 </div>
             </div>
@@ -297,8 +203,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal Edit data -->
-
+    <!-- /.modal Kurangkan Stok-->
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
@@ -352,37 +257,8 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
             $("#include-navbar").load("left-navbar.php");
         });
 
-
-        $(document).ready(function() {
-            $("#produk").select2({
-                multiple: true,
-                placeholder: "Silahkan Pilih",
-                width: '100%'
-            });
-
-        });
-
-
-        $('#edt_produk').select2().select2({
-            multiple: true,
-            placeholder: "Silahkan Pilih",
-            width: '100%',
-            val: [1]
-        });
-
-        // $("#edt_produk").val(["1", "2", "3"]).trigger("change");
-
-        //buat aktifin kolom ukuran kalau pilih pcs
-        $("#satuan").change(function() {
-            var value = $(this).val();
-            if (value == 'PCS') {
-                $('#size').removeAttr('readonly');
-            } else {
-                $('#size').prop('readonly', true);
-            }
-        });
-
-        $(document).on("click", ".ubahBahan", function() {
+        // Tambah stok disini
+        $(document).on("click", ".tambah", function() {
             var itemId = $(this).attr('id');
             $.ajax({
                 url: "../model/AdminStok.php", //the page containing php script
@@ -393,50 +269,31 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                     itemId: itemId
                 },
                 success: function(data) {
-                    // $("select option").each(function() {
-                    //     $(this).prop("selected", "false");
-                    // });
+                    $('#stok_id').val(data[0].item_id);
+                    $('#stok_name').val(data[0].item_name);
+                    $("#stok_old").val(data[0].item_qty);
+                    // $("#hapus").text('Anda yakin menghapus ' + data.item_name + ' ?');
+                }
+            });
+        });
 
-                    $('#edt_id').val(data[0].item_id);
-                    $('#edt_name').val(data[0].item_name);
-                    $("select option.satuan").each(function() {
-                        if ($(this).val().replace(/ /g, '') == data[0].item_type) {
-                            $(this).prop("selected", "true");
-                        }
-                    });
-
-                    if (data[0].item_type == 'PCS') {
-                        $('#edt_size').removeAttr('readonly');
-                    }
-
-                    $('#edt_size').val(data[0].item_size);
-                    $('#edt_qty').val(data[0].item_qty);
-
-                    $("select option.desc").each(function() {
-                        if ($(this).val().replace(/ /g, '') == data[0].item_desc) {
-                            $(this).prop("selected", "true");
-                        }
-                    });
-                    $('#edt_price').val(data[0].item_price);
-
-                    // $('#edt_produk').val(data[0].produk_id);
-
-                    var i = 0;
-                    $.each((data), function() {
-                        $("select option.produk").each(function() {
-                            if ($(this).val().replace(/ /g, '') == data[i].produk_id) {
-                                $(this).prop("selected", "true");
-                            }
-                        });
-                        i++;
-                    })
-
-
-
-                    // $.each($("#edt_produk"), function() {
-                    //     $(this).select2('val', data[0].produk_id);
-                    // });
-
+        // Kurangkan stok disini
+        $(document).on("click", ".kurang", function() {
+            var itemId = $(this).attr('id');
+            $.ajax({
+                url: "../model/AdminStok.php", //the page containing php script
+                type: "post", //request type,
+                dataType: 'json',
+                data: {
+                    stok_item: 1,
+                    itemId: itemId
+                },
+                success: function(data) {
+                    console.log(data);
+                    $('#stok_id2').val(data[0].item_id);
+                    $('#stok_name2').val(data[0].item_name);
+                    $("#stok_old2").val(data[0].item_qty);
+                    // $("#hapus").text('Anda yakin menghapus ' + data.item_name + ' ?');
                 }
             });
         });
