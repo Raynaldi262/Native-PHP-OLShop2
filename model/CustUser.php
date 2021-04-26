@@ -6,6 +6,20 @@ if (isset($_POST['register'])) {
  }
 
 
+function getDetailProduk($id , $conn){
+   $sql = "SELECT * from tbl_produk where produk_id = '". $id ."' ";
+   $item = mysqli_query($conn, $sql);
+   $data  = mysqli_fetch_assoc($item);
+   return $data;
+ }
+
+function GetdataProduk($conn){
+   $sql = "SELECT * from tbl_produk ";
+   $item = mysqli_query($conn, $sql);
+   return $item;
+}
+
+
 function insertUser($conn)
 {
    $sql = "SELECT * from tbl_customer where cust_email = '" . $_POST['email'] . "' ";

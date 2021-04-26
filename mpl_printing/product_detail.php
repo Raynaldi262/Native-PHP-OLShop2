@@ -1,3 +1,12 @@
+<?php 
+require('../connect/conn.php');
+require('../session/session.php');
+require('../model/CustUser.php');
+
+if (isset($_GET['id'])) {
+	$data_detail = getDetailProduk($_GET['id'] , $conn);
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -53,7 +62,7 @@
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a href="index.html">E-Commerce</a>
+                                    <a href="../mpl_printing/index.php">E-Commerce</a>
                                 </div>
                             </div>
                             <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
@@ -88,7 +97,7 @@
                                 <div class="collapse navbar-collapse" id="mainNav">
                                     <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                            <a class="nav-link" href="../mpl_printing/index.php">Home <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="electronics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Electronics</a>
@@ -143,30 +152,13 @@
                                 <div class="col-12 mb-3">
                                     <div class="img-large border" style="background-image: url('images/image-1.jpg')"></div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-sm-2 col-3">
-                                            <div class="img-small border" style="background-image: url('images/image-1.jpg')" data-src="images/image-1.jpg"></div>
-                                        </div>
-                                        <div class="col-sm-2 col-3">
-                                            <div class="img-small border" style="background-image: url('images/image-2.jpg')" data-src="images/image-2.jpg"></div>
-                                        </div>
-                                        <div class="col-sm-2 col-3">
-                                            <div class="img-small border" style="background-image: url('images/image-3.jpg')" data-src="images/image-3.jpg"></div>
-                                        </div>
-                                        <div class="col-sm-2 col-3">
-                                            <div class="img-small border" style="background-image: url('images/image-4.jpg')" data-src="images/image-4.jpg"></div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Product Images -->
 
                             <!-- Product Info -->
-                            <div class="col-lg-5 col-md-9">
+                            <div class="col-lg-7">
                                 <div class="col-12 product-name large">
-                                    Area 51M Gaming Laptop Welcome to A New ERA with 9TH GEN Intel CORE I9-9900K NVIDIA GEFORCE RTX 2080 8GB GDDR6 17.3" FHD 144HZ AG G-SYNC TOBII EYETRACKING (1TB SSD RAID|32GB RAM|10 PRO)
-                                    <small>By <a href="#">Dell</a></small>
+                                    <?php echo $data_detail['produk_name']?>
                                 </div>
                                 <div class="col-12 px-0">
                                     <hr>
@@ -182,36 +174,6 @@
                                 </div>
                             </div>
                             <!-- Product Info -->
-
-                            <!-- Sidebar -->
-                            <div class="col-lg-2 col-md-3 text-center">
-                                <div class="col-12 border-left border-top sidebar h-100">
-                                    <div class="row">
-                                        <div class="col-12">
-                                        <span class="detail-price">
-                                            $2,500
-                                        </span>
-                                            <span class="detail-price-old">
-                                            $2,800
-                                        </span>
-                                        </div>
-                                        <div class="col-xl-5 col-md-9 col-sm-3 col-5 mx-auto mt-3">
-                                            <div class="form-group">
-                                                <label for="qty">Quantity</label>
-                                                <input type="number" id="qty" min="1" value="1" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mt-3">
-                                            <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Add to cart</button>
-                                        </div>
-                                        <div class="col-12 mt-3">
-                                            <button class="btn btn-outline-secondary btn-sm" type="button"><i class="fas fa-heart mr-2"></i>Add to wishlist</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Sidebar -->
-
                         </div>
                     </div>
 
@@ -223,48 +185,225 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-12 text-uppercase">
-                                            <h2><u>Details</u></h2>
+                                            <h2><u>Spesifikasi</u></h2>
                                         </div>
                                         <div class="col-12" id="details">
-                                            <h4>OPERATING SYSTEM</h4>
-
-                                            <p><strong>Available with Windows 10 Home:</strong> Gaming is better than ever on Windows 10, with games in 4K, DirectX 12, and streaming your gameplay*.</p>
-                                            <hr>
-                                            <h4>CONSIDER THE GAME CHANGED</h4>
-
-                                            <p>The Alienware Area-51m is unlike any mobile gaming machine ever created. With unprecedented desktop-level processing power, CPU and GPU upgradability, advanced cooling and a premium, revolutionary design, a true desktop-gaming experience is now available in the form of a laptop.</p>
-                                            <hr>
-                                            <h4>DESKTOP POWER PACKED INTO A LAPTOP</h4>
-
-                                            <p>The Area-51m features a host of firsts for peak performance and power. It’s our first-ever Alienware laptop to feature 8-core, 16-thread Intel® processors, giving it a whole new level of compute power versus other gaming laptops. Engineered with desktop processors, the CPU is enabled with up to 125% rated power, allowing high-end overclocking. This results in higher performance for megatasking, CPU-intensive gaming, as well as day-to-day applications.</p>
-
-                                            <p>Lose yourself in vivid, uninterrupted gaming thanks to NVIDIA® GeForce RTX™ graphics with full-throttle power and up to 30W of overclocking headroom—all on an immersive 144Hz G-SYNC 17" Full HD display. Users can overclock their settings via the new Alienware Command Center.</p>
-
-                                            <p>The Area-51m is also our first-ever Alienware laptop to support up to 64GB of DDR4 memory, ensuring you have enough RAM for even the most performance-intensive tasks.</p>
-                                            <hr>
-                                            <h4>UNPRECEDENTED UPGRADEABILITY</h4>
-
-                                            <p>Gamers have made it clear that they’ve noticed a lack of CPU and GPU upgradability in gaming laptops.</p>
-
-                                            <p>The Area-51m was engineered with this in mind, finally allowing gamers to harness power comparable to even the highest-performance desktop, and taking advantage of latest technologies from NVIDIA® such as ray tracing, DLSS, and AI enhanced graphics.</p>
-
-                                            <p>CPU upgrades can be done using standard desktop-class processors, while GPU upgrades can be done via onboard graphics module replacement or with the Alienware Graphics Amplifier.</p>
-                                            <hr>
-                                            <h4>ADVANCED ALIENWARE CRYO-TECH COOLING</h4>
-
-                                            <p>Our thermal technology, Advanced Alienware Cryo-Tech v2.0, optimizes component cooling, which maximizes overall performance and keeps your laptop cool to the touch. Here’s a closer look at our innovative cooling solution.</p>
-
-                                            <p><strong>Dual-Intake, Dual-Exhaust Airflow Design:</strong> The Area-51m chassis prioritizes performance with a dual fan design that pulls in cool air from the bottom and top vents, while exhaling exhaust out the rear and side vents for optimal core component cooling. (The Intel® Core™ i7-8700 with NVIDIA® GeForce RTX™ 2060 configuration does not have a side-exhaust)</p>
-
-                                            <p><strong>High Voltage Driving Fan:</strong> The fire resistant, liquid-crystal polymer fan is built with 0.2mm blades, sleeve bearings and 3-phase fan control to create less friction and circulate air more efficiently. The Area-51m fans occupy an area of 95x105mm with a thickness ranging from 19mm to 21.5mm and can push over 25 CFM in open air conditions—something normally seen only in desktops.</p>
-
-                                            <p><strong>Load-balancing Heat Pipes:</strong> The dynamics of thermal activity across critical components like the GPU and the CPU are intelligently discharged across various dedicated and shared 8mm and 6mm copper-composite heat pipes.The highest-end configurations carry 7 total heat pipes.</p>
-
-                                            <p><strong>Copper Fin Stacks:</strong> The Area-51m features best-in-class surface temperatures, largely due to a thermal module, including four 0.15mm copper fins.Heat is drawn away from the most critical components to prioritize system performance and longevity.</p>
-
-                                            <p><strong>Thermal Control:</strong> Cryo-Tech v2.0 ensures that 100% of the system's GPU thermal design power is enabled, while also ensuring CPU-intensive games benefit from high performance.</p>
-
-                                            <p><strong>Whisper-quiet:</strong>  The cooling system of the Area-51m is so powerful, virtually no noise is heard while engaged in daily tasks.</p>
+                                            <h4><?php echo $data_detail['produk_name']?></h4>
+                                            <!-- <p><strong>Available with Windows 10 Home:</strong> -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <?php if($_GET['id'] == 1){ ?>
+                                                        <!-- KArtu Nama -->
+                                                    <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                            <label>Ukuran</label>
+                                                            <select name="ukuran" class="form-control">
+                                                              <option value="9 x 5,5 cm">9 x 5,5 cm</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <input type="text" name="bahan" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password-confirm">Jumlah / Box</label>
+                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } elseif ( $_GET['id'] == 2) {?> 
+                                                        <!-- Dokumen HVS -->
+                                                        <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                        <label>Ukuran</label>
+                                                            <select name="ukuran" class="form-control">
+                                                              <option value="A3+">A3+</option>
+                                                              <option value="A4">A4</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Jumlah</label>
+                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } elseif ($_GET['id'] == 3) { ?>
+                                                        <!-- Poster A3+ -->
+                                                        <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                        <label>Ukuran</label>
+                                                            <select name="ukuran" class="form-control">
+                                                              <option value="A3+">A3+</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password-confirm">Jumlah</label>
+                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } elseif ($_GET['id'] == 4) { ?>
+                                                        <!-- Banner Standard -->
+                                                        <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                            <label>Ukuran</label>
+                                                            <input type="number" name="ukuran" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <select name="Bahan" class="form-control">
+                                                              <option value="Albatros">Albatros</option>
+                                                              <option value="Canvas">Canvas</option>
+                                                              <option value="Duratrans">Duratrans</option>
+                                                              <option value="Fabric">Fabric</option>
+                                                              <option value="Flexy">Flexy</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Finishing</label>
+                                                            <select name="finishing" class="form-control">
+                                                              <option value="Laminating Doff">Laminating Doff / Matte</option>
+                                                              <option value="Laminating Glossy">Laminating Glossy</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password-confirm">Jumlah</label>
+                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } elseif ($_GET['id'] == 5) { ?>
+                                                        <!-- X banner -->
+                                                        <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                            <label>Ukuran</label>
+                                                            <select name="ukuran" class="form-control">
+                                                              <option value="60 x 160 cm">60 x 160 cm</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <select name="bahan" class="form-control">
+                                                              <option value="Albatros">Albatros</option>
+                                                              <option value="Flexy">Flexy</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Finishing</label>
+                                                            <select name="finishing" class="form-control">
+                                                              <option value="Laminating Doff">Laminating Doff / Matte</option>
+                                                              <option value="Laminating Glossy">Laminating Glossy</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Jumlah</label>
+                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } elseif ($_GET['id'] == 6) { ?>
+                                                        <!-- Roll Up Banner -->
+                                                        <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                            <label>Ukuran</label>
+                                                            <select name="ukuran" class="form-control">
+                                                              <option value="60 x 160 cm">60 x 160 cm</option>
+                                                              <option value="80 x 200 cm">80 x 200 cm</option>
+                                                              <option value="85 x 200 cm">85 x 200 cm</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <select name="bahan" class="form-control">
+                                                              <option value="Albatros">Albatros</option>
+                                                              <option value="Flexy">Flexy</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Finishing</label>
+                                                            <select name="finishing" class="form-control">
+                                                              <option value="Laminating Doff">Laminating Doff / Matte</option>
+                                                              <option value="Laminating Glossy">Laminating Glossy</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password-confirm">Jumlah</label>
+                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } elseif ($_GET['id'] == 7) { ?>
+                                                        <!-- Brosuer / Flyer -->
+                                                        <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                            <label>Ukuran</label>
+                                                            <select name="ukuran" class="form-control">
+                                                              <option value="A3+">A3+</option>
+                                                              <option value="A4">A4</option>
+                                                              <option value="A5">A5</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <select name="bahan" class="form-control">
+                                                              <option value="Art Paper">Art Paper</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Jumlah / Rim</label>
+                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } elseif ($_GET['id'] == 8) { ?>
+                                                        <!-- Sticker Promosi -->
+                                                        <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                            <label>Ukuran</label>
+                                                            <input type="text" name="ukuran" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">Bahan</label>
+                                                            <select name="ukuran" class="form-control">
+                                                              <option value="Sticker Vynil Biasa">Sticker Vynil Biasa</option>
+                                                              <option value="Sticker Ritrama">Sticker Ritrama</option>
+                                                              <option value="Sticker Blockout">Sticker Blockout</option>
+                                                              <option value="Sticker Transparant">Sticker Transparant</option>
+                                                              <option value="Sticker Oneway Vision">Sticker Oneway Vision</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                        <label>Finishing</label>
+                                                            <select name="finishing" class="form-control">
+                                                              <option value="Laminating Doff">Laminating Doff / Matte</option>
+                                                              <option value="Laminating Glossy">Laminating Glossy</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password-confirm">Jumlah</label>
+                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -455,131 +594,6 @@
 
                         </div>
                     </div>
-
-                    <!-- Similar Product -->
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12 py-3">
-                                <div class="row">
-                                    <div class="col-12 text-center text-uppercase">
-                                        <h2>Similar Products</h2>
-                                    </div>
-                                </div>
-                                <div class="row">
-
-                                    <!-- Product -->
-                                    <div class="col-lg-3 col-sm-6 my-3">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
-                                                    <a href="product.html">
-                                                        <img src="images/image-1.jpg" class="img-fluid">
-                                                    </a>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Sony Alpha DSLR Camera</a>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <span class="product-price-old">
-                                                        $500
-                                                    </span>
-                                                    <br>
-                                                    <span class="product-price">
-                                                        $500
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 mb-3 align-self-end">
-                                                    <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Add to cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Product -->
-
-                                    <!-- Product -->
-                                    <div class="col-lg-3 col-sm-6 my-3">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
-                                                    <a href="product.html">
-                                                        <img src="images/image-2.jpg" class="img-fluid">
-                                                    </a>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Optoma 4K HDR Projector</a>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <span class="product-price">
-                                                        $1,500
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 mb-3 align-self-end">
-                                                    <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Add to cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Product -->
-
-                                    <!-- Product -->
-                                    <div class="col-lg-3 col-sm-6 my-3">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
-                                                    <a href="product.html">
-                                                        <img src="images/image-3.jpg" class="img-fluid">
-                                                    </a>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">HP Envy Specter 360</a>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="product-price-old">
-                                                        $2,800
-                                                    </div>
-                                                    <span class="product-price">
-                                                        $2,500
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 mb-3 align-self-end">
-                                                    <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Add to cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Product -->
-
-                                    <!-- Product -->
-                                    <div class="col-lg-3 col-sm-6 my-3">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
-                                                    <a href="product.html">
-                                                        <img src="images/image-4.jpg" class="img-fluid">
-                                                    </a>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Dell Alienware Area 51</a>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <span class="product-price">
-                                                        $4,500
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 mb-3 align-self-end">
-                                                    <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Add to cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Product -->
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Similar Products -->
-
                 </main>
                 <!-- Main Content -->
             </div>
