@@ -52,15 +52,10 @@ function insertBahan($conn)
     $price = $_POST['price'];
     $produk[] = $_POST['produk'];
     $desc = $_POST['desc'];
-    $size = $_POST['size'];
 
-    if ($satuan == 'PCS') { //beda di size klo pcs masukin size
-        $sql = "insert into tbl_item (item_name, supplier, item_type, item_size, item_qty, item_price, item_desc, create_date, item_status)
-            values('" . $name . "', '" . $supplier . "','" . $satuan . "', '" . $size . "'," . $qty . ", " . $price . ", '" . $desc . "', now(), 'ACTIVE')";
-    } else {
-        $sql = "insert into tbl_item (item_name, supplier, item_type, item_qty, item_price, item_desc, create_date, item_status)
+
+    $sql = "insert into tbl_item (item_name, supplier, item_type, item_qty, item_price, item_desc, create_date, item_status)
         values('" . $name . "', '" . $supplier . "','" . $satuan . "'," . $qty . ", " . $price . ", '" . $desc . "', now(), 'ACTIVE')";
-    }
 
     $result = mysqli_query($conn, $sql);
 
@@ -129,19 +124,13 @@ function editBahan($conn)
     $name = $_POST['name'];
     $supplier = $_POST['supplier'];
     $satuan = $_POST['satuan'];
-    $size = $_POST['size'];
     $qty = $_POST['qty'];
     $desc = $_POST['desc'];
     $price = $_POST['price'];
     $produk[] = $_POST['produk'];
 
-    if ($satuan == 'PCS') { //ini update size
-        $sql = "update tbl_item set item_name = '" . $name . "', supplier = '" . $supplier . "' ,item_type = '" . $satuan . "', item_size = '" . $size . "',
-            item_qty = " . $qty . ", item_price = " . $price . ", item_desc = '" . $desc . "' where item_id = " . $id . "";
-    } else {    // ini ga update sizze
-        $sql = "update tbl_item set item_name = '" . $name . "', supplier = '" . $supplier . "', item_type = '" . $satuan . "',
-            item_qty = " . $qty . ", item_price = " . $price . ", item_desc = '" . $desc . "' where item_id = " . $id . "";
-    }
+    $sql = "update tbl_item set item_name = '" . $name . "', supplier = '" . $supplier . "', item_type = '" . $satuan . "',
+        item_qty = " . $qty . ", item_price = " . $price . ", item_desc = '" . $desc . "' where item_id = " . $id . "";
 
     $result = mysqli_query($conn, $sql);
 

@@ -75,7 +75,6 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                                                 <th>Supplier</th>
                                                 <th>Produk</th>
                                                 <th>Satuan</th>
-                                                <th>Ukuran</th>
                                                 <th>Qty</th>
                                                 <th>Harga</th>
                                                 <th>Deskripsi</th>
@@ -109,7 +108,6 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                                                         ?>
                                                     </td>
                                                     <td><?php echo $data['item_type']; ?></td>
-                                                    <td><?php echo $data['item_size']; ?></td>
                                                     <td><?php echo $data['item_qty']; ?></td>
                                                     <td><?php echo $data['item_price']; ?></td>
                                                     <td><?php echo $data['item_desc']; ?></td>
@@ -189,13 +187,6 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                             <div class="input-group-append">
                             </div>
                         </div>
-                        <!-- ukuran isinya buat yg ketentuannya pcs - misal a4 a3+ dst -->
-                        <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Ukuran : </div>
-                            <input type="text" class="form-control col-5" placeholder="a3/a4/a5" name="size" id="size" readonly>
-                            <div class="input-group-append">
-                            </div>
-                        </div>
                         <div class="input-group mb-3">
                             <div class="col-5 input-group-text">Kegunaan : </div>
                             <select id="desc" name="desc" required>
@@ -267,13 +258,6 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                             <div class="input-group-append">
                             </div>
                         </div>
-                        <!-- ukuran isinya buat yg ketentuannya pcs - misal a4 a3+ dst -->
-                        <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">Ukuran : </div>
-                            <input type="text" class="form-control col-5" placeholder="a3/a4/a5" name="size" id="edt_size" readonly>
-                            <div class="input-group-append">
-                            </div>
-                        </div>
                         <div class="input-group mb-3">
                             <div class="col-5 input-group-text">Jumlah : </div>
                             <input type="number" class="form-control col-5" placeholder="Jumlah Bahan" name="qty" min="1" id="edt_qty" readonly>
@@ -321,7 +305,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
         <div class="modal-dialog">
             <div class="modal-content col-8">
                 <div class="modal-header">
-                    <h4 class="modal-title">Hapus Nahan</h4>
+                    <h4 class="modal-title">Hapus Bahan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -409,26 +393,6 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
             width: '100%'
         })
 
-        //buat aktifin kolom ukuran kalau pilih pcs dari modal tambah bahan
-        $("#satuan").change(function() {
-            var value = $(this).val();
-            if (value == 'PCS') {
-                $('#size').removeAttr('readonly');
-            } else {
-                $('#size').prop('readonly', true);
-            }
-        });
-
-        //buat aktifin kolom ukuran kalau pilih pcs dari modal edit
-        $("#edt_satuan").change(function() {
-            var value = $(this).val();
-            if (value == 'PCS') {
-                $('#edt_size').removeAttr('readonly');
-            } else {
-                $('#edt_size').prop('readonly', true);
-            }
-        });
-
         $(document).on("click", ".ubahBahan", function() {
             var itemId = $(this).attr('id');
             $.ajax({
@@ -448,7 +412,6 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                         $(this).prop("selected", "false");
                     }); //kosongin selected setiap ganti item
 
-
                     $('#edt_id').val(data[0].item_id);
                     $('#edt_name').val(data[0].item_name);
                     $('#edt_sup').val(data[0].supplier);
@@ -458,11 +421,6 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                         }
                     });
 
-                    if (data[0].item_type == 'PCS') {
-                        $('#edt_size').removeAttr('readonly');
-                    }
-
-                    $('#edt_size').val(data[0].item_size);
                     $('#edt_qty').val(data[0].item_qty);
 
                     $("select option.desc").each(function() {
