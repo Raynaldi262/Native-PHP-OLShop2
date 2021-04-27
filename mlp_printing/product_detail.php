@@ -46,10 +46,10 @@ if (isset($_GET['id'])) {
                             <div class="col-auto">
                                 <ul class="top-nav">
                                     <li>
-                                        <a href="../mpl_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Register</a>
+                                        <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Register</a>
                                     </li>
                                     <li>
-                                        <a href="../mpl_printing/login.php"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
+                                        <a href="../mlp_printing/login.php"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
                                     </li>
                                 </ul>
                             </div>
@@ -62,7 +62,7 @@ if (isset($_GET['id'])) {
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a href="../mpl_printing/index.php">E-Commerce</a>
+                                    <a href="../mlp_printing/index.php">E-Commerce</a>
                                 </div>
                             </div>
                             <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
@@ -97,7 +97,7 @@ if (isset($_GET['id'])) {
                                 <div class="collapse navbar-collapse" id="mainNav">
                                     <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="../mpl_printing/index.php">Home <span class="sr-only">(current)</span></a>
+                                            <a class="nav-link" href="../mlp_printing/index.php">Home <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="electronics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Electronics</a>
@@ -248,28 +248,33 @@ if (isset($_GET['id'])) {
                                                             <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
                                                         </div>
                                                     </form>
-                                                    <?php } elseif ($_GET['id'] == 4) { ?>
+                                                    <?php } elseif ($_GET['id'] == 4) { 
+                                                        $data_bahan = GetDataBahan($_GET['id'], $conn);
+                                                        $data_finish = GetDataFinishing($_GET['id'], $conn);
+                                                        ?>
                                                         <!-- Banner Standard -->
                                                         <form method="post" action="../model/CustUser.php">
                                                         <div class="form-group">
                                                             <label>Ukuran</label>
-                                                            <input type="number" name="ukuran" class="form-control" required>
+                                                            <br>
+
+                                                            <input type="number" name="ukuran"  class="form-control col-md-2"  required> X
+                                                            <input type="number" name="ukuran" class="form-control col-5" required> Cm
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Bahan</label>
                                                             <select name="Bahan" class="form-control">
-                                                              <option value="Albatros">Albatros</option>
-                                                              <option value="Canvas">Canvas</option>
-                                                              <option value="Duratrans">Duratrans</option>
-                                                              <option value="Fabric">Fabric</option>
-                                                              <option value="Flexy">Flexy</option>
+                                                        <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
+                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Finishing</label>
                                                             <select name="finishing" class="form-control">
-                                                              <option value="Laminating Doff">Laminating Doff / Matte</option>
-                                                              <option value="Laminating Glossy">Laminating Glossy</option>
+                                                            <?php while ($data  = mysqli_fetch_assoc($data_finish)){ ?>
+                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                            <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">

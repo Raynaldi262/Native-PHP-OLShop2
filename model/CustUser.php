@@ -19,6 +19,17 @@ function GetdataProduk($conn){
    return $item;
 }
 
+function GetDataBahan($id,$conn){
+   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = ".$id." && tbl_item.item_desc = 'BAHAN' ";
+   $item = mysqli_query($conn, $sql);
+   return $item;
+}
+
+function GetDataFinishing($id, $conn){
+   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = ".$id." && tbl_item.item_desc = 'FINISHING' ";
+   $item = mysqli_query($conn, $sql);
+   return $item;
+}
 
 function insertUser($conn)
 {
@@ -26,7 +37,7 @@ function insertUser($conn)
    $check = mysqli_query($conn, $sql); // untuk check email agar tidak bisa register dengan email yang sama
    $check_data = mysqli_fetch_assoc($check); 
    if ($check_data) { // untuk check email agar tidak bisa register dengan email yang sama
-      msg('Email Sudah Pernah Dipakai', '../mpl_printing/register.php');
+      msg('Email Sudah Pernah Dipakai', '../mlp_printing/register.php');
    } else {
 
     if ( $_POST['password'] ==  $_POST['password1']){
@@ -39,9 +50,9 @@ function insertUser($conn)
             VALUES ('" .$custid. "' ,'" . $_POST['nama'] . "', '" . $_POST['alamat'] . "', 'null', 'null', '" . $_POST['email'] . "',  password('" . $_POST['password'] . "'), '" . $_POST['nohp'] . "', '0', '0', 'default.jpeg', now()) ";
             $result = mysqli_query($conn, $sql);
                 if ($result) {
-                    msg('Register Telah Berhasil Silakan Login!!', '../mpl_printing/login.php');
+                    msg('Register Telah Berhasil Silakan Login!!', '../mlp_printing/login.php');
                      } else {
-                          msg('Register Gagal', '../mpl_printing/register.php');
+                          msg('Register Gagal', '../mlp_printing/register.php');
                      }
             }else{
                 $increment = $check_data['custnum']+1; // tambah id terakhir
@@ -50,13 +61,13 @@ function insertUser($conn)
                 VALUES ('" .$custid. "' ,'" . $_POST['nama'] . "', '" . $_POST['alamat'] . "', 'null', 'null', '" . $_POST['email'] . "',  password('" . $_POST['password'] . "'), '" . $_POST['nohp'] . "', '0', '0', 'default.jpeg', now()) ";
                 $result = mysqli_query($conn, $sql);
                 if ($result) {
-                    msg('Register Telah Berhasil Silakan Login!!', '../mpl_printing/login.php');
+                    msg('Register Telah Berhasil Silakan Login!!', '../mlp_printing/login.php');
                      } else {
-                          msg('Register Gagal', '../mpl_printing/register.php');
+                          msg('Register Gagal', '../mlp_printing/register.php');
                      }
             }
     }else{
-        msg('Password yang anda masukan tidak sama', '../mpl_printing/register.php');
+        msg('Password yang anda masukan tidak sama', '../mlp_printing/register.php');
         }
 
    }
