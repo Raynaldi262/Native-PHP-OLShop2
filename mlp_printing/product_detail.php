@@ -1,6 +1,4 @@
 <?php 
-require('../connect/conn.php');
-require('../session/session.php');
 require('../model/CustUser.php');
 
 if (isset($_GET['id'])) {
@@ -192,7 +190,10 @@ if (isset($_GET['id'])) {
                                             <!-- <p><strong>Available with Windows 10 Home:</strong> -->
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <?php if($_GET['id'] == 1){ ?>
+                                                    <?php if($_GET['id'] == 1){ 
+                                                        $data_bahan = GetDataBahan($_GET['id'], $conn);
+                                                        $data  = mysqli_fetch_assoc($data_bahan);                                                       
+                                                        ?>
                                                         <!-- KArtu Nama -->
                                                     <form method="post" action="../model/CustUser.php">
                                                         <div class="form-group">
@@ -202,18 +203,20 @@ if (isset($_GET['id'])) {
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Bahan</label>
-                                                            <input type="text" name="bahan" class="form-control" required>
+                                                            <label for="password-confirm">Jumlah / Box(100pcs)</label>
+                                                            <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
+                                                            <input type="Hidden" name="item_id" class="form-control" value = '<?php echo $data['item_id']?>' >
+                                                            <input type="Hidden" name="finishing" class="form-control" value = ' - ' >
+                                                            <input type="Hidden" name="produk_name" class="form-control" value = 'Kartu Nama' >
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="password-confirm">Jumlah / Box</label>
-                                                            <input type="Number" name="jumlah" class="form-control" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                            <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
-                                                    <?php } elseif ( $_GET['id'] == 2) {?> 
+                                                    <?php } elseif ( $_GET['id'] == 2) {
+                                                         $data_bahan = GetDataBahan($_GET['id'], $conn);
+                                                         $data  = mysqli_fetch_assoc($data_bahan);                                                        
+                                                        ?> 
                                                         <!-- Dokumen HVS -->
                                                         <form method="post" action="../model/CustUser.php">
                                                         <div class="form-group">
@@ -225,13 +228,19 @@ if (isset($_GET['id'])) {
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Jumlah</label>
-                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                            <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
+                                                            <input type="Hidden" name="item_id" class="form-control" value = '<?php echo $data['item_id']?>' >
+                                                            <input type="Hidden" name="finishing" class="form-control" value = ' - ' >
+                                                            <input type="Hidden" name="produk_name" class="form-control" value = 'Print Dokumen(HVS)' >
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                            <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
-                                                    <?php } elseif ($_GET['id'] == 3) { ?>
+                                                    <?php } elseif ($_GET['id'] == 3) { 
+                                                         $data_bahan = GetDataBahan($_GET['id'], $conn);
+                                                         $data  = mysqli_fetch_assoc($data_bahan);                                                          
+                                                        ?>
                                                         <!-- Poster A3+ -->
                                                         <form method="post" action="../model/CustUser.php">
                                                         <div class="form-group">
@@ -242,10 +251,13 @@ if (isset($_GET['id'])) {
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="password-confirm">Jumlah</label>
-                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                            <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
+                                                            <input type="Hidden" name="item_id" class="form-control" value = '<?php echo $data['item_id']?>' >
+                                                            <input type="Hidden" name="finishing" class="form-control" value = ' - ' >
+                                                            <input type="Hidden" name="produk_name" class="form-control" value = 'Poster A3+' >
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                            <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
                                                     <?php } elseif ($_GET['id'] == 4) { 
@@ -258,13 +270,89 @@ if (isset($_GET['id'])) {
                                                             <label>Ukuran</label>
                                                             <br>
 
-                                                            <input type="number" name="ukuran"  class="form-control col-md-2"  required> X
-                                                            <input type="number" name="ukuran" class="form-control col-5" required> Cm
+                                                            <input type="number" name="ukuran"  class="col-md-5"  required> X
+                                                            <input type="number" name="ukuran" class="col-5" required> Cm
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Bahan</label>
                                                             <select name="Bahan" class="form-control">
                                                         <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
+                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <input type="Hidden" name="item_id" class="form-control" value = '<?php echo $data['item_id']?>' >
+                                                              <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Finishing</label>
+                                                            <select name="finishing" class="form-control">
+                                                            <?php while ($data  = mysqli_fetch_assoc($data_finish)){ ?>
+                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <input type="Hidden" name="finishing_id" class="form-control" value = '<?php echo $data['item_id']?>' >
+                                                            <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password-confirm">Jumlah</label>
+                                                            <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } elseif ($_GET['id'] == 5) { 
+                                                    $data_bahan = GetDataBahan($_GET['id'], $conn);
+                                                    $data_finish = GetDataFinishing($_GET['id'], $conn);
+                                                        ?>
+                                                        <!-- X banner -->
+                                                        <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                            <label>Ukuran</label>
+                                                            <select name="ukuran" class="form-control">
+                                                              <option value="60 x 160 cm">60 x 160 cm</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <select name="bahan" class="form-control">
+                                                            <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
+                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Finishing</label>
+                                                            <select name="finishing" class="form-control">
+                                                            <?php while ($data  = mysqli_fetch_assoc($data_finish)){ ?>
+                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                            <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Jumlah</label>
+                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
+                                                        </div>
+                                                    </form>
+                                                    <?php } elseif ($_GET['id'] == 6) { 
+                                                    $data_bahan = GetDataBahan($_GET['id'], $conn);
+                                                    $data_finish = GetDataFinishing($_GET['id'], $conn);
+                                                        ?>
+                                                        <!-- Roll Up Banner -->
+                                                        <form method="post" action="../model/CustUser.php">
+                                                        <div class="form-group">
+                                                            <label>Ukuran</label>
+                                                            <select name="ukuran" class="form-control">
+                                                              <option value="60 x 160 cm">60 x 160 cm</option>
+                                                              <option value="80 x 200 cm">80 x 200 cm</option>
+                                                              <option value="85 x 200 cm">85 x 200 cm</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <select name="bahan" class="form-control">
+                                                            <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
                                                               <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
                                                               <?php } ?>
                                                             </select>
@@ -282,74 +370,13 @@ if (isset($_GET['id'])) {
                                                             <input type="Number" name="jumlah" class="form-control" required>
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
-                                                    <?php } elseif ($_GET['id'] == 5) { ?>
-                                                        <!-- X banner -->
-                                                        <form method="post" action="../model/CustUser.php">
-                                                        <div class="form-group">
-                                                            <label>Ukuran</label>
-                                                            <select name="ukuran" class="form-control">
-                                                              <option value="60 x 160 cm">60 x 160 cm</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Bahan</label>
-                                                            <select name="bahan" class="form-control">
-                                                              <option value="Albatros">Albatros</option>
-                                                              <option value="Flexy">Flexy</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Finishing</label>
-                                                            <select name="finishing" class="form-control">
-                                                              <option value="Laminating Doff">Laminating Doff / Matte</option>
-                                                              <option value="Laminating Glossy">Laminating Glossy</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Jumlah</label>
-                                                            <input type="Number" name="jumlah" class="form-control" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
-                                                        </div>
-                                                    </form>
-                                                    <?php } elseif ($_GET['id'] == 6) { ?>
-                                                        <!-- Roll Up Banner -->
-                                                        <form method="post" action="../model/CustUser.php">
-                                                        <div class="form-group">
-                                                            <label>Ukuran</label>
-                                                            <select name="ukuran" class="form-control">
-                                                              <option value="60 x 160 cm">60 x 160 cm</option>
-                                                              <option value="80 x 200 cm">80 x 200 cm</option>
-                                                              <option value="85 x 200 cm">85 x 200 cm</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Bahan</label>
-                                                            <select name="bahan" class="form-control">
-                                                              <option value="Albatros">Albatros</option>
-                                                              <option value="Flexy">Flexy</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Finishing</label>
-                                                            <select name="finishing" class="form-control">
-                                                              <option value="Laminating Doff">Laminating Doff / Matte</option>
-                                                              <option value="Laminating Glossy">Laminating Glossy</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="password-confirm">Jumlah</label>
-                                                            <input type="Number" name="jumlah" class="form-control" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
-                                                        </div>
-                                                    </form>
-                                                    <?php } elseif ($_GET['id'] == 7) { ?>
+                                                    <?php } elseif ($_GET['id'] == 7) { 
+                                                        $data_bahan = GetDataBahan($_GET['id'], $conn);
+                                                        $data_finish = GetDataFinishing($_GET['id'], $conn);                                                        
+                                                        ?>
                                                         <!-- Brosuer / Flyer -->
                                                         <form method="post" action="../model/CustUser.php">
                                                         <div class="form-group">
@@ -363,7 +390,9 @@ if (isset($_GET['id'])) {
                                                         <div class="form-group">
                                                             <label>Bahan</label>
                                                             <select name="bahan" class="form-control">
-                                                              <option value="Art Paper">Art Paper</option>
+                                                            <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
+                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -371,10 +400,13 @@ if (isset($_GET['id'])) {
                                                             <input type="Number" name="jumlah" class="form-control" required>
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
-                                                    <?php } elseif ($_GET['id'] == 8) { ?>
+                                                    <?php } elseif ($_GET['id'] == 8) { 
+                                                        $data_bahan = GetDataBahan($_GET['id'], $conn);
+                                                        $data_finish = GetDataFinishing($_GET['id'], $conn);                                                        
+                                                        ?>
                                                         <!-- Sticker Promosi -->
                                                         <form method="post" action="../model/CustUser.php">
                                                         <div class="form-group">
@@ -384,18 +416,17 @@ if (isset($_GET['id'])) {
                                                         <div class="form-group">
                                                             <label for="name">Bahan</label>
                                                             <select name="ukuran" class="form-control">
-                                                              <option value="Sticker Vynil Biasa">Sticker Vynil Biasa</option>
-                                                              <option value="Sticker Ritrama">Sticker Ritrama</option>
-                                                              <option value="Sticker Blockout">Sticker Blockout</option>
-                                                              <option value="Sticker Transparant">Sticker Transparant</option>
-                                                              <option value="Sticker Oneway Vision">Sticker Oneway Vision</option>
+                                                            <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
+                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                         <label>Finishing</label>
                                                             <select name="finishing" class="form-control">
-                                                              <option value="Laminating Doff">Laminating Doff / Matte</option>
-                                                              <option value="Laminating Glossy">Laminating Glossy</option>
+                                                            <?php while ($data  = mysqli_fetch_assoc($data_finish)){ ?>
+                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                            <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -403,7 +434,7 @@ if (isset($_GET['id'])) {
                                                             <input type="Number" name="jumlah" class="form-control" required>
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Checkout</button>
+                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
                                                     <?php } ?>

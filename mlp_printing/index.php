@@ -1,6 +1,5 @@
 <?php
 require('../connect/conn.php');
-require('../session/session.php');
 require('../model/CustUser.php');
 
 if(isset($_SESSION['cust_id'])){
@@ -48,10 +47,10 @@ $data_produk = GetdataProduk($conn);
                             <div class="col-auto">
                                 <ul class="top-nav">
                                     <li>
-                                        <a href="../mpl_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Register</a>
+                                        <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Register</a>
                                     </li>
                                     <li>
-                                        <a href="../mpl_printing/login.php"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
+                                        <a href="../mlp_printing/login.php"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
                                     </li>
                                 </ul>
                             </div>
@@ -83,7 +82,7 @@ $data_produk = GetdataProduk($conn);
                                 <a href="#" class="header-item">
                                     <i class="fas fa-heart mr-2"></i><span id="header-favorite">0</span>
                                 </a>
-                                <a href="cart.html" class="header-item">
+                                <a href="../mlp_printing/cart.php" class="header-item">
                                     <i class="fas fa-shopping-bag mr-2"></i><span id="header-qty" class="mr-3">2</span>
                                     <i class="fas fa-money-bill-wave mr-2"></i><span id="header-price">$4,000</span>
                                 </a>
@@ -99,7 +98,7 @@ $data_produk = GetdataProduk($conn);
                                 <div class="collapse navbar-collapse" id="mainNav">
                                     <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="../mpl_printing/">Home <span class="sr-only">(current)</span></a>
+                                            <a class="nav-link" href="../mlp_printing/">Home <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="electronics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Electronics</a>
@@ -191,7 +190,7 @@ $data_produk = GetdataProduk($conn);
 
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
-                                        <a href="../mpl_printing/product_detail.php?id=1">
+                                        <a href="../mlp_printing/product_detail.php?id=1">
                                         <div class="col-12 bg-white text-center h-100 product-item">
                                             <div class="row h-100">
                                                 <div class="col-12 p-0 mb-3">
@@ -208,7 +207,7 @@ $data_produk = GetdataProduk($conn);
 
                                      <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
-                                        <a href="../mpl_printing/product_detail.php?id=2">
+                                        <a href="../mlp_printing/product_detail.php?id=2">
                                         <div class="col-12 bg-white text-center h-100 product-item">
                                             <div class="row h-100">
                                                 <div class="col-12 p-0 mb-3">
@@ -225,7 +224,7 @@ $data_produk = GetdataProduk($conn);
 
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
-                                        <a href="../mpl_printing/product_detail.php?id=3">
+                                        <a href="../mlp_printing/product_detail.php?id=3">
                                         <div class="col-12 bg-white text-center h-100 product-item">
                                             <div class="row h-100">
                                                 <div class="col-12 p-0 mb-3">
@@ -242,7 +241,7 @@ $data_produk = GetdataProduk($conn);
 
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
-                                        <a href="../mpl_printing/product_detail.php?id=4">
+                                        <a href="../mlp_printing/product_detail.php?id=4">
                                         <div class="col-12 bg-white text-center h-100 product-item">
                                             <div class="row h-100">
                                                 <div class="col-12 p-0 mb-3">
@@ -259,7 +258,7 @@ $data_produk = GetdataProduk($conn);
 
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
-                                        <a href="../mpl_printing/product_detail.php?id=5">
+                                        <a href="../mlp_printing/product_detail.php?id=5">
                                         <div class="col-12 bg-white text-center h-100 product-item">
                                             <div class="row h-100">
                                                 <div class="col-12 p-0 mb-3">
@@ -276,7 +275,7 @@ $data_produk = GetdataProduk($conn);
 
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
-                                        <a href="../mpl_printing/product_detail.php?id=6">
+                                        <a href="../mlp_printing/product_detail.php?id=6">
                                         <div class="col-12 bg-white text-center h-100 product-item">
                                             <div class="row h-100">
                                                 <div class="col-12 p-0 mb-3">
@@ -292,7 +291,7 @@ $data_produk = GetdataProduk($conn);
                                     <!-- Product -->
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
-                                        <a href="../mpl_printing/product_detail.php?id=7">
+                                        <a href="../mlp_printing/product_detail.php?id=7">
                                         <div class="col-12 bg-white text-center h-100 product-item">
                                             <div class="row h-100">
                                                 <div class="col-12 p-0 mb-3">
@@ -309,7 +308,7 @@ $data_produk = GetdataProduk($conn);
 
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
-                                        <a href="../mpl_printing/product_detail.php?id=8">
+                                        <a href="../mlp_printing/product_detail.php?id=8">
                                         <div class="col-12 bg-white text-center h-100 product-item">
                                             <div class="row h-100">
                                                 <div class="col-12 p-0 mb-3">
@@ -412,7 +411,7 @@ $data_produk = GetdataProduk($conn);
                                     <div class="col-12">
                                         <ul class="footer-nav">
                                             <li>
-                                                <a href="../mpl_printing/">Home</a>
+                                                <a href="../mlp_printing/">Home</a>
                                             </li>
                                             <li>
                                                 <a href="#">Contact Us</a>

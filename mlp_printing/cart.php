@@ -1,3 +1,22 @@
+<?php
+require('../model/CustUser.php');
+if (isset($_SESSION['cust_id'])) {
+	$item = getDataCart($_SESSION['cust_id'], $conn);
+	// $datauser = getDataUser($_SESSION['cust_id']);
+}
+// if (isset($_SESSION['cust_id'])) {
+// 	$data_cart = getcartCount($_SESSION['cust_id']);
+// 	$data_check = getcheckCount($_SESSION['cust_id']);
+// 	$proses_count = getProsesCount($_SESSION['cust_id']);
+// } else {
+// 	$data_cart['juml'] = 0;
+// 	$data_check['juml'] = 0;
+// 	$proses_count['juml'] = 0;
+// }
+$totalharga = 0;
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -53,7 +72,7 @@
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a href="index.html">E-Commerce</a>
+                                    <a href="../mlp_printing/">E-Commerce</a>
                                 </div>
                             </div>
                             <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
@@ -88,7 +107,7 @@
                                 <div class="collapse navbar-collapse" id="mainNav">
                                     <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                            <a class="nav-link" href="../mlp_printing/">Home <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="electronics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Electronics</a>
@@ -149,59 +168,58 @@
                                         <table class="table table-striped table-hover table-sm">
                                             <thead>
                                             <tr>
-                                                <th>Product</th>
-                                                <th>Price</th>
+                                                <th>Nama Produk</th>
+                                                <th>Ukuran</th>
+                                                <th>Bahan</th>
+                                                <th>Finishing</th>
                                                 <th>Qty</th>
-                                                <th>Amount</th>
+                                                <th>Harga</th>
+                                                <th>Tanggal</th>
                                                 <th></th>
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <?php
+						                    if (isset($_SESSION['cust_id'])) {
+						                    	while ($data_cart = mysqli_fetch_assoc($item)) {
+                                                $totalharga += $data_cart['harga'];
+						                    ?>
                                             <tr>
                                                 <td>
-                                                    <img src="images/image-2.jpg" class="img-fluid">
-                                                    Optoma 4K HDR Projector
+                                                  <?php echo $data_cart['produk_name']?>
                                                 </td>
                                                 <td>
-                                                    $1,500
+                                                <?php echo $data_cart['ukuran']?>
                                                 </td>
                                                 <td>
-                                                    <input type="number" min="1" value="1">
+                                                <?php echo $data_cart['bahan']?>
                                                 </td>
                                                 <td>
-                                                    $1,500
+                                                <?php echo $data_cart['finishing']?>
+                                                </td>
+                                                <td>
+                                                <?php echo $data_cart['qty']?>
+                                                </td>
+                                                <td>
+                                                <?php echo $data_cart['harga']?>
+                                                </td>
+                                                <td>
+                                                <?php echo $data_cart['create_date']?>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-link text-danger"><i class="fas fa-times"></i></button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="images/image-3.jpg" class="img-fluid">
-                                                    HP Envy Specter 360
-                                                </td>
-                                                <td>
-                                                    $2,500
-                                                </td>
-                                                <td>
-                                                    <input type="number" min="1" value="1">
-                                                </td>
-                                                <td>
-                                                    $2,500
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-link text-danger"><i class="fas fa-times"></i></button>
-                                                </td>
-                                            </tr>
+                                            <?php }} ?>
                                             </tbody>
                                             <tfoot>
-                                            <tr>
-                                                <th colspan="3" class="text-right">Total</th>
-                                                <th>$4,000</th>
-                                                <th></th>
-                                            </tr>
                                             </tfoot>
                                         </table>
+                                            <tr>
+                                                <th colspan="3" class="text-right">Total</th>
+                                                <th><?php echo  "Rp. ",number_format($totalharga)?></th>
+                                                <th></th>
+                                            </tr>
                                     </div>
                                     <div class="col-12 text-right">
                                         <button class="btn btn-outline-secondary mr-3" type="submit">Update</button>

@@ -1,9 +1,15 @@
 <?php
 require('../connect/conn.php');
+require('../session/session.php');
 
 if (isset($_POST['register'])) {
     insertUser($conn);
  }
+
+ if (isset($_POST['addchart'])) {
+   AddChart($conn);
+}
+
 
 
 function getDetailProduk($id , $conn){
@@ -20,16 +26,52 @@ function GetdataProduk($conn){
 }
 
 function GetDataBahan($id,$conn){
-   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = ".$id." && tbl_item.item_desc = 'BAHAN' ";
+   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' ";
    $item = mysqli_query($conn, $sql);
    return $item;
 }
 
 function GetDataFinishing($id, $conn){
-   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = ".$id." && tbl_item.item_desc = 'FINISHING' ";
+   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'FINISHING' ";
    $item = mysqli_query($conn, $sql);
    return $item;
 }
+
+function getDataCart($cust_id,$conn)
+{
+   $sql = "SELECT * from tbl_cart where cust_id = '" . $cust_id . "' ";
+   $item = mysqli_query($conn, $sql);
+   return $item;
+}
+
+
+function addChart($conn)
+{
+
+   if (!isset($_SESSION['cust_id'])) {
+      msg('Silakan Login dahulu', '../mlp_printing/login.php');
+   } else {
+      $sql = "SELECT * from tbl_item where item_id = '" . $_POST['item_id'] . "' ";
+      $item = mysqli_query($conn, $sql);
+      $data = mysqli_fetch_assoc($item);
+      if ($data['item_qty'] < $_POST['qty']) {
+         msg('Stock Barang Kurang', '../mlp_printing/index.php');
+      } else {
+         $harga = $data['item_price'] * $_POST['qty'];
+            $sql = "INSERT INTO tbl_cart ( cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date) 
+                   VALUES ('" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "','" . $_POST['finishing'] . "', '" . $_POST['qty'] . "','" . $harga . "', now())";
+            $result = mysqli_query($conn, $sql);
+   
+         if ($result) {
+            header("location: ../mlp_printing/cart.php");
+         } else {
+            echo "asd";
+            msg('Item Gagal Ditambah', '../mlp_printing/cart.php');
+         }
+      }
+   }
+}
+
 
 function insertUser($conn)
 {
