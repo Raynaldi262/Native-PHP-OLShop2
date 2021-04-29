@@ -10,7 +10,19 @@ if (isset($_POST['register'])) {
    AddChart($conn);
 }
 
+if (isset($_POST['deletecart'])) {
+   deleteCart($conn);
+}
 
+
+
+function getDataUser($cust_id, $conn)
+{
+   $sql = "SELECT * from tbl_customer where cust_id = '" . $cust_id . "' ";
+   $item = mysqli_query($conn, $sql);
+   $data = mysqli_fetch_assoc($item);
+   return $data;
+}
 
 function getDetailProduk($id , $conn){
    $sql = "SELECT * from tbl_produk where produk_id = '". $id ."' ";
@@ -44,6 +56,13 @@ function getDataCart($cust_id,$conn)
    return $item;
 }
 
+function deleteCart($conn)
+{
+   echo $_POST['cart_id'];
+   $sql = "DELETE FROM tbl_cart WHERE tbl_cart . cart_id = '" . $_POST['cart_id'] . "'";
+   mysqli_query($conn, $sql);
+   header("location: ../mlp_printing/cart.php");
+}
 
 function addChart($conn)
 {
@@ -55,19 +74,27 @@ function addChart($conn)
       $item = mysqli_query($conn, $sql);
       $data = mysqli_fetch_assoc($item);
       if ($data['item_qty'] < $_POST['qty']) {
-         msg('Stock Barang Kurang', '../mlp_printing/index.php');
+        msg('Stock Barang Kurang', '../mlp_printing/index.php');
+
       } elseif (isset($_POST['finishing_id'])) {
-
-         $ukuran = $_POST['ukuran1']." x ".$_POST['ukuran1']. "cm";
-
+         if(isset($_POST['ukuran1'])){
+            $ukuran = $_POST['ukuran1']." x ".$_POST['ukuran2']. "cm";
+            $hasil_meter = $_POST['ukuran1']*$_POST['ukuran2'];
+         }else{
+            $ukuran = $_POST['ukuran'];
+            $ukuran1 = substr($_POST['ukuran'],0 , strpos($_POST['ukuran'], "x")); // untuk mengambil angka
+            $ukuran2 = substr($_POST['ukuran'], strpos($_POST['ukuran'], "x")+1 ,strpos($_POST['ukuran'], "cm",)- 4);
+            $hasil_meter = (int)$ukuran1*(int)$ukuran2; // mengbubah paksa string ke int
+         }
+         
          $sql = "SELECT * from tbl_item where item_id = '" . $_POST['finishing_id'] . "' ";
          $item = mysqli_query($conn, $sql);
          $data_finishing = mysqli_fetch_assoc($item);
-
+         echo  $_POST['catatan'];
          $harga = ($data['item_price'] + $data_finishing['item_price']) * $_POST['qty'];
 
-            $sql = "INSERT INTO tbl_cart ( cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date) 
-                   VALUES ('" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" .  $ukuran . "', '" . $data['item_name'] . "','" .$data_finishing['item_name'] . "', '" . $_POST['qty'] . "','" . $harga . "', now())";
+            $sql = "INSERT INTO tbl_cart ( cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
+                   VALUES ('" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" .  $ukuran . "', '" . $data['item_name'] . "','" .$data_finishing['item_name'] . "', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "','" . $_POST['sisi'] . "','".$hasil_meter."')";
             $result = mysqli_query($conn, $sql);
    
          if ($result) {
@@ -77,9 +104,15 @@ function addChart($conn)
          }
       }else {
          $harga = $data['item_price'] * $_POST['qty'];
-         $sql = "INSERT INTO tbl_cart ( cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date) 
-                VALUES ('" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "','" . $_POST['finishing'] . "', '" . $_POST['qty'] . "','" . $harga . "', now())";
+         $sql = "INSERT INTO tbl_cart ( cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
+                VALUES ('" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "','" . $_POST['finishing'] . "', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "', '" . $_POST['sisi'] . "' , 0 )";
          $result = mysqli_query($conn, $sql);
+         if ($result) {
+            header("location: ../mlp_printing/cart.php");
+         } else {
+            echo "gagal";
+            // msg('Item Gagal Ditambah', '../mlp_printing/cart.php');
+         }
       }
    }
 }

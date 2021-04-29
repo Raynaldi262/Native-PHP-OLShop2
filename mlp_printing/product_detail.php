@@ -1,6 +1,10 @@
 <?php 
+require('../connect/conn.php');
 require('../model/CustUser.php');
 
+if(isset($_SESSION['cust_id'])){
+    $datauser = getDataUser($_SESSION['cust_id'],$conn);
+}
 if (isset($_GET['id'])) {
 	$data_detail = getDetailProduk($_GET['id'] , $conn);
 }
@@ -29,16 +33,36 @@ if (isset($_GET['id'])) {
             <div class="col-12">
                 <header class="row">
                     <!-- Top Nav -->
+                    <?php if(isset($_SESSION['cust_id'])){ ?>
                     <div class="col-12 bg-dark py-2 d-md-block d-none">
                         <div class="row">
                             <div class="col-auto mr-auto">
                                 <ul class="top-nav">
                                     <li>
-                                        <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+123-456-7890</a>
+                                        <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+<?php echo $datauser['cust_phone'];?></a>
                                     </li>
                                     <li>
-                                        <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i>mail@ecom.com</a>
+                                        <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i><?php echo $datauser['cust_email'];?></a>
                                     </li>
+                                </ul>
+                            </div>
+                            <div class="col-auto">
+                                <ul class="top-nav">
+                                    <li>
+                                        <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="../login_user/logout_user.php"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } else {?>
+                        <div class="col-12 bg-dark py-2 d-md-block d-none">
+                        <div class="row">
+                            <div class="col-auto mr-auto">
+                                <ul class="top-nav">
                                 </ul>
                             </div>
                             <div class="col-auto">
@@ -53,6 +77,7 @@ if (isset($_GET['id'])) {
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
                     <!-- Top Nav -->
 
                     <!-- Header -->
@@ -75,15 +100,6 @@ if (isset($_GET['id'])) {
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-lg-auto text-center text-lg-left header-item-holder">
-                                <a href="#" class="header-item">
-                                    <i class="fas fa-heart mr-2"></i><span id="header-favorite">0</span>
-                                </a>
-                                <a href="#" class="header-item">
-                                    <i class="fas fa-shopping-bag mr-2"></i><span id="header-qty" class="mr-3">2</span>
-                                    <i class="fas fa-money-bill-wave mr-2"></i><span id="header-price">$4,000</span>
-                                </a>
-                            </div>
                         </div>
 
                         <!-- Nav -->
@@ -95,37 +111,16 @@ if (isset($_GET['id'])) {
                                 <div class="collapse navbar-collapse" id="mainNav">
                                     <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="../mlp_printing/index.php">Home <span class="sr-only">(current)</span></a>
+                                            <a class="nav-link" href="../mlp_printing/">Home <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="electronics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Electronics</a>
-                                            <div class="dropdown-menu" aria-labelledby="electronics">
-                                                <a class="dropdown-item" href="category.html">Computers</a>
-                                                <a class="dropdown-item" href="category.html">Mobile Phones</a>
-                                                <a class="dropdown-item" href="category.html">Television Sets</a>
-                                                <a class="dropdown-item" href="category.html">DSLR Cameras</a>
-                                                <a class="dropdown-item" href="category.html">Projectors</a>
-                                            </div>
+                                            <a class="nav-link" href="../mlp_printing/cart.php" >Cart</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="fashion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fashion</a>
-                                            <div class="dropdown-menu" aria-labelledby="fashion">
-                                                <a class="dropdown-item" href="category.html">Men's</a>
-                                                <a class="dropdown-item" href="category.html">Women's</a>
-                                                <a class="dropdown-item" href="category.html">Children's</a>
-                                                <a class="dropdown-item" href="category.html">Accessories</a>
-                                                <a class="dropdown-item" href="category.html">Footwear</a>
-                                            </div>
+                                            <a class="nav-link" href="../mlp_printing/cart.php" >Checkout</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="books" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Books</a>
-                                            <div class="dropdown-menu" aria-labelledby="books">
-                                                <a class="dropdown-item" href="category.html">Adventure</a>
-                                                <a class="dropdown-item" href="category.html">Horror</a>
-                                                <a class="dropdown-item" href="category.html">Romantic</a>
-                                                <a class="dropdown-item" href="category.html">Children's</a>
-                                                <a class="dropdown-item" href="category.html">Non-Fiction</a>
-                                            </div>
+                                            <a class="nav-link" href="../mlp_printing/cart.php" >Pesanan</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -191,8 +186,7 @@ if (isset($_GET['id'])) {
                                             <div class="row">
                                                 <div class="col-12">
                                                     <?php if($_GET['id'] == 1){ 
-                                                        $data_bahan = GetDataBahan($_GET['id'], $conn);
-                                                        $data  = mysqli_fetch_assoc($data_bahan);                                                       
+                                                        $data_bahan = GetDataBahan($_GET['id'], $conn);                                                      
                                                         ?>
                                                         <!-- KArtu Nama -->
                                                     <form method="post" action="../model/CustUser.php">
@@ -203,19 +197,40 @@ if (isset($_GET['id'])) {
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
+                                                            <label>Sisi</label>
+                                                            <select name="sisi" class="form-control">
+                                                              <option value="1">1 sisi</option>
+                                                              <option value="2">2 sisi</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <select name="item_id" class="form-control">
+                                                        <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
+                                                              <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label for="password-confirm">Jumlah / Box(100pcs)</label>
-                                                            <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
-                                                            <input type="Hidden" name="item_id" class="form-control" value = '<?php echo $data['item_id']?>' >
+                                                            <input type="Number" name="qty" class="form-control" min='1' max="100" value = '1' required>
                                                             <input type="Hidden" name="finishing" class="form-control" value = ' - ' >
                                                             <input type="Hidden" name="produk_name" class="form-control" value = 'Kartu Nama' >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Upload Gambar Desain </label>
+                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label>Catatan</label>
+                                                            <textarea name="catatan" class="form-control"></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
                                                     <?php } elseif ( $_GET['id'] == 2) {
-                                                         $data_bahan = GetDataBahan($_GET['id'], $conn);
-                                                         $data  = mysqli_fetch_assoc($data_bahan);                                                        
+                                                         $data_bahan = GetDataBahan($_GET['id'], $conn);                                                     
                                                         ?> 
                                                         <!-- Dokumen HVS -->
                                                         <form method="post" action="../model/CustUser.php">
@@ -227,19 +242,42 @@ if (isset($_GET['id'])) {
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <select name="item_id" class="form-control">
+                                                        <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
+                                                              <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Sisi</label>
+                                                            <select name="sisi" class="form-control">
+                                                              <option value="1 sisi Black & White">1 sisi Black & White</option>
+                                                              <option value="2 sisi Full Color">2 sisi Full Color</option>
+                                                              <option value="1 sisi Black & White">1 sisi Black & White</option>
+                                                              <option value="2 sisi Full Color">2 sisi Full Color</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label>Jumlah</label>
                                                             <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
-                                                            <input type="Hidden" name="item_id" class="form-control" value = '<?php echo $data['item_id']?>' >
                                                             <input type="Hidden" name="finishing" class="form-control" value = ' - ' >
                                                             <input type="Hidden" name="produk_name" class="form-control" value = 'Print Dokumen(HVS)' >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Upload Gambar Desain </label>
+                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label>Catatan</label>
+                                                            <textarea name="catatan" class="form-control"></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
                                                     <?php } elseif ($_GET['id'] == 3) { 
-                                                         $data_bahan = GetDataBahan($_GET['id'], $conn);
-                                                         $data  = mysqli_fetch_assoc($data_bahan);                                                          
+                                                         $data_bahan = GetDataBahan($_GET['id'], $conn);                                                         
                                                         ?>
                                                         <!-- Poster A3+ -->
                                                         <form method="post" action="../model/CustUser.php">
@@ -250,11 +288,27 @@ if (isset($_GET['id'])) {
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
+                                                            <label>Bahan</label>
+                                                            <select name="item_id" class="form-control">
+                                                        <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
+                                                              <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label for="password-confirm">Jumlah</label>
                                                             <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
-                                                            <input type="Hidden" name="item_id" class="form-control" value = '<?php echo $data['item_id']?>' >
                                                             <input type="Hidden" name="finishing" class="form-control" value = ' - ' >
+                                                            <input type="Hidden" name="sisi" class="form-control" value = ' - ' >
                                                             <input type="Hidden" name="produk_name" class="form-control" value = 'Poster A3+' >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Upload Gambar Desain </label>
+                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label>Catatan</label>
+                                                            <textarea name="catatan" class="form-control"></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
@@ -295,6 +349,14 @@ if (isset($_GET['id'])) {
                                                             <input type="Hidden" name="produk_name" class="form-control" value = 'Banner Standard' >
                                                         </div>
                                                         <div class="form-group">
+                                                            <label>Upload Gambar Desain </label>
+                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label>Catatan</label>
+                                                            <textarea name="catatan" class="form-control"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <button type="submit" id="button" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
@@ -307,31 +369,40 @@ if (isset($_GET['id'])) {
                                                         <div class="form-group">
                                                             <label>Ukuran</label>
                                                             <select name="ukuran" class="form-control">
-                                                              <option value="60 x 160 cm">60 x 160 cm</option>
+                                                              <option value="60x160 cm">60 x 160 cm</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Bahan</label>
-                                                            <select name="bahan" class="form-control">
+                                                            <select name="item_id" class="form-control">
                                                             <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
-                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
                                                               <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Finishing</label>
-                                                            <select name="finishing" class="form-control">
+                                                            <select name="finishing_id" class="form-control">
                                                             <?php while ($data  = mysqli_fetch_assoc($data_finish)){ ?>
-                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
                                                             <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Jumlah</label>
-                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                            <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
+                                                            <input type="Hidden" name="produk_name" class="form-control" value = 'X Banner' >
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
+                                                            <label>Upload Gambar Desain </label>
+                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label>Catatan</label>
+                                                            <textarea name="catatan" class="form-control"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
                                                     <?php } elseif ($_GET['id'] == 6) { 
@@ -343,40 +414,49 @@ if (isset($_GET['id'])) {
                                                         <div class="form-group">
                                                             <label>Ukuran</label>
                                                             <select name="ukuran" class="form-control">
-                                                              <option value="60 x 160 cm">60 x 160 cm</option>
-                                                              <option value="80 x 200 cm">80 x 200 cm</option>
-                                                              <option value="85 x 200 cm">85 x 200 cm</option>
+                                                              <option value="60x160 cm">60 x 160 cm</option>
+                                                              <option value="80x200 cm">80 x 200 cm</option>
+                                                              <option value="85x200 cm">85 x 200 cm</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Bahan</label>
-                                                            <select name="bahan" class="form-control">
+                                                            <select name="item_id" class="form-control">
                                                             <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
-                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
                                                               <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Finishing</label>
-                                                            <select name="finishing" class="form-control">
+                                                            <select name="finishing_id" class="form-control">
                                                             <?php while ($data  = mysqli_fetch_assoc($data_finish)){ ?>
-                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
                                                             <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="password-confirm">Jumlah</label>
-                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                            <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
+                                                            <input type="Hidden" name="produk_name" class="form-control" value = 'Roll Up Banner'>
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
+                                                            <label>Upload Gambar Desain </label>
+                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label>Catatan</label>
+                                                            <textarea name="catatan" class="form-control"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
                                                     <?php } elseif ($_GET['id'] == 7) { 
                                                         $data_bahan = GetDataBahan($_GET['id'], $conn);
                                                         $data_finish = GetDataFinishing($_GET['id'], $conn);                                                        
                                                         ?>
-                                                        <!-- Brosuer / Flyer -->
+                                                        <!-- Brosur/Flyer -->
                                                         <form method="post" action="../model/CustUser.php">
                                                         <div class="form-group">
                                                             <label>Ukuran</label>
@@ -388,18 +468,35 @@ if (isset($_GET['id'])) {
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Bahan</label>
-                                                            <select name="bahan" class="form-control">
+                                                            <select name="item_id" class="form-control">
                                                             <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
-                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
                                                               <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Jumlah / Rim</label>
-                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                            <label>Sisi</label>
+                                                            <select name="sisi" class="form-control">
+                                                              <option value="1 sisi Full Color">1 sisi Full Color</option>
+                                                              <option value="2 sisi Full Color">2 sisi Full Color</option>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
+                                                            <label>Jumlah / Rim</label>
+                                                            <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
+                                                            <input type="Hidden" name="produk_name" class="form-control" value = 'Brosur/Flyer'>
+                                                            <input type="Hidden" name="finishing" class="form-control" value = ' - ' >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Upload Gambar Desain </label>
+                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label>Catatan</label>
+                                                            <textarea name="catatan" class="form-control"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
                                                     <?php } elseif ($_GET['id'] == 8) { 
@@ -410,30 +507,42 @@ if (isset($_GET['id'])) {
                                                         <form method="post" action="../model/CustUser.php">
                                                         <div class="form-group">
                                                             <label>Ukuran</label>
-                                                            <input type="text" name="ukuran" class="form-control" required>
+                                                            <br>
+                                                            <input type="number" name="ukuran1" id="ukuran1" class="col-md-5"  required> X
+                                                            <input type="number" name="ukuran2" id="ukuran2" class="col-5" required> Cm
+
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="name">Bahan</label>
-                                                            <select name="ukuran" class="form-control">
+                                                            <select name="item_id" class="form-control">
                                                             <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
-                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
                                                               <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                         <label>Finishing</label>
-                                                            <select name="finishing" class="form-control">
+                                                            <select name="finishing_id" class="form-control">
                                                             <?php while ($data  = mysqli_fetch_assoc($data_finish)){ ?>
-                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
                                                             <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="password-confirm">Jumlah</label>
-                                                            <input type="Number" name="jumlah" class="form-control" required>
+                                                            <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
+                                                            <input type="Hidden" name="produk_name" class="form-control" value = 'Sticker Promosi'>
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
+                                                            <label>Upload Gambar Desain </label>
+                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label>Catatan</label>
+                                                            <textarea name="catatan" class="form-control"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
                                                     <?php } ?>
@@ -452,172 +561,38 @@ if (isset($_GET['id'])) {
                                     <!-- Rating -->
                                     <div class="row">
                                         <div class="col-12 mt-md-0 mt-3 text-uppercase">
-                                            <h2><u>Ratings & Reviews</u></h2>
+                                            <h2><u>Ringkasan Pesanan</u></h2>
                                         </div>
-                                        <div class="col-12">
+                                    </div>
+                                    <main class="row">
                                             <div class="row">
-                                                <div class="col-sm-4 text-center">
-                                                    <div class="row">
-                                                        <div class="col-12 average-rating">
-                                                            4.1
+                                                <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="name">Produk</label>
+                                                            <h3> asdasddsa</h3>
                                                         </div>
-                                                        <div class="col-12">
-                                                            of 100 reviews
+                                                        <div class="form-group">
+                                                            <label for="name">Ukuran</label>
+                                                            <h3> asdasddsa</h3>
                                                         </div>
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <label for="name">Jumlah</label>
+                                                            <h3> asdasddsa</h3>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="email">Harga Satuan</label>
+                                                            <h3> asdasddsa</h3>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password">Total Harga</label>
+                                                            <h3> asdasddsa</h3>
+                                                        </div>
                                                 </div>
-                                                <div class="col">
-                                                    <ul class="rating-list mt-3">
-                                                        <li>
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-dark" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
-                                                            </div>
-                                                            <div class="rating-progress-label">
-                                                                5<i class="fas fa-star ml-1"></i>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-dark" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
-                                                            </div>
-                                                            <div class="rating-progress-label">
-                                                                4<i class="fas fa-star ml-1"></i>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-dark" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
-                                                            </div>
-                                                            <div class="rating-progress-label">
-                                                                3<i class="fas fa-star ml-1"></i>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-dark" role="progressbar" style="width: 7%;" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100">7%</div>
-                                                            </div>
-                                                            <div class="rating-progress-label">
-                                                                2<i class="fas fa-star ml-1"></i>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-dark" role="progressbar" style="width: 3%;" aria-valuenow="3" aria-valuemin="3" aria-valuemax="100">3%</div>
-                                                            </div>
-                                                            <div class="rating-progress-label">
-                                                                1<i class="fas fa-star ml-1"></i>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Rating -->
-
-                                    <div class="row">
-                                        <div class="col-12 px-md-3 px-0">
-                                            <hr>
-                                        </div>
-                                    </div>
-
-                                    <!-- Add Review -->
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h4>Add Review</h4>
-                                        </div>
-                                        <div class="col-12">
-                                            <form>
-                                                <div class="form-group">
-                                                    <textarea class="form-control" placeholder="Give your review"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="d-flex ratings justify-content-end flex-row-reverse">
-                                                        <input type="radio" value="5" name="rating" id="rating-5"><label
-                                                            for="rating-5"></label>
-                                                        <input type="radio" value="4" name="rating" id="rating-4"><label
-                                                            for="rating-4"></label>
-                                                        <input type="radio" value="3" name="rating" id="rating-3"><label
-                                                            for="rating-3"></label>
-                                                        <input type="radio" value="2" name="rating" id="rating-2"><label
-                                                            for="rating-2"></label>
-                                                        <input type="radio" value="1" name="rating" id="rating-1" checked><label
-                                                            for="rating-1"></label>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button class="btn btn-outline-dark">Add Review</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- Add Review -->
-
-                                    <div class="row">
-                                        <div class="col-12 px-md-3 px-0">
-                                            <hr>
-                                        </div>
-                                    </div>
-
+                                            </div>                                             
+                                     </main>                                
                                     <!-- Review -->
                                     <div class="row">
                                         <div class="col-12">
-
-                                            <!-- Comments -->
-                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <strong class="mr-2">Steve Rogers</strong>
-                                                        <small>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                        </small>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ullamcorper quam, non congue odio.
-                                                        <br>
-                                                        Fusce ligula augue, faucibus sed neque non, auctor rhoncus enim. Sed nec molestie turpis. Nullam accumsan porttitor rutrum. Curabitur eleifend venenatis volutpat.
-                                                        <br>
-                                                        Aenean faucibus posuere vehicula.
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <small>
-                                                            <i class="fas fa-clock mr-2"></i>5 hours ago
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Comments -->
-
-                                            <!-- Comments -->
-                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <strong class="mr-2">Bucky Barns</strong>
-                                                        <small>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                        </small>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ullamcorper quam, non congue odio.
-                                                        <br>
-                                                        Aenean faucibus posuere vehicula.
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <small>
-                                                            <i class="fas fa-clock mr-2"></i>5 hours ago
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Comments -->
 
                                         </div>
                                     </div>

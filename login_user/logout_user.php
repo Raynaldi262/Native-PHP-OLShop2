@@ -8,5 +8,5 @@ session_destroy();
 ?>
 <script type="text/javascript">
     alert("Anda Berhasil Keluar!!");
-    window.location = "../Eshopper/login.php";
+    window.location = "../mlp_printing/login.php";
 </script>
