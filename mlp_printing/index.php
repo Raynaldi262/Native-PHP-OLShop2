@@ -197,7 +197,7 @@ $data_produk = GetdataProduk($conn);
                                                         <img src="images/image-1.jpg" class="img-fluid">
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Kartu Nama</a>
+                                                    <h3 class="product-name">Kartu Nama</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -214,7 +214,7 @@ $data_produk = GetdataProduk($conn);
                                                         <img src="images/image-1.jpg" class="img-fluid">
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Dokumen (HVS)</a>
+                                                    <h3 class="product-name">Dokumen (HVS)</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -231,7 +231,7 @@ $data_produk = GetdataProduk($conn);
                                                         <img src="images/image-1.jpg" class="img-fluid">
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Poster A3+</a>
+                                                    <h3 class="product-name">Poster A3+</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -248,7 +248,7 @@ $data_produk = GetdataProduk($conn);
                                                         <img src="images/image-1.jpg" class="img-fluid">
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Banner Standart</a>
+                                                    <h3 class="product-name">Banner Standart</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -265,7 +265,7 @@ $data_produk = GetdataProduk($conn);
                                                         <img src="images/image-1.jpg" class="img-fluid">
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">X Banner</a>
+                                                    <h3 class="product-name">X Banner</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,7 +282,7 @@ $data_produk = GetdataProduk($conn);
                                                         <img src="images/image-1.jpg" class="img-fluid">
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Roll Up Banner</a>
+                                                    <h3 class="product-name">Roll Up Banner</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -298,7 +298,7 @@ $data_produk = GetdataProduk($conn);
                                                         <img src="images/image-1.jpg" class="img-fluid">
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Brosur/Flyer</a>
+                                                    <h3 class="product-name">Brosur/Flyer</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -315,7 +315,7 @@ $data_produk = GetdataProduk($conn);
                                                         <img src="images/image-1.jpg" class="img-fluid">
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <a href="product.html" class="product-name">Sticker Promosi</a>
+                                                    <h3 class="product-name">Sticker Promosi</h3>
                                                 </div>
                                             </div>
                                         </div>

@@ -56,18 +56,30 @@ function addChart($conn)
       $data = mysqli_fetch_assoc($item);
       if ($data['item_qty'] < $_POST['qty']) {
          msg('Stock Barang Kurang', '../mlp_printing/index.php');
-      } else {
-         $harga = $data['item_price'] * $_POST['qty'];
+      } elseif (isset($_POST['finishing_id'])) {
+
+         $ukuran = $_POST['ukuran1']." x ".$_POST['ukuran1']. "cm";
+
+         $sql = "SELECT * from tbl_item where item_id = '" . $_POST['finishing_id'] . "' ";
+         $item = mysqli_query($conn, $sql);
+         $data_finishing = mysqli_fetch_assoc($item);
+
+         $harga = ($data['item_price'] + $data_finishing['item_price']) * $_POST['qty'];
+
             $sql = "INSERT INTO tbl_cart ( cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date) 
-                   VALUES ('" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "','" . $_POST['finishing'] . "', '" . $_POST['qty'] . "','" . $harga . "', now())";
+                   VALUES ('" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" .  $ukuran . "', '" . $data['item_name'] . "','" .$data_finishing['item_name'] . "', '" . $_POST['qty'] . "','" . $harga . "', now())";
             $result = mysqli_query($conn, $sql);
    
          if ($result) {
             header("location: ../mlp_printing/cart.php");
          } else {
-            echo "asd";
             msg('Item Gagal Ditambah', '../mlp_printing/cart.php');
          }
+      }else {
+         $harga = $data['item_price'] * $_POST['qty'];
+         $sql = "INSERT INTO tbl_cart ( cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date) 
+                VALUES ('" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "','" . $_POST['finishing'] . "', '" . $_POST['qty'] . "','" . $harga . "', now())";
+         $result = mysqli_query($conn, $sql);
       }
    }
 }

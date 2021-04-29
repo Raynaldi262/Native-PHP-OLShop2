@@ -269,34 +269,33 @@ if (isset($_GET['id'])) {
                                                         <div class="form-group">
                                                             <label>Ukuran</label>
                                                             <br>
+                                                            <input type="number" name="ukuran1" id="ukuran1" class="col-md-5"  required> X
+                                                            <input type="number" name="ukuran2" id="ukuran2" class="col-5" required> Cm
 
-                                                            <input type="number" name="ukuran"  class="col-md-5"  required> X
-                                                            <input type="number" name="ukuran" class="col-5" required> Cm
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Bahan</label>
-                                                            <select name="Bahan" class="form-control">
+                                                            <select name="item_id" class="form-control">
                                                         <?php while ($data  = mysqli_fetch_assoc($data_bahan)){ ?>
-                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
-                                                              <input type="Hidden" name="item_id" class="form-control" value = '<?php echo $data['item_id']?>' >
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
                                                               <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Finishing</label>
-                                                            <select name="finishing" class="form-control">
+                                                            <select name="finishing_id" class="form-control">
                                                             <?php while ($data  = mysqli_fetch_assoc($data_finish)){ ?>
-                                                              <option value="<?php echo $data['item_name']?>"><?php echo $data['item_name']?></option>
-                                                              <input type="Hidden" name="finishing_id" class="form-control" value = '<?php echo $data['item_id']?>' >
+                                                              <option value="<?php echo $data['item_id']?>"><?php echo $data['item_name']?></option>
                                                             <?php } ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="password-confirm">Jumlah</label>
                                                             <input type="Number" name="qty" class="form-control" min='1' value = '1' required>
+                                                            <input type="Hidden" name="produk_name" class="form-control" value = 'Banner Standard' >
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" name="register" class="btn btn-outline-dark">Cart</button>
+                                                            <button type="submit" id="button" name="addchart" class="btn btn-outline-dark">Cart</button>
                                                         </div>
                                                     </form>
                                                     <?php } elseif ($_GET['id'] == 5) { 
@@ -748,7 +747,6 @@ if (isset($_GET['id'])) {
         </div>
 
     </div>
-
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
