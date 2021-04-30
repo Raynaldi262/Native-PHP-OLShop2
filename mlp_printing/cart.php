@@ -3,9 +3,9 @@ require('../model/CustUser.php');
 require('../connect/conn.php');
 
 if (isset($_SESSION['cust_id'])) {
-	$item = getDataCart($_SESSION['cust_id'], $conn);
-    $datauser = getDataUser($_SESSION['cust_id'],$conn);
-	// $datauser = getDataUser($_SESSION['cust_id']);
+    $item = getDataCart($_SESSION['cust_id'], $conn);
+    $datauser = getDataUser($_SESSION['cust_id'], $conn);
+    // $datauser = getDataUser($_SESSION['cust_id']);
 }
 // if (isset($_SESSION['cust_id'])) {
 // 	$data_cart = getcartCount($_SESSION['cust_id']);
@@ -22,21 +22,20 @@ $totalharga = 0;
 
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>E-Commerce Template</title>
 
     <link href="//fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i" rel="stylesheet">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="container-fluid">
 
@@ -44,50 +43,50 @@ $totalharga = 0;
             <div class="col-12">
                 <header class="row">
                     <!-- Top Nav -->
-                    <?php if(isset($_SESSION['cust_id'])){ ?>
-                    <div class="col-12 bg-dark py-2 d-md-block d-none">
-                        <div class="row">
-                            <div class="col-auto mr-auto">
-                                <ul class="top-nav">
-                                    <li>
-                                        <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+<?php echo $datauser['cust_phone'];?></a>
-                                    </li>
-                                    <li>
-                                        <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i><?php echo $datauser['cust_email'];?></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-auto">
-                                <ul class="top-nav">
-                                    <li>
-                                        <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="../login_user/logout_user.php"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <?php } else {?>
+                    <?php if (isset($_SESSION['cust_id'])) { ?>
                         <div class="col-12 bg-dark py-2 d-md-block d-none">
-                        <div class="row">
-                            <div class="col-auto mr-auto">
-                                <ul class="top-nav">
-                                </ul>
-                            </div>
-                            <div class="col-auto">
-                                <ul class="top-nav">
-                                    <li>
-                                        <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Register</a>
-                                    </li>
-                                    <li>
-                                        <a href="../mlp_printing/login.php"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
-                                    </li>
-                                </ul>
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <ul class="top-nav">
+                                        <li>
+                                            <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+<?php echo $datauser['cust_phone']; ?></a>
+                                        </li>
+                                        <li>
+                                            <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i><?php echo $datauser['cust_email']; ?></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-auto">
+                                    <ul class="top-nav">
+                                        <li>
+                                            <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="../login_user/logout_user.php"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } else { ?>
+                        <div class="col-12 bg-dark py-2 d-md-block d-none">
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <ul class="top-nav">
+                                    </ul>
+                                </div>
+                                <div class="col-auto">
+                                    <ul class="top-nav">
+                                        <li>
+                                            <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Register</a>
+                                        </li>
+                                        <li>
+                                            <a href="../mlp_printing/login.php"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     <?php } ?>
                     <!-- Top Nav -->
 
@@ -125,13 +124,13 @@ $totalharga = 0;
                                             <a class="nav-link" href="../mlp_printing/">Home</a>
                                         </li>
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="../mlp_printing/cart.php" >Cart</a>
+                                            <a class="nav-link" href="../mlp_printing/cart.php">Cart</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="../mlp_printing/cart.php" >Checkout</a>
+                                            <a class="nav-link" href="../mlp_printing/cart.php">Checkout</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="../mlp_printing/cart.php" >Pesanan</a>
+                                            <a class="nav-link" href="../mlp_printing/cart.php">Pesanan</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -157,9 +156,9 @@ $totalharga = 0;
                     <div class="col-12 bg-white py-3 mb-3">
                         <div class="row">
                             <div class=" col-md-10 mx-auto table-responsive">
-                                    <div class="col-12">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
+                                <div class="col-12">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
                                             <tr>
                                                 <th>Nama Produk</th>
                                                 <th>Ukuran</th>
@@ -172,62 +171,63 @@ $totalharga = 0;
                                                 <th>Tanggal</th>
                                                 <th></th>
                                             </tr>
-                                            </thead>
-                                            <tbody>
+                                        </thead>
+                                        <tbody>
                                             <?php
-						                    if (isset($_SESSION['cust_id'])) {
-						                    	while ($data_cart = mysqli_fetch_assoc($item)) {
-                                                $totalharga += $data_cart['harga'];
-						                    ?>
-                                            <tr>
-                                                <td>
-                                                  <?php echo $data_cart['produk_name']?>
-                                                </td>
-                                                <td>
-                                                <?php echo $data_cart['ukuran']?>
-                                                </td>
-                                                <td>
-                                                <?php echo $data_cart['bahan']?>
-                                                </td>
-                                                <td>
-                                                <?php echo $data_cart['finishing']?>
-                                                </td>
-                                                <td>
-                                                <?php echo $data_cart['sisi']?>
-                                                </td>
-                                                <td>
-                                                <?php echo $data_cart['qty']?>
-                                                </td>
-                                                <td>
-                                                <?php echo $data_cart['deskripsi']?>
-                                                </td>
-                                                <td>
-                                                <?php echo $data_cart['harga']?>
-                                                </td>
-                                                <td>
-                                                <?php echo $data_cart['create_date']?>
-                                                </td>
-                                                <td>
-                                                <form action="../model/CustUser.php" method="post">
-										        	<input type="hidden" name="cart_id" value="<?php echo $data_cart['cart_id'] ?>">
-                                                    <button type="submit" name="deletecart" class="btn btn-link text-danger"><i class="fas fa-times"></i></button>
-										        </form>
-                                                </td>
-                                            </tr>
-                                            <?php }} ?>
-                                            </tbody>
-                                            <tfoot>
-                                            </tfoot>
-                                        </table>
-                                            <tr>
-                                                <th colspan="3" class="text-right">Total</th>
-                                                <th><?php echo  "Rp. ",number_format($totalharga)?></th>
-                                                <th></th>
-                                            </tr>
-                                    </div>
-                                    <div class="col-12 text-right">
-                                        <a href="#" class="btn btn-outline-success">Checkout</a>
-                                    </div>
+                                            if (isset($_SESSION['cust_id'])) {
+                                                while ($data_cart = mysqli_fetch_assoc($item)) {
+                                                    $totalharga += $data_cart['harga'];
+                                            ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $data_cart['produk_name'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['ukuran'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['bahan'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['finishing'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['sisi'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['qty'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['deskripsi'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['harga'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['create_date'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <form action="../model/CustUser.php" method="post">
+                                                                <input type="hidden" name="cart_id" value="<?php echo $data_cart['cart_id'] ?>">
+                                                                <button type="submit" name="deletecart" class="btn btn-link text-danger"><i class="fas fa-times"></i></button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                            <?php }
+                                            } ?>
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
+                                    <tr>
+                                        <th colspan="3" class="text-right">Total</th>
+                                        <th><?php echo  "Rp. ", number_format($totalharga) ?></th>
+                                        <th></th>
+                                    </tr>
+                                </div>
+                                <div class="col-12 text-right">
+                                    <a href="#" class="btn btn-outline-success">Checkout</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -355,4 +355,5 @@ $totalharga = 0;
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 </body>
+
 </html>

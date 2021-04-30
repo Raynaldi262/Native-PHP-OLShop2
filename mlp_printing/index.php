@@ -2,29 +2,28 @@
 require('../connect/conn.php');
 require('../model/CustUser.php');
 
-if(isset($_SESSION['cust_id'])){
-    $datauser = getDataUser($_SESSION['cust_id'],$conn);
+if (isset($_SESSION['cust_id'])) {
+    $datauser = getDataUser($_SESSION['cust_id'], $conn);
 }
 $data_produk = GetdataProduk($conn);
 
- ?>
+?>
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>E-Commerce Template</title>
 
     <link href="//fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i" rel="stylesheet">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="container-fluid">
 
@@ -32,50 +31,50 @@ $data_produk = GetdataProduk($conn);
             <div class="col-12">
                 <header class="row">
                     <!-- Top Nav -->
-                    <?php if(isset($_SESSION['cust_id'])){ ?>
-                    <div class="col-12 bg-dark py-2 d-md-block d-none">
-                        <div class="row">
-                            <div class="col-auto mr-auto">
-                                <ul class="top-nav">
-                                    <li>
-                                        <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+<?php echo $datauser['cust_phone'];?></a>
-                                    </li>
-                                    <li>
-                                        <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i><?php echo $datauser['cust_email'];?></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-auto">
-                                <ul class="top-nav">
-                                    <li>
-                                        <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="../login_user/logout_user.php"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <?php } else {?>
+                    <?php if (isset($_SESSION['cust_id'])) { ?>
                         <div class="col-12 bg-dark py-2 d-md-block d-none">
-                        <div class="row">
-                            <div class="col-auto mr-auto">
-                                <ul class="top-nav">
-                                </ul>
-                            </div>
-                            <div class="col-auto">
-                                <ul class="top-nav">
-                                    <li>
-                                        <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Register</a>
-                                    </li>
-                                    <li>
-                                        <a href="../mlp_printing/login.php"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
-                                    </li>
-                                </ul>
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <ul class="top-nav">
+                                        <li>
+                                            <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+<?php echo $datauser['cust_phone']; ?></a>
+                                        </li>
+                                        <li>
+                                            <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i><?php echo $datauser['cust_email']; ?></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-auto">
+                                    <ul class="top-nav">
+                                        <li>
+                                            <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="../login_user/logout_user.php"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } else { ?>
+                        <div class="col-12 bg-dark py-2 d-md-block d-none">
+                            <div class="row">
+                                <div class="col-auto mr-auto">
+                                    <ul class="top-nav">
+                                    </ul>
+                                </div>
+                                <div class="col-auto">
+                                    <ul class="top-nav">
+                                        <li>
+                                            <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Register</a>
+                                        </li>
+                                        <li>
+                                            <a href="../mlp_printing/login.php"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     <?php } ?>
                     <!-- Top Nav -->
 
@@ -113,13 +112,13 @@ $data_produk = GetdataProduk($conn);
                                             <a class="nav-link" href="../mlp_printing/">Home <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="../mlp_printing/cart.php" >Cart</a>
+                                            <a class="nav-link" href="../mlp_printing/cart.php">Cart</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="../mlp_printing/cart.php" >Checkout</a>
+                                            <a class="nav-link" href="../mlp_printing/cart.php">Checkout</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="../mlp_printing/cart.php" >Pesanan</a>
+                                            <a class="nav-link" href="../mlp_printing/cart.php">Pesanan</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -182,33 +181,33 @@ $data_produk = GetdataProduk($conn);
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
                                         <a href="../mlp_printing/product_detail.php?id=1">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
+                                            <div class="col-12 bg-white text-center h-100 product-item">
+                                                <div class="row h-100">
+                                                    <div class="col-12 p-0 mb-3">
                                                         <img src="images/image-1.jpg" class="img-fluid">
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <h3 class="product-name">Kartu Nama</h3>
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <h3 class="product-name">Kartu Nama</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                     <!-- Product -->
 
-                                     <!-- Product -->
+                                    <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
                                         <a href="../mlp_printing/product_detail.php?id=2">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
+                                            <div class="col-12 bg-white text-center h-100 product-item">
+                                                <div class="row h-100">
+                                                    <div class="col-12 p-0 mb-3">
                                                         <img src="images/image-1.jpg" class="img-fluid">
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <h3 class="product-name">Dokumen (HVS)</h3>
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <h3 class="product-name">Dokumen (HVS)</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                     <!-- Product -->
@@ -216,16 +215,16 @@ $data_produk = GetdataProduk($conn);
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
                                         <a href="../mlp_printing/product_detail.php?id=3">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
+                                            <div class="col-12 bg-white text-center h-100 product-item">
+                                                <div class="row h-100">
+                                                    <div class="col-12 p-0 mb-3">
                                                         <img src="images/image-1.jpg" class="img-fluid">
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <h3 class="product-name">Poster A3+</h3>
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <h3 class="product-name">Poster A3+</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                     <!-- Product -->
@@ -233,16 +232,16 @@ $data_produk = GetdataProduk($conn);
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
                                         <a href="../mlp_printing/product_detail.php?id=4">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
+                                            <div class="col-12 bg-white text-center h-100 product-item">
+                                                <div class="row h-100">
+                                                    <div class="col-12 p-0 mb-3">
                                                         <img src="images/image-1.jpg" class="img-fluid">
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <h3 class="product-name">Banner Standart</h3>
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <h3 class="product-name">Banner Standart</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                     <!-- Product -->
@@ -250,16 +249,16 @@ $data_produk = GetdataProduk($conn);
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
                                         <a href="../mlp_printing/product_detail.php?id=5">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
+                                            <div class="col-12 bg-white text-center h-100 product-item">
+                                                <div class="row h-100">
+                                                    <div class="col-12 p-0 mb-3">
                                                         <img src="images/image-1.jpg" class="img-fluid">
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <h3 class="product-name">X Banner</h3>
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <h3 class="product-name">X Banner</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                     <!-- Product -->
@@ -267,32 +266,32 @@ $data_produk = GetdataProduk($conn);
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
                                         <a href="../mlp_printing/product_detail.php?id=6">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
+                                            <div class="col-12 bg-white text-center h-100 product-item">
+                                                <div class="row h-100">
+                                                    <div class="col-12 p-0 mb-3">
                                                         <img src="images/image-1.jpg" class="img-fluid">
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <h3 class="product-name">Roll Up Banner</h3>
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <h3 class="product-name">Roll Up Banner</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                     <!-- Product -->
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
                                         <a href="../mlp_printing/product_detail.php?id=7">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
+                                            <div class="col-12 bg-white text-center h-100 product-item">
+                                                <div class="row h-100">
+                                                    <div class="col-12 p-0 mb-3">
                                                         <img src="images/image-1.jpg" class="img-fluid">
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <h3 class="product-name">Brosur/Flyer</h3>
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <h3 class="product-name">Brosur/Flyer</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                     <!-- Product -->
@@ -300,16 +299,16 @@ $data_produk = GetdataProduk($conn);
                                     <!-- Product -->
                                     <div class="col-lg-3 col-sm-6 my-3">
                                         <a href="../mlp_printing/product_detail.php?id=8">
-                                        <div class="col-12 bg-white text-center h-100 product-item">
-                                            <div class="row h-100">
-                                                <div class="col-12 p-0 mb-3">
+                                            <div class="col-12 bg-white text-center h-100 product-item">
+                                                <div class="row h-100">
+                                                    <div class="col-12 p-0 mb-3">
                                                         <img src="images/image-1.jpg" class="img-fluid">
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <h3 class="product-name">Sticker Promosi</h3>
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <h3 class="product-name">Sticker Promosi</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                     <!-- Product -->
@@ -509,4 +508,5 @@ $data_produk = GetdataProduk($conn);
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 </body>
+
 </html>
