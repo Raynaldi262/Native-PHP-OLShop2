@@ -635,6 +635,11 @@ if (isset($_GET['id'])) {
                                                 <label for=" name"><b> Jumlah : &nbsp</b></label>
                                                 <p style="text-align: center;display: inline;"></p>
                                             </div>
+
+                                            <div class="harga">
+                                                <label for=" name"><b> harga : &nbsp</b></label>
+                                                <p style="text-align: center;display: inline;"></p>
+                                            </div>
                                         </div>
                                     </main>
                                     <!-- Review -->
