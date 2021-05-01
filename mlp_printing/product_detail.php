@@ -223,7 +223,7 @@ if (isset($_GET['id'])) {
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' max="100" value='1' required>
                                                                 <div class="col-3 input-group-text"><b> Box(100pcs)</b></div>
                                                                 <input type="Hidden" name="finishing" class="form-control" value=' - ' id="finishing">
-                                                                <input type="Hidden" name="produk_name" class="form-control" value='Kartu Nama'>
+                                                                <input type="Hidden" name="produk_name" class="form-control" value='Kartu Nama' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='1'>
                                                                 <input type="Hidden" name="uk_kertas" class="form-control" value='A3+'>
                                                                 <div class="input-group-append">
@@ -234,7 +234,7 @@ if (isset($_GET['id'])) {
                                                                 <input type="text" name="upload_name" class="form-control" required>
                                                             </div>
                                                             <div class="input-group mb-3">
-                                                                <div class="col-3 input-group-text"><b> Catatan : </b></div> 
+                                                                <div class="col-3 input-group-text"><b> Catatan : </b></div>
                                                                 <textarea name="catatan" class="form-control"></textarea>
                                                             </div>
                                                             <div class="form-group" style="text-align: center;">
@@ -280,7 +280,7 @@ if (isset($_GET['id'])) {
                                                                 <div class="col-3 input-group-text"><b> Jumlah : </b></div>
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
                                                                 <input type="Hidden" name="finishing" class="form-control" value=' - ' id="finishing">
-                                                                <input type="Hidden" name="produk_name" class="form-control" value='Print Dokumen(HVS)'>
+                                                                <input type="Hidden" name="produk_name" class="form-control" value='Print Dokumen(HVS)' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='2'>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -323,7 +323,7 @@ if (isset($_GET['id'])) {
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
                                                                 <input type="Hidden" name="finishing" class="form-control" value=' - ' id="finishing">
                                                                 <input type="Hidden" name="sisi" class="form-control" value=' - ' id="sisi">
-                                                                <input type="Hidden" name="produk_name" class="form-control" value='Poster A3+'>
+                                                                <input type="Hidden" name="produk_name" class="form-control" value='Poster A3+' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='3'>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -373,7 +373,7 @@ if (isset($_GET['id'])) {
                                                                 <input type="Number" name="qty" id="qty" class="form-control" min='1' value='1' required>
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
-                                                                <input type="Hidden" name="produk_name" class="form-control" value='Banner Standard'>
+                                                                <input type="Hidden" name="produk_name" class="form-control" value='Banner Standard' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='4'>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -421,7 +421,7 @@ if (isset($_GET['id'])) {
                                                                 <input type="Number" name="qty" id="qty" class="form-controlcol6" min='1' value='1' required>
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
-                                                                <input type="Hidden" name="produk_name" class="form-control" value='X Banner'>
+                                                                <input type="Hidden" name="produk_name" class="form-control" value='X Banner' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='5'>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -471,7 +471,7 @@ if (isset($_GET['id'])) {
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
-                                                                <input type="Hidden" name="produk_name" class="form-control" value='Roll Up Banner'>
+                                                                <input type="Hidden" name="produk_name" class="form-control" value='Roll Up Banner' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='6'>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -518,7 +518,7 @@ if (isset($_GET['id'])) {
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Jumlah/Rim : </b></div>
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
-                                                                <input type="Hidden" name="produk_name" class="form-control" value='Brosur/Flyer'>
+                                                                <input type="Hidden" name="produk_name" class="form-control" value='Brosur/Flyer' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='7'>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -567,7 +567,7 @@ if (isset($_GET['id'])) {
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
-                                                                <input type="Hidden" name="produk_name" class="form-control" value='Sticker Promosi'>
+                                                                <input type="Hidden" name="produk_name" class="form-control" value='Sticker Promosi' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='8'>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -596,37 +596,44 @@ if (isset($_GET['id'])) {
                                 <div class="col-12 px-md-4 border-top border-left sidebar h-100">
 
                                     <!-- Rating -->
-                                    <div class="row">
+                                    <div class="row" style="background-color: black;">
                                         <div class="col-12 mt-md-0 mt-3 text-uppercase" style="text-align: center;">
-                                            <h2><b><u>Ringkasan Pesanan</u></b></h2>
+                                            <br>
+                                            <h2 style="color: white;"><b>Ringkasan Pesanan</b></h2>
+                                            <br>
                                         </div>
                                     </div>
-                                    <br>
                                     <main class="row">
-                                        <div class="col-12">
+                                        <div class="col-12 ringkasan">
+                                            <br>
                                             <div class="produk">
-                                                <label for="name"><b> Produk:</b></label>
-                                                <h4 style="text-align: center;"> asdasddsa</h4>
+                                                <label for="name"><b> Produk : &nbsp</b></label>
+                                                <p style="text-align: center;display: inline;" id></p>
                                             </div>
 
                                             <div class="ukuran">
-                                                <label for="name"><b> Ukuran:</b></label>
-                                                <h4 style="text-align: center;"> asdasddsa</h4>
+                                                <label for="name"><b> Ukuran : &nbsp</b></label>
+                                                <p style="text-align: center;display: inline;"></p>
                                             </div>
 
                                             <div class="bahan">
-                                                <label for="name"><b> Bahan:</b></label>
-                                                <h4 style="text-align: center;"> asdasddsa</h4>
+                                                <label for="name"><b> Bahan : &nbsp</b></label>
+                                                <p style="text-align: center;display: inline;"></p>
                                             </div>
 
                                             <div class="sisi">
-                                                <label for="name"><b> Sisi:</b></label>
-                                                <h4 style="text-align: center;"> asdasddsa</h4>
+                                                <label for="name"><b> Sisi : &nbsp</b></label>
+                                                <p style="text-align: center;display: inline;"></p>
                                             </div>
 
                                             <div class="finishing">
-                                                <label for="name"><b> Finishing:</b></label>
-                                                <h4 style="text-align: center;"> asdasddsa</h4>
+                                                <label for=" name"><b> Finishing : &nbsp</b></label>
+                                                <p style="text-align: center;display: inline;"></p>
+                                            </div>
+
+                                            <div class="qty">
+                                                <label for=" name"><b> Jumlah : &nbsp</b></label>
+                                                <p style="text-align: center;display: inline;"></p>
                                             </div>
                                         </div>
                                     </main>
@@ -798,9 +805,24 @@ if (isset($_GET['id'])) {
                 break;
         }
 
-        var ukuran = $(id + ' > .input-group > #ukuran');
-        var ukuran = $(id + ' > .input-group > #ukuran');
+        var produk = $(id + ' > .input-group > #produk').val();
+        var ukuran = $(id + ' > .input-group > #ukuran > option:selected').val();
+        var bahan = $(id + ' > .input-group > #bahan > option:selected').text();
+        var sisi = $(id + ' > .input-group > #sisi').val();
+        var finishing = $(id + ' > .input-group > #finishing > option:selected').text();
+        var qty = $(id + ' > .input-group > #qty').val();
 
+        if (ukuran == null) {
+            ukuran = '-';
+        }
 
+        $(".ringkasan > div > p").text('');
+
+        $(".ringkasan > .produk > p").text(produk);
+        $(".ringkasan > .ukuran > p").text(ukuran);
+        $(".ringkasan > .bahan > p").text(bahan);
+        $(".ringkasan > .sisi > p").text(sisi);
+        $(".ringkasan > .finishing > p").text(finishing);
+        $(".ringkasan > .qty > p").text(qty);
     });
 </script>
