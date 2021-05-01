@@ -116,7 +116,7 @@ function addChart($conn)
          $result = mysqli_query($conn, $sql);
 
          $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
-                VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "', 0 ,'" . $_POST['item_id'] . "','" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "',' - ', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "', '" . $_POST['sisi'] . "' , '" . $ukuran_kertas . "' )";
+                VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "', null ,'" . $_POST['item_id'] . "','" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "',' - ', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "', '" . $_POST['sisi'] . "' , '" . $ukuran_kertas . "' )";
          $result = mysqli_query($conn, $sql);
          if ($result) {
             header("location: ../mlp_printing/cart.php");
