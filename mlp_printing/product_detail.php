@@ -9,7 +9,7 @@ if (isset($_GET['id'])) {
     $data_detail = getDetailProduk($_GET['id'], $conn);
 }
 
-$getitem = getDataItem($conn); 
+$getitem = getDataItem($conn);
 while ($datas = mysqli_fetch_assoc($getitem)) {
     $dataitem[] = $datas; //assign whole values to array
 }
@@ -263,7 +263,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Bahan : </b></div>
-                                                                <select name="item_id" class="form-control col-6" id="bahan">
+                                                                <select name="item_id" class="form-control col-6" id="bahan" disabled>
                                                                     <?php while ($data  = mysqli_fetch_assoc($data_bahan)) { ?>
                                                                         <option value="<?php echo $data['item_id'] ?>"><?php echo $data['item_name'] ?></option>
                                                                     <?php } ?>
@@ -427,6 +427,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Number" name="qty" id="qty" class="form-controlcol6" min='1' value='1' required>
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
+                                                                <input type="Hidden" name="kaki" class="form-control" value='39' id="kaki">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='X Banner' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='5'>
                                                             </div>
@@ -477,6 +478,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
+                                                                <input type="Hidden" name="kaki" class="form-control" value='40' id="kaki">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Roll Up Banner' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='6'>
                                                             </div>
@@ -643,7 +645,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                             </div>
 
                                             <div class="harga">
-                                                <label for=" name"><b> harga : &nbsp</b></label>
+                                                <label for=" name"><b> Harga : &nbsp</b></label>
                                                 <p style="text-align: center;display: inline;"></p>
                                             </div>
                                         </div>
@@ -788,8 +790,10 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
 </html>
 <script>
     $(function() {
+        var itemid = <?php echo $_GET['id'] ?>;
         var id = 0;
-        switch (<?php echo $_GET['id'] ?>) {
+        var harga = 0;
+        switch (itemid) {
             case 1:
                 id = ".kartu_nama";
                 break;
@@ -816,15 +820,20 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                 break;
         }
 
+
         var produk = $(id + ' > .input-group > #produk').val();
         var ukuran = $(id + ' > .input-group > #ukuran > option:selected').val();
         var bahan = $(id + ' > .input-group > #bahan > option:selected').text();
         var sisi = $(id + ' > .input-group > #sisi').val();
+        var kaki = $(id + ' > .input-group > #kaki').val();
         var finishing = $(id + ' > .input-group > #finishing > option:selected').text();
         var qty = $(id + ' > .input-group > #qty').val();
 
+        var idbahan = $(id + ' > .input-group > #bahan').val();
+        var idfinishing = $(id + ' > .input-group > #finishing').val();
+
         if (ukuran == null) {
-            ukuran = '-';
+            ukuran = 0;
         }
 
         $(".ringkasan > div > p").text('');
@@ -835,5 +844,74 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
         $(".ringkasan > .sisi > p").text(sisi);
         $(".ringkasan > .finishing > p").text(finishing);
         $(".ringkasan > .qty > p").text(qty);
+
+        console.log(ukuran);
+
+        if (itemid != 7) {
+            var pattern = /\d+/g;
+            var result = ukuran.match(pattern);
+            ukuran = (result[0] / 100) * (result[1] / 100);
+        }
+
+        harga = totalPrice(itemid, ukuran, idbahan, idfinishing, kaki, qty);
+
+        $(".ringkasan > .harga > p").text(harga);
     });
+
+    function totalPrice(id, ukuran, bahan, finishing, kaki, qty) {
+
+        var total = 0;
+        var hBahan = 0;
+        var hFinish = 0;
+        var hFooter = 0;
+        var items = <?php echo json_encode($dataitem) ?>;
+
+        $.each(items, function(key, value) {
+            if (value['item_id'] == bahan) {
+                hBahan = value['item_price'];
+            }
+
+            if (value['item_id'] == finishing) {
+                hFinish = value['item_price'];
+            }
+
+
+            if (value['item_id'] == kaki) {
+                hFooter = value['item_price'];
+            }
+        });
+
+
+        if (id == 1) { //kalau kartu nama
+            total = (3 * hBahan) * qty;
+            return total;
+        }
+
+        if (id == 2 || id == 3) { //kalau dokumen hvs, poster a3+
+            total = hBahan * qty;
+            return total;
+        }
+
+        if (id == 4 || id == 8) { // banner standart
+            total = (hBahan * ukuran * qty) + (hFinish * ukuran * qty);
+            return total;
+        }
+
+        if (id == 5 || id == 6) { // x standart & roll up  
+            total = (hBahan * ukuran * qty) + (hFinish * ukuran * qty) + (kaki * qty);
+            return total;
+        }
+
+        if (id == 7) { // Brosur
+            if (ukuran == 'A3+') {
+                ukuran = 500;
+            } else if (ukuran == 'A4') {
+                ukuran = 250;
+            } else if (ukuran == 'A5') {
+                ukuran = 125;
+            }
+            total = hBahan * ukuran * qty;
+            return total;
+        }
+    }
 </script>
