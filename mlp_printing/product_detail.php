@@ -224,15 +224,17 @@ if (isset($_GET['id'])) {
                                                                 <div class="col-3 input-group-text"><b> Box(100pcs)</b></div>
                                                                 <input type="Hidden" name="finishing" class="form-control" value=' - ' id="finishing">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Kartu Nama'>
+                                                                <input type="Hidden" name="produk_id" class="form-control" value='1'>
+                                                                <input type="Hidden" name="uk_kertas" class="form-control" value='A3+'>
                                                                 <div class="input-group-append">
                                                                 </div>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
-                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                                <input type="text" name="upload_name" class="form-control" required>
                                                             </div>
                                                             <div class="input-group mb-3">
-                                                                <div class="col-3 input-group-text"><b> Catatan : </b></div>
+                                                                <div class="col-3 input-group-text"><b> Catatan : </b></div> 
                                                                 <textarea name="catatan" class="form-control"></textarea>
                                                             </div>
                                                             <div class="form-group" style="text-align: center;">
@@ -279,10 +281,11 @@ if (isset($_GET['id'])) {
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
                                                                 <input type="Hidden" name="finishing" class="form-control" value=' - ' id="finishing">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Print Dokumen(HVS)'>
+                                                                <input type="Hidden" name="produk_id" class="form-control" value='2'>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
-                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                                <input type="text" name="upload_name" class="form-control" required>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
@@ -321,10 +324,11 @@ if (isset($_GET['id'])) {
                                                                 <input type="Hidden" name="finishing" class="form-control" value=' - ' id="finishing">
                                                                 <input type="Hidden" name="sisi" class="form-control" value=' - ' id="sisi">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Poster A3+'>
+                                                                <input type="Hidden" name="produk_id" class="form-control" value='3'>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
-                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                                <input type="text" name="upload_name" class="form-control" required>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
@@ -370,10 +374,11 @@ if (isset($_GET['id'])) {
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Banner Standard'>
+                                                                <input type="Hidden" name="produk_id" class="form-control" value='4'>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
-                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                                <input type="text" name="upload_name" class="form-control" required>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
@@ -417,10 +422,11 @@ if (isset($_GET['id'])) {
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='X Banner'>
+                                                                <input type="Hidden" name="produk_id" class="form-control" value='5'>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
-                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                                <input type="text" name="upload_name" class="form-control" required>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
@@ -466,10 +472,11 @@ if (isset($_GET['id'])) {
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Roll Up Banner'>
+                                                                <input type="Hidden" name="produk_id" class="form-control" value='6'>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
-                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                                <input type="text" name="upload_name" class="form-control">
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
@@ -512,11 +519,11 @@ if (isset($_GET['id'])) {
                                                                 <div class="col-3 input-group-text"><b> Jumlah/Rim : </b></div>
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Brosur/Flyer'>
-                                                                <input type="Hidden" name="finishing" class="form-control" value='-' id="finishing">
+                                                                <input type="Hidden" name="produk_id" class="form-control" value='7'>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
-                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                                <input type="text" name="upload_name" class="form-control" required>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
@@ -561,10 +568,11 @@ if (isset($_GET['id'])) {
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Sticker Promosi'>
+                                                                <input type="Hidden" name="produk_id" class="form-control" value='8'>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Upload Berkas : </b></div>
-                                                                <a class="form-control" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+                                                                <input type="text" name="upload_name" class="form-control" required>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
