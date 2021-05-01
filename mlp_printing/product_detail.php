@@ -8,6 +8,12 @@ if (isset($_SESSION['cust_id'])) {
 if (isset($_GET['id'])) {
     $data_detail = getDetailProduk($_GET['id'], $conn);
 }
+
+$getitem = getDataItem($conn); 
+while ($datas = mysqli_fetch_assoc($getitem)) {
+    $dataitem[] = $datas; //assign whole values to array
+}
+
 ?>
 <!doctype html>
 <html lang="en">

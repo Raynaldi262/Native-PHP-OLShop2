@@ -24,6 +24,13 @@ function getDataUser($cust_id, $conn)
    return $data;
 }
 
+function getDataItem($conn)
+{
+   $sql = "SELECT item_id, item_price from tbl_item ";
+   $item = mysqli_query($conn, $sql);
+   return $item;
+}
+
 function getDetailProduk($id , $conn){
    $sql = "SELECT * from tbl_produk where produk_id = '". $id ."' ";
    $item = mysqli_query($conn, $sql);
