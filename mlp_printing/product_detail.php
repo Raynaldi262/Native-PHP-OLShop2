@@ -237,7 +237,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
-                                                                <input type="text" name="upload_name" class="form-control" required>
+                                                                <input type="url" name="upload_name" class="form-control" required>
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
@@ -353,9 +353,9 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Ukuran : </b></div>
                                                                 <br>
-                                                                <input type="number" name="ukuran1" id="ukuran1" class="col-3" required>
+                                                                <input type="number" name="ukuran1" id="ukuran1" class="col-3" min="0" value="0" required>
                                                                 <div class="col-1 input-group-text"><b>X</b></div>
-                                                                <input type="number" name="ukuran2" id="ukuran2" class="col-3" required>
+                                                                <input type="number" name="ukuran2" id="ukuran2" class="col-3" min="0" value="0" required>
                                                                 <div class="col-1 input-group-text"><b> CM</b></div>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -549,9 +549,9 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                         <form method="post" action="../model/CustUser.php" class="stiker">
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Ukuran : </b></div>
-                                                                <input type="number" name="ukuran1" id="ukuran1" class="col-3" required>
+                                                                <input type="number" name="ukuran1" id="ukuran1" class="col-3" min="0" value="0" required>
                                                                 <div class="col-1 input-group-text"><b> X</b></div>
-                                                                <input type="number" name="ukuran2" id="ukuran2" class="col-3" required>
+                                                                <input type="number" name="ukuran2" id="ukuran2" class="col-3" min="0" value="0" required>
                                                                 <div class="col-1 input-group-text"><b> CM</b></div>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -645,7 +645,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                             </div>
 
                                             <div class="harga">
-                                                <label for=" name"><b> Harga : &nbsp</b></label>
+                                                <label for=" name"><b> Harga : &nbsp</b>Rp </label>
                                                 <p style="text-align: center;display: inline;"></p>
                                             </div>
                                         </div>
@@ -782,9 +782,14 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
         </div>
 
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/ukuran.js"></script>
+    <script type="text/javascript" src="js/bahan.js"></script>
+    <script type="text/javascript" src="js/finishing.js"></script>
+    <script type="text/javascript" src="js/qty.js"></script>
 </body>
 
 </html>
@@ -837,7 +842,6 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
         }
 
         $(".ringkasan > div > p").text('');
-
         $(".ringkasan > .produk > p").text(produk);
         $(".ringkasan > .ukuran > p").text(ukuran);
         $(".ringkasan > .bahan > p").text(bahan);
@@ -845,18 +849,49 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
         $(".ringkasan > .finishing > p").text(finishing);
         $(".ringkasan > .qty > p").text(qty);
 
-        console.log(ukuran);
-
-        if (itemid != 7) {
-            var pattern = /\d+/g;
-            var result = ukuran.match(pattern);
-            ukuran = (result[0] / 100) * (result[1] / 100);
+        if (itemid == '1' || itemid == '2' || itemid == '3' || itemid == '4' || itemid == '7' || itemid == '8')
+            console.log('msk');
+        else {
+            ukuran = searchSize(ukuran);
         }
 
         harga = totalPrice(itemid, ukuran, idbahan, idfinishing, kaki, qty);
-
+        harga = numeral(harga).format('0,0')
         $(".ringkasan > .harga > p").text(harga);
+
+        // kalau ukuran brubah
+        $(id + ' > .input-group > #ukuran').change(function() {
+            changeSize(id, itemid);
+        })
+
+        //ini khusus id 4  ukurannya custom user
+        $(id + ' > .input-group > #ukuran1').change(function() {
+            changeSize(id, itemid);
+        });
+
+        //ini khusus id 4  ukurannya custom user
+        $(id + ' > .input-group > #ukuran2').change(function() {
+            changeSize(id, itemid);
+        });
+
+        $(id + ' > .input-group > #bahan').change(function() {
+            changeBahan(id, itemid);
+        });
+
+        $(id + ' > .input-group > #finishing').change(function() {
+            changeFinishing(id, itemid);
+        });
+
+        $(id + ' > .input-group > #qty').change(function() {
+            changeQty(id, itemid);
+        })
+
+        $(id + ' > .input-group > #sisi').change(function() {
+            var sisi = $(id + ' > .input-group > #sisi > option:selected').text();
+            $(".ringkasan > .sisi > p").text(sisi);
+        })
     });
+
 
     function totalPrice(id, ukuran, bahan, finishing, kaki, qty) {
 
@@ -887,7 +922,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
             return total;
         }
 
-        if (id == 2 || id == 3) { //kalau dokumen hvs, poster a3+
+        if (id == 2 || id == 3) { //kalau dokumen hvs, poster a3+ 
             total = hBahan * qty;
             return total;
         }
@@ -913,5 +948,12 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
             total = hBahan * ukuran * qty;
             return total;
         }
+    }
+
+    function searchSize(data) {
+        var pattern = /\d+/g;
+        var result = data.match(pattern);
+        result = (result[0] / 100) * (result[1] / 100);
+        return result
     }
 </script>
