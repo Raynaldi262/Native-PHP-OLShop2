@@ -45,13 +45,19 @@ function GetdataProduk($conn){
 }
 
 function GetDataBahan($id,$conn){
-   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' ";
+   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
    $item = mysqli_query($conn, $sql);
    return $item;
 }
 
 function GetDataFinishing($id, $conn){
-   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'FINISHING' ";
+   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'FINISHING' && item_status = 'ACTIVE' ";
+   $item = mysqli_query($conn, $sql);
+   return $item;
+}
+
+function GetDataKaki($id, $conn){
+   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'KAKI' && item_status = 'ACTIVE' ";
    $item = mysqli_query($conn, $sql);
    return $item;
 }
@@ -103,8 +109,8 @@ function addChart($conn)
          $sql = "INSERT INTO tbl_upload ( cust_id, date_id, upload_name) VALUES ('" . $_SESSION['cust_id'] . "','" . $date_id . "', '" . $_POST['upload_name'] . "')";
          $result = mysqli_query($conn, $sql);
 
-            $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
-                   VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "','" . $_POST['finishing_id'] . "','" . $_POST['item_id'] . "','" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" .  $ukuran . "', '" . $data['item_name'] . "','" .$data_finishing['item_name'] . "', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "','" . $_POST['sisi'] . "','".$hasil_meter."')";
+            $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
+                   VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "','" . $_POST['finishing_id'] . "','" . $_POST['item_id'] . "' ,'" . $_POST['kaki'] . "', '" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" .  $ukuran . "', '" . $data['item_name'] . "','" .$data_finishing['item_name'] . "', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "','" . $_POST['sisi'] . "','".$hasil_meter."')";
             $result = mysqli_query($conn, $sql);
    
          if ($result) {
@@ -122,8 +128,8 @@ function addChart($conn)
           $sql = "INSERT INTO tbl_upload ( cust_id, date_id, upload_name) VALUES ('" . $_SESSION['cust_id'] . "','" . $date_id . "', '" . $_POST['upload_name'] . "')";
          $result = mysqli_query($conn, $sql);
 
-         $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
-                VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "', null ,'" . $_POST['item_id'] . "','" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "',' - ', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "', '" . $_POST['sisi'] . "' , '" . $ukuran_kertas . "' )";
+         $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, kaki_id, cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
+                VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "', null ,'" . $_POST['item_id'] . "',null,'" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "',' - ', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "', '" . $_POST['sisi'] . "' , '" . $ukuran_kertas . "' )";
          $result = mysqli_query($conn, $sql);
          if ($result) {
             header("location: ../mlp_printing/cart.php");
