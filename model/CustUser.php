@@ -57,9 +57,10 @@ function GetDataFinishing($id, $conn){
 }
 
 function GetDataKaki($id, $conn){
-   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'KAKI' && item_status = 'ACTIVE' ";
+   $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'KAKI' && item_status = 'ACTIVE' LIMIT 1;";
    $item = mysqli_query($conn, $sql);
-   return $item;
+   $data = mysqli_fetch_assoc($item);
+   return $data;
 }
 
 function getDataCart($cust_id,$conn)
@@ -80,6 +81,7 @@ function deleteCart($conn)
 function addChart($conn)
 {
 
+   echo $_POST['item_id'];
    if (!isset($_SESSION['cust_id'])) {
       msg('Silakan Login dahulu', '../mlp_printing/login.php');
    } else {
@@ -103,14 +105,11 @@ function addChart($conn)
          $sql = "SELECT * from tbl_item where item_id = '" . $_POST['finishing_id'] . "' ";
          $item = mysqli_query($conn, $sql);
          $data_finishing = mysqli_fetch_assoc($item);
-         echo  $_POST['catatan'];
-         $harga = ($data['item_price'] + $data_finishing['item_price']) * $_POST['qty'];
-
          $sql = "INSERT INTO tbl_upload ( cust_id, date_id, upload_name) VALUES ('" . $_SESSION['cust_id'] . "','" . $date_id . "', '" . $_POST['upload_name'] . "')";
          $result = mysqli_query($conn, $sql);
 
             $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
-                   VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "','" . $_POST['finishing_id'] . "','" . $_POST['item_id'] . "' ,'" . $_POST['kaki'] . "', '" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" .  $ukuran . "', '" . $data['item_name'] . "','" .$data_finishing['item_name'] . "', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "','" . $_POST['sisi'] . "','".$hasil_meter."')";
+                   VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "','" . $_POST['finishing_id'] . "','" . $_POST['item_id'] . "' ,'" . $_POST['kaki'] . "', '" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" .  $ukuran . "', '" . $data['item_name'] . "','" .$data_finishing['item_name'] . "', '" . $_POST['qty'] . "','" . $_POST['total_harga']  . "', now(), '" . $_POST['catatan'] . "','" . $_POST['sisi'] . "','".$hasil_meter."')";
             $result = mysqli_query($conn, $sql);
    
          if ($result) {
@@ -119,7 +118,6 @@ function addChart($conn)
             msg('Item Gagal Ditambah', '../mlp_printing/cart.php');
          }
       }else {
-         $harga = $data['item_price'] * $_POST['qty'];
          if( $_POST['produk_id'] == 1){
           $ukuran_kertas = 'A3+';
          }else{
@@ -129,7 +127,7 @@ function addChart($conn)
          $result = mysqli_query($conn, $sql);
 
          $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, kaki_id, cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
-                VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "', null ,'" . $_POST['item_id'] . "',null,'" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "',' - ', '" . $_POST['qty'] . "','" . $harga . "', now(), '" . $_POST['catatan'] . "', '" . $_POST['sisi'] . "' , '" . $ukuran_kertas . "' )";
+                VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "', null ,'" . $_POST['item_id'] . "', 0 ,'" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "',' - ', '" . $_POST['qty'] . "','" . $_POST['total_harga'] . "', now(), '" . $_POST['catatan'] . "', '" . $_POST['sisi'] . "' , '" . $ukuran_kertas . "' )";
          $result = mysqli_query($conn, $sql);
          if ($result) {
             header("location: ../mlp_printing/cart.php");
