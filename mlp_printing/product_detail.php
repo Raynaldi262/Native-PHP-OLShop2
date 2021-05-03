@@ -122,7 +122,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                             <a class="nav-link" href="../mlp_printing/cart.php">Cart</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="../mlp_printing/cart.php">Checkout</a>
+                                            <a class="nav-link" href="../mlp_printing/checkout.php">Checkout</a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="../mlp_printing/cart.php">Pesanan</a>
@@ -216,7 +216,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Bahan : </b></div>
-                                                                <select name="item_idddd" class="form-control col-6" id="bahan">
+                                                                <select name="item_id" class="form-control col-6" id="bahan">
                                                                     <?php while ($data  = mysqli_fetch_assoc($data_bahan)) { ?>
                                                                         <option value="<?php echo $data['item_id'] ?>"><?php echo $data['item_name'] ?></option>
                                                                     <?php } ?>
@@ -232,7 +232,6 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Kartu Nama' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='1'>
                                                                 <input type="Hidden" name="uk_kertas" class="form-control" value='A3+'>
-                                                                <input type="Hidden" name="item_id" class="form-control" value='item_id' id="idbahan">
                                                                 <input type="Hidden" name="total_harga" class="form-control" id="total_harga" value='total_harga'>
                                                                 <div class="input-group-append">
                                                                 </div>
@@ -265,7 +264,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Bahan : </b></div>
-                                                                <select name="item_id" class="form-control col-6" id="bahan" disabled>
+                                                                <select name="item_iddd" class="form-control col-6" id="bahan" disabled>
                                                                     <?php while ($data  = mysqli_fetch_assoc($data_bahan)) { ?>
                                                                         <option value="<?php echo $data['item_id'] ?>"><?php echo $data['item_name'] ?></option>
                                                                     <?php } ?>
@@ -290,6 +289,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Hidden" name="finishing" class="form-control" value=' - ' id="finishing">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Print Dokumen(HVS)' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='2'>
+                                                                <input type="Hidden" name="item_id" class="form-control" value='item_id' id="idbahan">
                                                                 <input type="Hidden" name="total_harga" class="form-control" id="total_harga" value='total_harga'>
                                                             </div>
                                                             <div class="input-group mb-3">
@@ -868,7 +868,6 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
         }
 
         harga = totalPrice(itemid, ukuran, idbahan, idfinishing, kaki, qty);
-
         $(id + ' > .input-group > #total_harga').val(harga);
         harga = numeral(harga).format('0,0')
         $(".ringkasan > .harga > p").text(harga);
@@ -947,7 +946,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
         }
 
         if (id == 5 || id == 6) { // x standart & roll up  
-            total = (hBahan * ukuran * qty) + (hFinish * ukuran * qty) + (kaki * qty);
+            total = (hBahan * ukuran * qty) + (hFinish * ukuran * qty) + (hFooter * qty);
             return total;
         }
 

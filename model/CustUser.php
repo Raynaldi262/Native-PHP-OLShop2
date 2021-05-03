@@ -14,6 +14,10 @@ if (isset($_POST['deletecart'])) {
    deleteCart($conn);
 }
 
+if (isset($_POST['checkout'])) {
+   AddCheckout($conn);
+}
+
 
 
 function getDataUser($cust_id, $conn)
@@ -66,6 +70,13 @@ function GetDataKaki($id, $conn){
 function getDataCart($cust_id,$conn)
 {
    $sql = "SELECT * from tbl_cart where cust_id = '" . $cust_id . "' ";
+   $item = mysqli_query($conn, $sql);
+   return $item;
+}
+
+function getDataCheckout($cust_id,$conn)
+{
+   $sql = "SELECT * from tbl_checkout where cust_id = '" . $cust_id . "' ";
    $item = mysqli_query($conn, $sql);
    return $item;
 }
@@ -137,6 +148,23 @@ function addChart($conn)
          }
       }
    }
+}
+
+function AddCheckout($conn)
+{  
+
+   $sql = "SELECT * from tbl_cart where cust_id = '" . $_SESSION['cust_id'] . "' ";
+   $item = mysqli_query($conn, $sql);
+
+   while ($data = mysqli_fetch_assoc($item)) {
+      $sql = "INSERT INTO tbl_checkout ( date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter) 
+          VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "' , '" . $data['hasil_meter'] . "' )";
+      $result = mysqli_query($conn, $sql);
+      $sql = "DELETE FROM tbl_cart WHERE tbl_cart . cart_id = " . $data['cart_id'] . "";
+      mysqli_query($conn, $sql);
+      }
+  
+   header("location: ../mlp_printing/checkout.php");
 }
 
 

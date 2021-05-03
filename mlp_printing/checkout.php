@@ -1,10 +1,25 @@
 <?php
-require('../connect/conn.php');
 require('../model/CustUser.php');
+require('../connect/conn.php');
+
 if (isset($_SESSION['cust_id'])) {
+    $item = getDataCheckout($_SESSION['cust_id'], $conn);
     $datauser = getDataUser($_SESSION['cust_id'], $conn);
+    // $datauser = getDataUser($_SESSION['cust_id']);
 }
+// if (isset($_SESSION['cust_id'])) {
+// 	$data_cart = getcartCount($_SESSION['cust_id']);
+// 	$data_check = getcheckCount($_SESSION['cust_id']);
+// 	$proses_count = getProsesCount($_SESSION['cust_id']);
+// } else {
+// 	$data_cart['juml'] = 0;
+// 	$data_check['juml'] = 0;
+// 	$proses_count['juml'] = 0;
+// }
+$totalharga = 0;
+
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -12,7 +27,7 @@ if (isset($_SESSION['cust_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>E-Commerce Template</title>
+    <title>MLP Printing</title>
 
     <link href="//fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
@@ -23,6 +38,7 @@ if (isset($_SESSION['cust_id'])) {
 
 <body>
     <div class="container-fluid">
+
         <div class="row min-vh-100">
             <div class="col-12">
                 <header class="row">
@@ -79,7 +95,7 @@ if (isset($_SESSION['cust_id'])) {
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a href="index.html">E-Commerce</a>
+                                    <a href="../mlp_printing/">E-Commerce</a>
                                 </div>
                             </div>
                             <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
@@ -104,13 +120,13 @@ if (isset($_SESSION['cust_id'])) {
                                 </button>
                                 <div class="collapse navbar-collapse" id="mainNav">
                                     <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="../mlp_printing/">Home <span class="sr-only">(current)</span></a>
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="../mlp_printing/">Home</a>
                                         </li>
-                                        <li class="nav-item dropdown">
+                                        <li class="nav-item">
                                             <a class="nav-link" href="../mlp_printing/cart.php">Cart</a>
                                         </li>
-                                        <li class="nav-item dropdown">
+                                        <li class="nav-item active">
                                             <a class="nav-link" href="../mlp_printing/checkout.php">Checkout</a>
                                         </li>
                                         <li class="nav-item dropdown">
@@ -132,43 +148,80 @@ if (isset($_SESSION['cust_id'])) {
                 <!-- Main Content -->
                 <div class="row">
                     <div class="col-12 mt-3 text-center text-uppercase">
-                        <h2>Register</h2>
+                        <h2>Checkout</h2>
                     </div>
                 </div>
 
                 <main class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-8 mx-auto bg-white py-3 mb-4">
+                    <div class="col-12 bg-white py-3 mb-3">
                         <div class="row">
-                            <div class="col-12">
-                                <form method="post" action="../model/CustUser.php">
-                                    <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" name="nama" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Alamat</label>
-                                        <input type="text" name="alamat" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">No Hp</label>
-                                        <input type="number" name="nohp" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password-confirm">Confirm Password</label>
-                                        <input type="password" name="password1" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" name="register" class="btn btn-outline-dark">Register</button>
-                                    </div>
-                                </form>
+                            <div class=" col-md-10 mx-auto table-responsive">
+                                <div class="col-12">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Produk</th>
+                                                <th>Ukuran</th>
+                                                <th>Bahan</th>
+                                                <th>Finishing</th>
+                                                <th>Sisi</th>
+                                                <th>Qty</th>
+                                                <th>Catatan</th>
+                                                <th>Harga</th>
+                                                <th>Tanggal</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            if (isset($_SESSION['cust_id'])) {
+                                                while ($data_cart = mysqli_fetch_assoc($item)) {
+                                                    $totalharga += $data_cart['harga'];
+                                            ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $data_cart['produk_name'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['ukuran'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['bahan'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['finishing'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['sisi'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['qty'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['deskripsi'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo number_format($data_cart['harga']) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['create_date'] ?>
+                                                        </td>
+                                                    </tr>
+                                            <?php }
+                                            } ?>
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
+                                    <tr>
+                                        <th colspan="3" class="text-right">Total</th>
+                                        <th><?php echo  "Rp. ", number_format($totalharga) ?></th>
+                                        <th></th>
+                                    </tr>
+                                </div>
+                                <div class="col-12 text-right">
+                                    <a href="#" class="btn btn-outline-success">Checkout</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -176,7 +229,80 @@ if (isset($_SESSION['cust_id'])) {
                 </main>
                 <!-- Main Content -->
             </div>
+            <div class="col-12 mb-3 py-3 bg-white text-justify">
+                        <div class="row">
 
+                            <!-- Details -->
+                            <div class="col-md-7">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 text-uppercase">
+                                            <h2><u>Details</u></h2>
+                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <strong class="mr-2">Steve Rogers</strong>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ullamcorper quam, non congue odio.
+                                                        <br>
+                                                        Fusce ligula augue, faucibus sed neque non, auctor rhoncus enim. Sed nec molestie turpis. Nullam accumsan porttitor rutrum. Curabitur eleifend venenatis volutpat.
+                                                        <br>
+                                                        Aenean faucibus posuere vehicula.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Details -->
+
+                            <!-- Ratings & Reviews -->
+                            <div class="col-md-5">
+                                <div class="col-12 px-md-4 border-top border-left sidebar h-100">
+
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <!-- Comments -->
+                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <strong class="mr-2">Steve Rogers</strong>
+                                                        <small>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                        </small>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ullamcorper quam, non congue odio.
+                                                        <br>
+                                                        Fusce ligula augue, faucibus sed neque non, auctor rhoncus enim. Sed nec molestie turpis. Nullam accumsan porttitor rutrum. Curabitur eleifend venenatis volutpat.
+                                                        <br>
+                                                        Aenean faucibus posuere vehicula.
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <small>
+                                                            <i class="fas fa-clock mr-2"></i>5 hours ago
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Comments -->
+                                        </div>
+                                    </div>
+                                    <!-- Review -->
+
+                                </div>
+                            </div>
+                            <!-- Ratings & Reviews -->
+
+                        </div>
+                    </div>
             <div class="col-12 align-self-end">
                 <!-- Footer -->
                 <footer class="row">
@@ -288,8 +414,8 @@ if (isset($_SESSION['cust_id'])) {
                 </footer>
                 <!-- Footer -->
             </div>
-
         </div>
+
     </div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>

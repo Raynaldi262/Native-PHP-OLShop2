@@ -127,7 +127,7 @@ $totalharga = 0;
                                             <a class="nav-link" href="../mlp_printing/cart.php">Cart</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="../mlp_printing/cart.php">Checkout</a>
+                                            <a class="nav-link" href="../mlp_printing/checkout.php">Checkout</a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="../mlp_printing/cart.php">Pesanan</a>
@@ -201,7 +201,7 @@ $totalharga = 0;
                                                             <?php echo $data_cart['deskripsi'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_cart['harga'] ?>
+                                                            <?php echo number_format($data_cart['harga']) ?>
                                                         </td>
                                                         <td>
                                                             <?php echo $data_cart['create_date'] ?>
@@ -226,7 +226,10 @@ $totalharga = 0;
                                     </tr>
                                 </div>
                                 <div class="col-12 text-right">
-                                    <a href="#" class="btn btn-outline-success">Checkout</a>
+                                <form action="../model/CustUser.php" method="post" style="text-align:center;">
+								    <input type="hidden" name="cust_id" value="<?php echo $_SESSION['cust_id'] ?>">
+								    <button type="submit" name="checkout" class="btn btn-outline-success">Checkout</button>
+							    </form>
                                 </div>
                             </div>
                         </div>
