@@ -38,6 +38,7 @@ function changeSize(id, itemid) {
     }
 
     harga = totalPrice(itemid, ukuran, idbahan, idfinishing, kaki, qty);
+    $(id + ' > .input-group > #total_harga').val(harga);
     harga = numeral(harga).format('0,0');
     $(".ringkasan > .harga > p").text(harga);
 }
