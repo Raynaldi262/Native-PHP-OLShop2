@@ -436,7 +436,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='X Banner' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='5'>
                                                                 <input type="Hidden" name="total_harga" class="form-control" id="total_harga" value='total_harga'>
-                                                                <input type="Hidden" name="kaki" class="form-control" value='<?php echo $data_kaki['item_id']?>' id="kaki">
+                                                                <input type="Hidden" name="kaki" class="form-control" value='<?php echo $data_kaki['item_id'] ?>' id="kaki">
                                                             </div>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
@@ -486,7 +486,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
-                                                                <input type="Hidden" name="kaki" class="form-control" value='<?php echo $data_kaki['item_id']?>' id="kaki">
+                                                                <input type="Hidden" name="kaki" class="form-control" value='<?php echo $data_kaki['item_id'] ?>' id="kaki">
                                                                 <input type="Hidden" name="produk_name" class="form-control" value='Roll Up Banner' id="produk">
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='6'>
                                                                 <input type="Hidden" name="total_harga" class="form-control" id="total_harga" value='total_harga'>
@@ -848,6 +848,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
         var idbahan = $(id + ' > .input-group > #bahan').val();
         var idfinishing = $(id + ' > .input-group > #finishing').val();
 
+        $(id + ' > .input-group > #idbahan').val(idbahan);
         if (ukuran == null) {
             ukuran = 0;
         }

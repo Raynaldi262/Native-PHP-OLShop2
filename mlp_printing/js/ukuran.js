@@ -21,6 +21,8 @@ function changeSize(id, itemid) {
             }
             $(".ringkasan > .bahan > p").text(bahan);
         })
+
+        $(id + ' > .input-group > #idbahan').val(idbahan);
     }
 
     $(".ringkasan > .ukuran > p").text(ukuran);
