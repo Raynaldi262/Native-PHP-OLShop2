@@ -130,7 +130,7 @@ $totalharga = 0;
                                             <a class="nav-link" href="../mlp_printing/checkout.php">Checkout</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="../mlp_printing/cart.php">Pesanan</a>
+                                            <a class="nav-link" href="../mlp_printing/pesanan.php">Pesanan</a>
                                         </li>
                                     </ul>
                                 </div>

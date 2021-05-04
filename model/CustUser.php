@@ -17,6 +17,9 @@ if (isset($_POST['deletecart'])) {
 if (isset($_POST['checkout'])) {
    AddCheckout($conn);
 }
+if (isset($_POST['batalcheck'])) {
+   BatalCheck($conn);
+}
 
 
 
@@ -88,6 +91,13 @@ function deleteCart($conn)
    mysqli_query($conn, $sql);
    header("location: ../mlp_printing/cart.php");
 }
+
+function BatalCheck($conn){
+   $sql = "DELETE FROM tbl_checkout WHERE tbl_checkout . cust_id = '" . $_SESSION['cust_id'] . "'";
+   mysqli_query($conn, $sql);
+   header("location: ../mlp_printing/checkout.php");
+}
+
 
 function addChart($conn)
 {
