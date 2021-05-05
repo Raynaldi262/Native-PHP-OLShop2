@@ -13,7 +13,7 @@ if (isset($_SESSION['cust_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>E-Commerce Template</title>
+    <title>MLP Printing</title>
 
     <link href="//fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
@@ -80,7 +80,7 @@ if (isset($_SESSION['cust_id'])) {
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a href="index.html">E-Commerce</a>
+                                    <a href="../mlp_printing/">E-Commerce</a>
                                 </div>
                             </div>
                             <div class="col-lg-5 mx-auto mt-4 mt-lg-0">

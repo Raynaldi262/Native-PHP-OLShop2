@@ -35,6 +35,16 @@ $totalharga = 0;
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+<style>
+    table {
+        table-layout: fixed;
+
+    }
+
+    td {
+        word-wrap: break-word;
+    }
+</style>
 
 <body>
     <div class="container-fluid">
@@ -226,10 +236,10 @@ $totalharga = 0;
                                     </tr>
                                 </div>
                                 <div class="col-12 text-right">
-                                <form action="../model/CustUser.php" method="post" style="text-align:center;">
-								    <input type="hidden" name="cust_id" value="<?php echo $_SESSION['cust_id'] ?>">
-								    <button type="submit" name="checkout" class="btn btn-outline-success">Checkout</button>
-							    </form>
+                                    <form action="../model/CustUser.php" method="post" style="text-align:center;">
+                                        <input type="hidden" name="cust_id" value="<?php echo $_SESSION['cust_id'] ?>">
+                                        <button type="submit" name="checkout" class="btn btn-outline-success">Checkout</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

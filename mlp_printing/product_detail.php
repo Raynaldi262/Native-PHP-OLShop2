@@ -581,7 +581,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 </select>
                                                             </div>
                                                             <div class="input-group mb-3">
-                                                                <div class="col-3 input-group-text"><b> Finishing : </b></div>
+                                                                <div class="col-3 input-group-text"><b> Jumlah : </b></div>
                                                                 <input type="Number" name="qty" id="qty" class="form-control col-6" min='1' value='1' required>
                                                                 <!-- kurang sisi -->
                                                                 <input type="Hidden" name="sisi" class="form-control" value='-' id="sisi">
