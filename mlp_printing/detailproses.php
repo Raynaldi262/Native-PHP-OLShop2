@@ -3,7 +3,7 @@ require('../model/CustUser.php');
 require('../connect/conn.php');
 
 if (isset($_SESSION['cust_id'])) {
-    $item = getDataProses($_SESSION['cust_id'], $conn);
+    $item = getDataCheckoutBayar($_GET['id'], $conn);
     $datauser = getDataUser($_SESSION['cust_id'], $conn);
     // $datauser = getDataUser($_SESSION['cust_id']);
 }
@@ -123,13 +123,13 @@ $totalharga = 0;
                                         <li class="nav-item ">
                                             <a class="nav-link" href="../mlp_printing/">Home</a>
                                         </li>
-                                        <li class="nav-item ">
+                                        <li class="nav-item">
                                             <a class="nav-link" href="../mlp_printing/cart.php">Cart</a>
                                         </li>
-                                        <li class="nav-item dropdown">
+                                        <li class="nav-item active">
                                             <a class="nav-link" href="../mlp_printing/checkout.php">Checkout</a>
                                         </li>
-                                        <li class="nav-item active">
+                                        <li class="nav-item dropdown">
                                             <a class="nav-link" href="../mlp_printing/pesanan.php">Pesanan</a>
                                         </li>
                                     </ul>
@@ -148,7 +148,7 @@ $totalharga = 0;
                 <!-- Main Content -->
                 <div class="row">
                     <div class="col-12 mt-3 text-center text-uppercase">
-                        <h2>Pesanan</h2>
+                        <h2>Checkout</h2>
                     </div>
                 </div>
 
@@ -160,33 +160,55 @@ $totalharga = 0;
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Id</th>
-                                                <th>Status</th>
+                                                <th>Nama Produk</th>
+                                                <th>Ukuran</th>
+                                                <th>Bahan</th>
+                                                <th>Finishing</th>
+                                                <th>Sisi</th>
+                                                <th>Qty</th>
+                                                <th>Catatan</th>
+                                                <th>Harga</th>
                                                 <th>Tanggal</th>
-                                                <th>Detail</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             if (isset($_SESSION['cust_id'])) {
-                                                while ($data_proses = mysqli_fetch_assoc($item)) {
+                                                while ($data_cart = mysqli_fetch_assoc($item)) {
+                                                    $totalharga += $data_cart['harga'];
                                             ?>
                                                     <tr>
                                                         <td>
-                                                            <?php echo $data_proses['status_id'] ?>
+                                                            <?php echo $data_cart['produk_name'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_proses['status'] ?>
+                                                            <?php echo $data_cart['ukuran'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_proses['create_date'] ?>
+                                                            <?php echo $data_cart['bahan'] ?>
                                                         </td>
                                                         <td>
-                                                            <a href="../mlp_printing/detailproses.php?id=<?php echo $data_proses['status_id']?>">Detail</a>
+                                                            <?php echo $data_cart['finishing'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['sisi'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['qty'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['deskripsi'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo number_format($data_cart['harga']) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_cart['create_date'] ?>
                                                         </td>
                                                     </tr>
-                                            <?php } }?>
+                                            <?php }
+                                            } ?>
                                         </tbody>
                                         <tfoot>
                                         </tfoot>
@@ -204,7 +226,62 @@ $totalharga = 0;
                 </main>
                 <!-- Main Content -->
             </div>
+            <div class="col-12 mb-3 py-3 bg-white text-justify">
+                        <div class="row">
 
+                            <!-- Details -->
+                            <div class="col-md-7">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 text-uppercase">
+                                            <h2><u>Data Pribadi</u></h2>
+                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <strong class="mr-2"><?php echo $datauser['cust_name'] ?></strong>
+                                                    </div>
+					                                <ul>
+					                                	<?php if (isset($_SESSION['cust_id'])) { ?>
+					                                		<li>Alamat : <?php echo $datauser['cust_address'] ?></li>
+					                                		<li>Kota : <?php echo $datauser['cust_city'] ?></li>
+					                                		<li>no Hp : <?php echo $datauser['cust_phone'] ?></li>
+					                                		<li>Email : <?php echo $datauser['cust_email'] ?></li>
+					                                	<?php } ?>
+					                                </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Details -->
+
+                            <!-- Ratings & Reviews -->
+                            <div class="col-md-5">
+                                <div class="col-12 px-md-4 border-top border-left sidebar h-100">
+
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <!-- Comments -->
+                                            <h2><u>Total Harga</u></h2>
+                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                         <h3><?php echo  "Rp. ", number_format($totalharga) ?></h3>
+                                                </div>
+                                            </div>
+                                            <!-- Comments -->
+                                        </div>
+                                    </div>
+                                    <!-- Review -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Ratings & Reviews -->
+
+                        </div>
+                    </div>
             <div class="col-12 align-self-end">
                 <!-- Footer -->
                 <footer class="row">
