@@ -35,6 +35,16 @@ $totalharga = 0;
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+<style>
+    table {
+        table-layout: fixed;
+
+    }
+
+    td {
+        word-wrap: break-word;
+    }
+</style>
 
 <body>
     <div class="container-fluid">
@@ -227,90 +237,90 @@ $totalharga = 0;
                 <!-- Main Content -->
             </div>
             <div class="col-12 mb-3 py-3 bg-white text-justify">
-                        <div class="row">
+                <div class="row">
 
-                            <!-- Details -->
-                            <div class="col-md-7">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-12 text-uppercase">
-                                            <h2><u>Data Pribadi</u></h2>
-                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <strong class="mr-2"><?php echo $datauser['cust_name'] ?></strong>
-                                                    </div>
-					                                <ul>
-					                                	<?php if (isset($_SESSION['cust_id'])) { ?>
-					                                		<li>Alamat : <?php echo $datauser['cust_address'] ?></li>
-					                                		<li>Kota : <?php echo $datauser['cust_city'] ?></li>
-					                                		<li>no Hp : <?php echo $datauser['cust_phone'] ?></li>
-					                                		<li>Email : <?php echo $datauser['cust_email'] ?></li>
-					                                	<?php } ?>
-					                                </ul>
-                                                </div>
+                    <!-- Details -->
+                    <div class="col-md-7">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 text-uppercase">
+                                    <h2><u>Data Pribadi</u></h2>
+                                    <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <strong class="mr-2"><?php echo $datauser['cust_name'] ?></strong>
                                             </div>
+                                            <ul>
+                                                <?php if (isset($_SESSION['cust_id'])) { ?>
+                                                    <li>Alamat : <?php echo $datauser['cust_address'] ?></li>
+                                                    <li>Kota : <?php echo $datauser['cust_city'] ?></li>
+                                                    <li>no Hp : <?php echo $datauser['cust_phone'] ?></li>
+                                                    <li>Email : <?php echo $datauser['cust_email'] ?></li>
+                                                <?php } ?>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Details -->
-
-                            <!-- Ratings & Reviews -->
-                            <div class="col-md-5">
-                                <div class="col-12 px-md-4 border-top border-left sidebar h-100">
-
-                                    <div class="row">
-                                        <div class="col-12">
-
-                                            <!-- Comments -->
-                                            <h2><u>Total Harga</u></h2>
-                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                         <h3><?php echo  "Rp. ", number_format($totalharga) ?></h3>
-                                                </div>
-                                            </div>
-                                            <!-- Comments -->
-                                        </div>
-                                    </div>
-                                    <!-- Review -->
-                                    </div>
-                                        <div class=" text-right">
-                                            <form action="../model/CustUser.php" method="post" style="text-align:center;">
-								                <button type="submit" name="batalcheck" class="btn btn-outline-danger">Batal</button>
-								                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Bayar</button>
-							                </form>
-                                        </div>
-                                </div>
-                            </div>
-                            <!-- Ratings & Reviews -->
-
                         </div>
                     </div>
-	                <!-- Modal content-->
-                    <div class="modal fade" id="myModal" role="dialog">
-	                	<div class="modal-dialog">
+                    <!-- Details -->
 
-	                		<div class="modal-content">
-	                			<div class="modal-header">
-	                				<h4 class="modal-title">Unggah Bukti Pembayaran</h4>
-	                				<div class="signup-form">
-	                					<form action="../model/User.php" method="post" enctype="multipart/form-data">
-	                						<h5>Masukan Bukti Pembayaran :</h5>
-	                						<input type="file" name="img" />
-	                						<input type="hidden" name="kurir" value="<?php echo $data_onkir['ongkir_type']; ?>">
-	                						<input type="hidden" name="hargaongkir" value="<?php echo $hargaongkir; ?>">
-	                						<input type="hidden" name="totalharga" value="<?php echo $totalharga; ?>">
-                                            <br>
-	                						<button type="submit" name="bayar" class="btn btn-outline-success">Upload</button>
-	                					</form>
-	                				</div>
-	                			</div>
-	                		</div>
-	                	</div>
-	                </div>
-                        <!-- Modal content-->
+                    <!-- Ratings & Reviews -->
+                    <div class="col-md-5">
+                        <div class="col-12 px-md-4 border-top border-left sidebar h-100">
+
+                            <div class="row">
+                                <div class="col-12">
+
+                                    <!-- Comments -->
+                                    <h2><u>Total Harga</u></h2>
+                                    <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h3><?php echo  "Rp. ", number_format($totalharga) ?></h3>
+                                            </div>
+                                        </div>
+                                        <!-- Comments -->
+                                    </div>
+                                </div>
+                                <!-- Review -->
+                            </div>
+                            <div class=" text-right">
+                                <form action="../model/CustUser.php" method="post" style="text-align:center;">
+                                    <button type="submit" name="batalcheck" class="btn btn-outline-danger">Batal</button>
+                                    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Bayar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ratings & Reviews -->
+
+                </div>
+            </div>
+            <!-- Modal content-->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Unggah Bukti Pembayaran</h4>
+                            <div class="signup-form">
+                                <form action="../model/User.php" method="post" enctype="multipart/form-data">
+                                    <h5>Masukan Bukti Pembayaran :</h5>
+                                    <input type="file" name="img" />
+                                    <input type="hidden" name="kurir" value="<?php echo $data_onkir['ongkir_type']; ?>">
+                                    <input type="hidden" name="hargaongkir" value="<?php echo $hargaongkir; ?>">
+                                    <input type="hidden" name="totalharga" value="<?php echo $totalharga; ?>">
+                                    <br>
+                                    <button type="submit" name="bayar" class="btn btn-outline-success">Upload</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal content-->
 
             <div class="col-12 align-self-end">
                 <!-- Footer -->
