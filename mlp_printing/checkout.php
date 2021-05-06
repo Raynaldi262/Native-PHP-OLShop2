@@ -302,24 +302,6 @@ $totalharga = 0;
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
 
-<<<<<<< HEAD
-	                		<div class="modal-content">
-	                			<div class="modal-header">
-	                				<h4 class="modal-title">Unggah Bukti Pembayaran</h4>
-	                				<div class="signup-form">
-	                					<form action="../model/CustUser.php" method="post" enctype="multipart/form-data">
-	                						<h5>Masukan Bukti Pembayaran :</h5>
-	                						<input type="file" name="img" />
-                                            <br>
-	                						<button type="submit" name="bayar" class="btn btn-outline-success">Upload</button>
-	                					</form>
-	                				</div>
-	                			</div>
-	                		</div>
-	                	</div>
-	                </div>
-                        <!-- Modal content-->
-=======
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Unggah Bukti Pembayaran</h4>
@@ -339,7 +321,6 @@ $totalharga = 0;
                 </div>
             </div>
             <!-- Modal content-->
->>>>>>> bdf64687f4025d2f98bb923da08341ae8042eb40
 
             <div class="col-12 align-self-end">
                 <!-- Footer -->

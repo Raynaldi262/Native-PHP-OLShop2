@@ -7,7 +7,7 @@ if (isset($_POST['btnlogin'])) {
     $password = trim($_POST['password']);
 
     //create some sql statement             
-    $sql = "SELECT admin_id, admin_status, admin_name FROM  tbl_admin WHERE  upper(username_adm) =  '" . $username . "' AND  password_adm =  password(" . $password . ")";
+    $sql = "SELECT admin_id, admin_status, admin_name, role_id FROM  tbl_admin WHERE  upper(username_adm) =  '" . $username . "' AND  password_adm =  password(" . $password . ")";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -25,6 +25,7 @@ if (isset($_POST['btnlogin'])) {
             } else {
                 // msukin data yg login ke session
                 $_SESSION['admin_id'] = $user['admin_id'];
+                $_SESSION['role_id'] = $user['role_id'];
             ?>
                 <!-- login berhasil  -->
                 <script type="text/javascript">

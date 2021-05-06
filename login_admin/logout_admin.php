@@ -3,7 +3,10 @@
 session_start();
 
 // 2. Unset all the session variables
-session_destroy();
+// session_destroy();
+
+unset($_SESSION['admin_id']);
+unset($_SESSION['role_id']);
 
 ?>
 <script type="text/javascript">
