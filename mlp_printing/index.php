@@ -36,18 +36,18 @@ $data_produk = GetdataProduk($conn);
                             <div class="row">
                                 <div class="col-auto mr-auto">
                                     <ul class="top-nav">
-                                        <li>
-                                            <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+<?php echo $datauser['cust_phone']; ?></a>
+                                    <li>
+                                            <i class="fa fa-phone-square mr-2" style="color:white"> +<?php echo $datauser['cust_phone']; ?></i>
                                         </li>
                                         <li>
-                                            <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i><?php echo $datauser['cust_email']; ?></a>
+                                            <i class="fa fa-envelope mr-2" style="color:white"> <?php echo $datauser['cust_email']; ?></i>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-auto">
                                     <ul class="top-nav">
                                         <li>
-                                            <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
+                                            <a href="../mlp_printing/profile.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
                                         </li>
                                         <li>
                                             <a href="../login_user/logout_user.php"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>

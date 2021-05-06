@@ -23,6 +23,13 @@ if (isset($_POST['batalcheck'])) {
 if (isset($_POST['bayar'])) {
    ProsesBayar($conn);
 }
+if (isset($_POST['UbahPassword'])) {
+   UbahPassword($conn);
+}
+
+if (isset($_POST['updateprofile'])) {
+   UpdateProfile($conn);
+}
 
 
 
@@ -114,6 +121,59 @@ function BatalCheck($conn){
    header("location: ../mlp_printing/checkout.php");
 }
 
+function UbahPassword($conn)
+{
+   if ($_POST['pass1'] == $_POST['pass2']) {
+      $sql = "UPDATE tbl_customer SET cust_pass = password('" . $_POST['pass1'] . "') WHERE cust_id = " . $_SESSION['cust_id'] . " ";
+      $result = mysqli_query($conn, $sql);
+      msg('Password berhasil diubah!!', '../mlp_printing/profile.php');
+   } else {
+      msg('Password tidak sama!!', '../mlp_printing/profile.php');
+   }
+}
+
+function UpdateProfile($conn)
+{
+   $img = $_FILES['img']['name'];
+   if ($img) {  // kalau upload gambar
+      $nama = $_FILES['img']['name'];
+      $ekstensi_diperbolehkan = array('png', 'jpg', 'jpeg');
+      $x = explode('.', $nama);   // dpt nama tanpa ekstensi file
+      $ekstensi = strtolower(end($x));    // jdiin hruf kecil ekstensinya
+      $ukuran    = $_FILES['img']['size'];   //ukuran brp
+      $file_tmp = $_FILES['img']['tmp_name'];    //temp filenya apa
+      if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {    // kalau ekstensinya bener
+         if ($ukuran < 4044070) {        // max 4 mb
+            move_uploaded_file($file_tmp, '../mlp_printing/images/Profile/' . $nama);
+
+            $sql = "UPDATE tbl_customer SET cust_name = '" . $_POST['nama'] . "'  , cust_address = '" . $_POST['address'] . "' , cust_email = '" . $_POST['email'] . "', cust_phone = '" . $_POST['nohp'] . "', cust_img = '" . $img . "' WHERE cust_id = '" . $_SESSION['cust_id'] . "' ";
+            $result = mysqli_query($conn, $sql);
+
+            if ($result) {
+               msg('Data berhasil diubah!!', '../mlp_printing/profile.php');
+            } else {
+               msg('Gagal Mengubah data!!', '../mlp_printing/profile.php');
+            }
+         } else {
+            msg('Ukuran file max 4mb!!', '../mlp_printing/profile.php');
+         }
+      } else {
+         msg('Ekstensi File yang diupload hanya diperbolehkan png / jpg!!', '../mlp_printing/profile.php');
+      }
+   } else {
+      $sql = "UPDATE tbl_customer SET cust_name = '" . $_POST['nama'] . "' , cust_address = '" . $_POST['address'] . "', cust_email = '" . $_POST['email'] . "', cust_phone = '" . $_POST['nohp'] . "' WHERE cust_id = '" . $_SESSION['cust_id'] . "' ";
+      $result = mysqli_query($conn, $sql);
+
+      if ($result) {
+         msg('Data berhasil diubah!!', '../mlp_printing/profile.php');
+      } else {
+         msg('Gagal Mengubah data!!', '../mlp_printing/profile.php');
+      }
+   }
+}
+
+
+
 
 function addChart($conn)
 {
@@ -127,24 +187,24 @@ function addChart($conn)
       $sql = "SELECT * from tbl_item where item_id = '" . $_POST['item_id'] . "' ";
       $item = mysqli_query($conn, $sql);
       $data = mysqli_fetch_assoc($item);
-      if ($data['item_qty'] < $_POST['qty']) {
-        msg('Stock Barang Kurang', '../mlp_printing/index.php');
 
-      } elseif (isset($_POST['finishing_id'])) {
+         if (isset($_POST['finishing_id'])) {
+            
          if(isset($_POST['ukuran1'])){
             $ukuran = $_POST['ukuran1']." x ".$_POST['ukuran2']. "cm";
             $hasil_meter = $_POST['ukuran1']*$_POST['ukuran2'];
          }else{
             $ukuran = $_POST['ukuran'];
+            $ukuran1 = substr($_POST['ukuran'],0 , strpos($_POST['ukuran'], "x")); // untuk mengambil angka
+            $ukuran2 = substr($_POST['ukuran'], strpos($_POST['ukuran'], "x")+1 ,strpos($_POST['ukuran'], "cm",)- 4);
+            $hasil_meter = (int)$ukuran1*(int)$ukuran2; // mengbubah paksa string ke int            
          }
          $sql = "SELECT * from tbl_item where item_id = '" . $_POST['finishing_id'] . "' ";
          $item = mysqli_query($conn, $sql);
          $data_finishing = mysqli_fetch_assoc($item);
-         $sql = "INSERT INTO tbl_upload ( cust_id, date_id, upload_name) VALUES ('" . $_SESSION['cust_id'] . "','" . $date_id . "', '" . $_POST['upload_name'] . "')";
-         $result = mysqli_query($conn, $sql);
 
-            $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, upload_name) 
-                   VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "','" . $_POST['finishing_id'] . "','" . $_POST['item_id'] . "' ,'" . $_POST['kaki'] . "', '" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" .  $ukuran . "', '" . $data['item_name'] . "','" .$data_finishing['item_name'] . "', '" . $_POST['qty'] . "','" . $_POST['total_harga']  . "', now(), '" . $_POST['catatan'] . "','" . $_POST['sisi'] . "','".$_POST['upload_name']."')";
+            $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, hasil_meter, upload_name) 
+                   VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "','" . $_POST['finishing_id'] . "','" . $_POST['item_id'] . "' ,'" . $_POST['kaki'] . "', '" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" .  $ukuran . "', '" . $data['item_name'] . "','" .$data_finishing['item_name'] . "', '" . $_POST['qty'] . "','" . $_POST['total_harga']  . "', now(), '" . $_POST['catatan'] . "','" . $_POST['sisi'] . "','".$hasil_meter."','".$_POST['upload_name']."')";
             $result = mysqli_query($conn, $sql);
    
          if ($result) {
@@ -158,11 +218,8 @@ function addChart($conn)
          }else{
            $ukuran_kertas = $_POST['ukuran'];
           }
-          $sql = "INSERT INTO tbl_upload ( cust_id, date_id, upload_name) VALUES ('" . $_SESSION['cust_id'] . "','" . $date_id . "', '" . $_POST['upload_name'] . "')";
-         $result = mysqli_query($conn, $sql);
-
-         $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, kaki_id, cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, upload_name) 
-                VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "', null ,'" . $_POST['item_id'] . "', 0 ,'" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "',' - ', '" . $_POST['qty'] . "','" . $_POST['total_harga'] . "', now(), '" . $_POST['catatan'] . "', '" . $_POST['sisi'] . "' , '" . $_POST['upload_name'] . "' )";
+         $sql = "INSERT INTO tbl_cart (date_id ,produk_id, finishing_id, bahan_id, kaki_id, cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi,hasil_meter, upload_name) 
+                VALUES ('" . $date_id . "','" . $_POST['produk_id'] . "', null ,'" . $_POST['item_id'] . "', 0 ,'" . $_SESSION['cust_id'] . "', '" . $_POST['produk_name'] . "', '" . $_POST['ukuran'] . "', '" . $data['item_name'] . "',' - ', '" . $_POST['qty'] . "','" . $_POST['total_harga'] . "', now(), '" . $_POST['catatan'] . "', '" . $_POST['sisi'] . "' , '" . $ukuran_kertas . "', '" . $_POST['upload_name'] . "' )";
          $result = mysqli_query($conn, $sql);
          if ($result) {
             header("location: ../mlp_printing/cart.php");
@@ -196,26 +253,25 @@ function ProsesBayar($conn)
          $result = mysqli_query($conn, $sql);
 
 
+            $sql = "SELECT MAX(SUBSTR(id_pesanan, 5)) as custnum from tbl_detailproses ";
+            $check = mysqli_query($conn, $sql); // untuk mencari id terakhir
+            $check_data = mysqli_fetch_assoc($check);
+            $increment = $check_data['custnum']+1; // tambah id terakhir
+            $spktid = "SPK-".$increment;
+
             $sql = "SELECT * from tbl_checkout where cust_id = '" . $_SESSION['cust_id'] . "' ";
               $item = mysqli_query($conn, $sql);
               while ($data = mysqli_fetch_assoc($item)) {
-
-                $sql = "SELECT MAX(SUBSTR(id_pesanan, 5)) as custnum from tbl_detailproses ";
-                    $check = mysqli_query($conn, $sql); // untuk mencari id terakhir
-                    $check_data = mysqli_fetch_assoc($check);
                     if( !$check_data['custnum'] ){
 
-               $sql = "INSERT INTO tbl_detailproses ( date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, upload_name,status_id,id_pesanan) 
-                  VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "' , '" . $data['upload_name'] . "', '" . $date_id . "', 'SPK-1')";
+               $sql = "INSERT INTO tbl_detailproses ( date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi,hasil_meter, upload_name,status_id,id_pesanan) 
+                  VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "', '" . $data['hasil_meter'] . "' , '" . $data['upload_name'] . "', '" . $date_id . "', 'SPK-1')";
                   $result = mysqli_query($conn, $sql);
                  $sql = "DELETE FROM tbl_checkout WHERE tbl_checkout . checkout_id = " . $data['checkout_id'] . "";
                  mysqli_query($conn, $sql);                      
                     }else{
-
-                $increment = $check_data['custnum']+1; // tambah id terakhir
-                $spktid = "SKP-".$increment;
-               $sql = "INSERT INTO tbl_detailproses ( date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, upload_name,status_id,id_pesanan) 
-                  VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "' , '" . $data['upload_name'] . "', '" . $date_id . "', '" . $spktid . "')";
+               $sql = "INSERT INTO tbl_detailproses ( date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi,hasil_meter, upload_name,status_id,id_pesanan) 
+                  VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "' , '" . $data['hasil_meter'] . "', '" . $data['upload_name'] . "', '" . $date_id . "', '" . $spktid . "')";
                   $result = mysqli_query($conn, $sql);
                  $sql = "DELETE FROM tbl_checkout WHERE tbl_checkout . checkout_id = " . $data['checkout_id'] . "";
                  mysqli_query($conn, $sql);                
@@ -245,8 +301,8 @@ function AddCheckout($conn)
    $item = mysqli_query($conn, $sql);
 
    while ($data = mysqli_fetch_assoc($item)) {
-      $sql = "INSERT INTO tbl_checkout ( date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi, upload_name) 
-          VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "' , '" . $data['upload_name'] . "')";
+      $sql = "INSERT INTO tbl_checkout ( date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi,hasil_meter, upload_name) 
+          VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "' , '" . $data['hasil_meter'] . "', '" . $data['upload_name'] . "')";
       $result = mysqli_query($conn, $sql);
       $sql = "DELETE FROM tbl_cart WHERE tbl_cart . cart_id = " . $data['cart_id'] . "";
       mysqli_query($conn, $sql);

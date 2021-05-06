@@ -48,18 +48,18 @@ $totalharga = 0;
                             <div class="row">
                                 <div class="col-auto mr-auto">
                                     <ul class="top-nav">
-                                        <li>
-                                            <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+<?php echo $datauser['cust_phone']; ?></a>
+                                    <li>
+                                            <i class="fa fa-phone-square mr-2" style="color:white"> +<?php echo $datauser['cust_phone']; ?></i>
                                         </li>
                                         <li>
-                                            <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i><?php echo $datauser['cust_email']; ?></a>
+                                            <i class="fa fa-envelope mr-2" style="color:white"> <?php echo $datauser['cust_email']; ?></i>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-auto">
                                     <ul class="top-nav">
                                         <li>
-                                            <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
+                                            <a href="../mlp_printing/profile.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
                                         </li>
                                         <li>
                                             <a href="../login_user/logout_user.php"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>
@@ -126,10 +126,10 @@ $totalharga = 0;
                                         <li class="nav-item">
                                             <a class="nav-link" href="../mlp_printing/cart.php">Cart</a>
                                         </li>
-                                        <li class="nav-item active">
+                                        <li class="nav-item ">
                                             <a class="nav-link" href="../mlp_printing/checkout.php">Checkout</a>
                                         </li>
-                                        <li class="nav-item dropdown">
+                                        <li class="nav-item ">
                                             <a class="nav-link" href="../mlp_printing/pesanan.php">Pesanan</a>
                                         </li>
                                     </ul>
@@ -148,7 +148,7 @@ $totalharga = 0;
                 <!-- Main Content -->
                 <div class="row">
                     <div class="col-12 mt-3 text-center text-uppercase">
-                        <h2>Checkout</h2>
+                        <h2>Detail pesanan</h2>
                     </div>
                 </div>
 
@@ -175,36 +175,37 @@ $totalharga = 0;
                                         <tbody>
                                             <?php
                                             if (isset($_SESSION['cust_id'])) {
-                                                while ($data_cart = mysqli_fetch_assoc($item)) {
-                                                    $totalharga += $data_cart['harga'];
+                                                while ($data_detail = mysqli_fetch_assoc($item)) {
+                                                    $totalharga += $data_detail['harga'];
+                                                    $statusid = $data_detail['status_id']
                                             ?>
                                                     <tr>
                                                         <td>
-                                                            <?php echo $data_cart['produk_name'] ?>
+                                                            <?php echo $data_detail['produk_name'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_cart['ukuran'] ?>
+                                                            <?php echo $data_detail['ukuran'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_cart['bahan'] ?>
+                                                            <?php echo $data_detail['bahan'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_cart['finishing'] ?>
+                                                            <?php echo $data_detail['finishing'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_cart['sisi'] ?>
+                                                            <?php echo $data_detail['sisi'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_cart['qty'] ?>
+                                                            <?php echo $data_detail['qty'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_cart['deskripsi'] ?>
+                                                            <?php echo $data_detail['deskripsi'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo number_format($data_cart['harga']) ?>
+                                                            <?php echo number_format($data_detail['harga']) ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $data_cart['create_date'] ?>
+                                                            <?php echo $data_detail['create_date'] ?>
                                                         </td>
                                                     </tr>
                                             <?php }
@@ -243,7 +244,6 @@ $totalharga = 0;
 					                                <ul>
 					                                	<?php if (isset($_SESSION['cust_id'])) { ?>
 					                                		<li>Alamat : <?php echo $datauser['cust_address'] ?></li>
-					                                		<li>Kota : <?php echo $datauser['cust_city'] ?></li>
 					                                		<li>no Hp : <?php echo $datauser['cust_phone'] ?></li>
 					                                		<li>Email : <?php echo $datauser['cust_email'] ?></li>
 					                                	<?php } ?>
@@ -270,6 +270,11 @@ $totalharga = 0;
                                                     <div class="col-12">
                                                          <h3><?php echo  "Rp. ", number_format($totalharga) ?></h3>
                                                 </div>
+                                                <a href="invoice.php?id=<?php echo $statusid?>&idu=<?php echo $_SESSION['cust_id']?>">
+								                	<button type="button" class="btn btn-success">
+								                		<i class="fa fa-print"> Print Invoice</i>
+								                	</button>
+								                </a>
                                             </div>
                                             <!-- Comments -->
                                         </div>

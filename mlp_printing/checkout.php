@@ -29,7 +29,7 @@ $totalharga = 0;
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MLP Printing</title>
 
-    <link href="//fonts.googleapis.com/css?family
+    <link href="//fonts.googleapis.com/css?family">
     <link rel=" stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -57,18 +57,18 @@ $totalharga = 0;
                             <div class="row">
                                 <div class="col-auto mr-auto">
                                     <ul class="top-nav">
-                                        <li>
-                                            <a href="tel:+123-456-7890"><i class="fa fa-phone-square mr-2"></i>+<?php echo $datauser['cust_phone']; ?></a>
+                                    <li>
+                                            <i class="fa fa-phone-square mr-2" style="color:white"> +<?php echo $datauser['cust_phone']; ?></i>
                                         </li>
                                         <li>
-                                            <a href="mailto:mail@ecom.com"><i class="fa fa-envelope mr-2"></i><?php echo $datauser['cust_email']; ?></a>
+                                            <i class="fa fa-envelope mr-2" style="color:white"> <?php echo $datauser['cust_email']; ?></i>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-auto">
                                     <ul class="top-nav">
                                         <li>
-                                            <a href="../mlp_printing/register.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
+                                            <a href="../mlp_printing/profile.php"><i class="fas fa-user-edit mr-2"></i>Profile</a>
                                         </li>
                                         <li>
                                             <a href="../login_user/logout_user.php"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>
@@ -252,7 +252,6 @@ $totalharga = 0;
                                             <ul>
                                                 <?php if (isset($_SESSION['cust_id'])) { ?>
                                                     <li>Alamat : <?php echo $datauser['cust_address'] ?></li>
-                                                    <li>Kota : <?php echo $datauser['cust_city'] ?></li>
                                                     <li>no Hp : <?php echo $datauser['cust_phone'] ?></li>
                                                     <li>Email : <?php echo $datauser['cust_email'] ?></li>
                                                 <?php } ?>
