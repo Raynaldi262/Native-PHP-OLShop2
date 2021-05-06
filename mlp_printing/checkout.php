@@ -301,17 +301,13 @@ $totalharga = 0;
             <!-- Modal content-->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
-
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Unggah Bukti Pembayaran</h4>
                             <div class="signup-form">
-                                <form action="../model/User.php" method="post" enctype="multipart/form-data">
+                                <form action="../model/CustUser.php" method="post" enctype="multipart/form-data">
                                     <h5>Masukan Bukti Pembayaran :</h5>
                                     <input type="file" name="img" />
-                                    <input type="hidden" name="kurir" value="<?php echo $data_onkir['ongkir_type']; ?>">
-                                    <input type="hidden" name="hargaongkir" value="<?php echo $hargaongkir; ?>">
-                                    <input type="hidden" name="totalharga" value="<?php echo $totalharga; ?>">
                                     <br>
                                     <button type="submit" name="bayar" class="btn btn-outline-success">Upload</button>
                                 </form>
