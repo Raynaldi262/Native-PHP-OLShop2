@@ -1,9 +1,9 @@
 <?php require('../model/AdminStok.php');
-$produk = [];
+// $produk = [];
 
-while ($datas = mysqli_fetch_assoc($getProduk)) {
-    $produk[] = $datas; //assign whole values to array
-}
+// while ($datas = mysqli_fetch_assoc($getProduk)) {
+//     $produk[] = $datas; //assign whole values to array
+// }
 
 ?>
 <!DOCTYPE html>

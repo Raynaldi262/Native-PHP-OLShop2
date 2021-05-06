@@ -3,7 +3,7 @@ require('../model/CustUser.php');
 require('../connect/conn.php');
 
 if (isset($_SESSION['cust_id'])) {
-    $item = getDataCheckoutBayar($_GET['id'], $conn);
+    $item = getDataDetailProses($_GET['id'], $conn);
     $datauser = getDataUser($_SESSION['cust_id'], $conn);
     // $datauser = getDataUser($_SESSION['cust_id']);
 }
