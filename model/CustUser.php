@@ -123,13 +123,27 @@ function BatalCheck($conn){
 
 function UbahPassword($conn)
 {
-   if ($_POST['pass1'] == $_POST['pass2']) {
-      $sql = "UPDATE tbl_customer SET cust_pass = password('" . $_POST['pass1'] . "') WHERE cust_id = " . $_SESSION['cust_id'] . " ";
-      $result = mysqli_query($conn, $sql);
-      msg('Password berhasil diubah!!', '../mlp_printing/profile.php');
-   } else {
-      msg('Password tidak sama!!', '../mlp_printing/profile.php');
+   $password = trim($_POST['passlama']);
+   $sql = "SELECT * FROM  tbl_customer WHERE cust_pass =  password('" . $password . "')";
+   $result = mysqli_query($conn, $sql);
+   $data = mysqli_fetch_assoc($result);
+   if($data){
+      if ($_POST['pass1'] == $_POST['pass2']) {
+         $sql = "UPDATE tbl_customer SET cust_pass = password('" . $_POST['pass1'] . "') WHERE cust_id = '" . $_SESSION['cust_id'] . "' ";
+         $result = mysqli_query($conn, $sql);
+
+            if ($result) {
+         msg('Password berhasil diubah!!', '../mlp_printing/profile.php');
+      } else {
+         msg('Gagal Mengubah data!!', '../mlp_printing/profile.php');
+      }
+      } else {
+         msg('Password tidak sama!!', '../mlp_printing/profile.php');
+      }
+   }else{
+      msg('Password lama salah!!', '../mlp_printing/profile.php');
    }
+
 }
 
 function UpdateProfile($conn)
