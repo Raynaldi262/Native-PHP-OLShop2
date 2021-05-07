@@ -27,8 +27,16 @@ if (isset($_POST['get_pesanan'])) {
 function accPesanan($conn)
 {
     $id = $_POST['pesan_id'];
-    $c = cekStok($conn, $id);   //kalau c = 1 artinya stok kurang
-    echo 'hasil cek ' . $c;
+    $c[] = cekStok($conn, $id);   //kalau c = 1 artinya stok kurang
+    // $c[] = [[0, 1], [0, 1]];
+
+    echo "<br>";
+    var_dump($c);
+    // if ($c == 1) {
+    //     echo 'hasil cek kurang ' . $c;
+    // } else {
+    //     echo 'hasil cek mantapp' . $c;
+    // }
     // $sql = "";
     // return $result = mysqli_query($conn, $sql);
 }
@@ -64,50 +72,103 @@ function getPesanan($conn)
 function cekStok($conn)
 {
 
-    $count = 0;
+    $count = [];
     $id = $_POST['pesan_id'];
     $sql = "select produk_id, finishing_id, bahan_id, kaki_id, qty, hasil_meter
             from tbl_detailproses where status_id = '" . $id . "'";
 
     $result = mysqli_query($conn, $sql);
-    while ($datas = mysqli_fetch_assoc($result)) {
+    while ($datas = mysqli_fetch_assoc($result)) {  //dpt data sql
         $results[] = $datas; //assign whole values to array
+        var_dump($datas);
+        echo "<br>";
     }
 
-    foreach ($results as $datas) {
-        $result1 = 0;
-
-        if ($datas['produk_id'] == 1) //kalau kartu nama 
-        {   // kalau stok kurang nilainya 1
-            $sql1 = "select 1 from tbl_item
-                    where item_id = '" . $datas['bahan_id'] . "' and item_qty < " . $datas['qty'] . "*3";
-
-            $result1 = mysqli_query($conn, $sql1);
-            $result1 = mysqli_num_rows($result1);
-        } else if ($datas['produk_id'] == 2 or $datas['produk_id'] == 3) {  //dokumen hvs && poster
-            $sql1 = "select 1 from tbl_item
-                    where item_id = '" . $datas['bahan_id'] . "' and item_qty < " . $datas['qty'] . "";
-
-            $result1 = mysqli_query($conn, $sql1);
-            $result1 = mysqli_num_rows($result1);
-        } else if ($datas['produk_id'] == 4 or $datas['produk_id'] == 8) {  //Banner standart && Sticker
-            $sql1 = "select 1 from tbl_item
-                    where (item_id = '" . $datas['bahan_id'] . "' or item_id = '" . $datas['finishing_id'] . "') and item_qty < (" . $datas['hasil_meter'] . "/10000)";
-
-            $result1 = mysqli_query($conn, $sql1);
-            $result1 = mysqli_num_rows($result1);
-        }
-
-
-        if ($result1) { // kalau stok kurang masuk sini
-            $count = 1;
-            break;
-        }
+    foreach ($results as $id) { //dpt id yg berbeda
+        $item_id[] = $id['bahan_id'];
+        $item_id[] = $id['finishing_id'];
+        $item_id[] = $id['kaki_id'];
     }
 
-    return $count;
-    // $result = mysqli_fetch_assoc($result);
+    $item_id = array_values(array_unique($item_id));
+    $item_id = array_fill_keys($item_id, 'banana');
+    echo "<br>";
+    var_dump($item_id);
+    echo "<br>";
+    echo "<br>";
 
+    $tmp = [];
+    // foreach ($results as $datas) {
+    //     foreach ($item_id as $id) {
+    //         if ($datas['produk_id'] == 1) {  //kalau kartu nama 
+    //             $tmp[['id'=> $id],['id'=> $id]]
+    //         } 
+    //     }
+    // }
+
+    // foreach ($results as $datas) {
+    //     $result1 = 0;
+
+    //     if ($datas['produk_id'] == 1) //kalau kartu nama 
+    //     {   // kalau stok kurang nilainya 1
+    //         $sql1 = "select 1 from tbl_item
+    //                 where item_id = '" . $datas['bahan_id'] . "' and item_qty < " . $datas['qty'] . "*3";
+
+    //         echo $sql1;
+    //         echo "<br>";
+    //         $result1 = mysqli_query($conn, $sql1);
+    //         $result1 = mysqli_num_rows($result1);
+    //     } else if ($datas['produk_id'] == 2 or $datas['produk_id'] == 3) {  //dokumen hvs && poster
+    //         $sql1 = "select 1 from tbl_item
+    //                 where item_id = '" . $datas['bahan_id'] . "' and item_qty < " . $datas['qty'] . "";
+
+    //         echo $sql1;
+    //         echo "<br>";
+    //         $result1 = mysqli_query($conn, $sql1);
+    //         $result1 = mysqli_num_rows($result1);
+    //     } else if ($datas['produk_id'] == 4 or $datas['produk_id'] == 8) {  //Banner standart && Sticker
+    //         $sql1 = "select 1 from tbl_item
+    //                 where (item_id = '" . $datas['bahan_id'] . "' and item_qty < (" . $datas['hasil_meter'] . "/10000)*" . $datas['qty'] . ")
+    //                 or (item_id = '" . $datas['finishing_id'] . "' and item_qty < (" . $datas['hasil_meter'] . "/10000)*" . $datas['qty'] . ")";
+
+    //         echo $sql1;
+    //         echo "<br>";
+    //         $result1 = mysqli_query($conn, $sql1);
+    //         $result1 = mysqli_num_rows($result1);
+    //     } else if ($datas['produk_id'] == 5 or $datas['produk_id'] == 6) {  // x standart & roll up  
+    //         $sql1 = "select 1 from tbl_item
+    //                 where (item_id = '" . $datas['bahan_id'] . "' and item_qty < (" . $datas['hasil_meter'] . "/10000)*" . $datas['qty'] . ") or
+    //                       (item_id = '" . $datas['finishing_id'] . "' and item_qty < (" . $datas['hasil_meter'] . "/10000)*" . $datas['qty'] . ") or
+    //                       (item_id = '" . $datas['kaki_id'] . "' and item_qty < " . $datas['qty'] . ")";
+    //         echo $sql1;
+    //         echo "<br>";
+    //         $result1 = mysqli_query($conn, $sql1);
+    //         $result1 = mysqli_num_rows($result1);
+    //     } else if ($datas['produk_id'] == 7) {  // Brosur
+
+    //         if ($datas['hasil_meter'] == 'A3+') {
+    //             $$ukuran = 500;
+    //         } else if ($datas['hasil_meter'] == 'A4') {
+    //             $ukuran = 250;
+    //         } else if ($datas['hasil_meter'] == 'A5') {
+    //             $ukuran = 125;
+    //         }
+    //         $sql1 = "select 1 from tbl_item
+    //                 where item_id = '" . $datas['bahan_id'] . "' and item_qty < " . $datas['qty'] . "*" . $ukuran . "";
+
+    //         echo $sql1;
+    //         echo "<br>";
+    //         $result1 = mysqli_query($conn, $sql1);
+    //         $result1 = mysqli_num_rows($result1);
+    //     }
+
+    //     if ($result1) { // kalau stok kurang masuk sini
+    //         $count = ['nilai' => 1, 'id' => $datas['produk_id']];
+    //         break;
+    //     }
+    // }
+
+    // return $count;
 }
 
 function msg($pesan, $url)

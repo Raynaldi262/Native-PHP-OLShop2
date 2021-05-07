@@ -57,7 +57,7 @@ $totalharga = 0;
                             <div class="row">
                                 <div class="col-auto mr-auto">
                                     <ul class="top-nav">
-                                    <li>
+                                        <li>
                                             <i class="fa fa-phone-square mr-2" style="color:white"> +<?php echo $datauser['cust_phone']; ?></i>
                                         </li>
                                         <li>
@@ -315,9 +315,6 @@ $totalharga = 0;
                     </div>
                 </div>
             </div>
-            <!-- Modal content-->
-            <button type="submit" name="bayar" class="btn btn-outline-success">Upload</button>
-            </form>
         </div>
     </div>
     </div>
