@@ -76,8 +76,8 @@ function accPesanan($conn)
         $invData = getInvData($conn, $id);
 
         // insert tbl order
-        $sql4 = "insert into tbl_order (invoice, total_price, order_transfer, order_status, cust_id, status_id, create_date) 
-                    values('" . $inv . "', " . $invData['harga'] . ", '" . $invData['bukti_bayar'] . "', '" . $invData['status'] . "', '" . $invData['cust_id'] . "', '" . $invData['status_id'] . "', now())";
+        $sql4 = "insert into tbl_order (invoice, total_price, order_transfer, order_status, cust_id, id_pesanan, status_id, create_date) 
+                    values('" . $inv . "', " . $invData['harga'] . ", '" . $invData['bukti_bayar'] . "', '" . $invData['status'] . "', '" . $invData['cust_id'] . "', '" . $invData['id_pesanan'] . "', '" . $invData['status_id'] . "', now())";
 
         $result4 = mysqli_query($conn, $sql4);
 
@@ -244,7 +244,7 @@ function cekStok($conn, $flag)
 
 function getInvId($conn)
 {
-    $sql = "SELECT MAX(SUBSTR(invoice, 4)) as inv from tbl_order";
+    $sql = "SELECT MAX(SUBSTR(invoice, 5)) as inv from tbl_order";
     $check = mysqli_query($conn, $sql); // untuk mencari id terakhir
     $check_data = mysqli_fetch_assoc($check);
     $increment = $check_data['inv'] + 1; // tambah id terakhir
@@ -255,9 +255,9 @@ function getInvId($conn)
 
 function getInvData($conn, $id)
 {
-    $sql = "select sum(harga) harga, b.bukti_bayar, status, b.cust_id, b.status_id
+    $sql = "select a.id_pesanan, sum(harga) harga, b.bukti_bayar, status, b.cust_id, b.status_id
             from tbl_detailproses a join
-            tbl_proses b on a.status_id = b.status_id
+            tbl_proses b on a.status_id = b.status_id 
             where b.status_id = '" . $id . "'";
     $result = mysqli_query($conn, $sql); // untuk mencari data invoice
     $data = mysqli_fetch_assoc($result);

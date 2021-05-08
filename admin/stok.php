@@ -85,7 +85,7 @@
                                                     <td><?php echo $data['stok']; ?></td>
                                                     <td><?php echo $data['stock_out']; ?></td>
                                                     <td><?php echo $data['stock_out_manual']; ?></td>
-                                                    <td><?php echo $data['item_qty']; ?></td>
+                                                    <td><?php echo $data['item_qty'] . ' (' . $data['item_type'] . ')'; ?></td>
                                                     <td>
                                                         <button type="button" class="btn btn-success tambah" data-toggle="modal" data-target="#modal-tambah" id="<?php echo $data['item_id']; ?>">
                                                             <i class="nav-icon fas fa-plus"></i>

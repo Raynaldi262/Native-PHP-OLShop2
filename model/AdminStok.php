@@ -10,7 +10,7 @@ $getProduk = mysqli_query($conn, $sql);
 $sql = "SELECT * from tbl_item where item_status = 'ACTIVE'";
 $getItem = mysqli_query($conn, $sql);
 
-$sql = "SELECT a.item_id, item_name, item_qty+ifnull(stock_out,0)+ifnull(stock_out_manual,0) as stok
+$sql = "SELECT a.item_type, a.item_id, item_name, item_qty+ifnull(stock_out,0)+ifnull(stock_out_manual,0) as stok
             , ifnull(stock_out,0) as stock_out, ifnull(stock_out_manual,0) as stock_out_manual,  item_qty from tbl_item a 
         LEFT JOIN (select item_id, sum(stok_qty) as stock_out 
             from tbl_stockinout where stok_desc = 'STOCK OUT' group by item_id) b on a.item_id = b.item_id 

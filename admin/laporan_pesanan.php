@@ -24,12 +24,11 @@ require('../connect/conn.php');
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-left" id="laporan">
+                            <ol class="breadcrumb float-sm-left" id="laporan_pesanan">
                                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                                 <li class="breadcrumb-item active">Laporan Pesanan</li>
                             </ol>
@@ -77,12 +76,10 @@ require('../connect/conn.php');
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Stok</th>
-                                                <th>Total Bahan <br>Masuk</th>
-                                                <th>Total Bahan <br>Keluar</th>
-                                                <th>Total Bahan <br>Keluar Manual</th>
-                                                <th>Total Stok</th>
+                                                <th>Kode</th>
+                                                <th>Nama Customer</th>
+                                                <th>No Invoice</th>
+                                                <th>Harga</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -91,54 +88,25 @@ require('../connect/conn.php');
                                                 $start = $_POST['start'];
                                                 $end = $_POST['end'];
 
-                                                $sql = "select a.item_name, (ifnull(total_qty,0)+ifnull(stock_out,0)+ifnull(stock_out_manual,0)-ifnull(stock_in,0)) as stok  ,ifnull(stock_in,0) as stock_in, ifnull(stock_out,0) as stock_out, ifnull(stock_out_manual,0) as stock_out_manual, ifnull(total_qty,0) as total_qty
-                                                        from tbl_item a 
-                                                        left join (select item_id, sum(stok_qty) as stock_in, stok_desc 
-                                                            from tbl_stockinout where stok_desc = 'STOCK IN' and create_date >= '" . $start . " 00:00:00' and create_date <= '" . $end . " 23:59:59'
-                                                            GROUP by item_id) b
-                                                            on a.item_id = b.item_id
-                                                        left join (select item_id, sum(stok_qty) as stock_out, stok_desc 
-                                                            from tbl_stockinout 
-                                                            where stok_desc = 'STOCK OUT' and create_date >= '" . $start . " 00:00:00' and create_date <= '" . $end . " 23:59:59'
-                                                            group by  item_id) c
-                                                            on a.item_id = c.item_id
-                                                        left join (select item_id, sum(stok_qty) as stock_out_manual, stok_desc 
-                                                            from tbl_stockinout where stok_desc = 'STOCK OUT MANUAL' and create_date >= '" . $start . " 00:00:00' and create_date <= '" . $end . " 23:59:59'
-                                                            group by  item_id) d
-                                                            on a.item_id = d.item_id
-                                                        left join (select item_id, total_qty from (select item_id, total_qty, row_number() over (partition by item_id order by create_date desc) as no_urut 
-                                                            from tbl_stockinout
-                                                            where create_date >= '" . $start . " 00:00:00' and create_date <= '" . $end . " 23:59:59') as abc where no_urut = 1) e
-                                                            on a.item_id = e.item_id";
-                                                $getStok = mysqli_query($conn, $sql);
+                                                $sql = "select * from tbl_order a
+                                                        join (select cust_id, cust_name from tbl_customer )b on a.cust_id = b.cust_id
+                                                         where create_date >= '" . $start . " 00:00:00' and create_date <= '" . $end . " 23:59:59'";
+                                                $getPesanan = mysqli_query($conn, $sql);
                                             } else {
-                                                $sql = "select a.item_name, (ifnull(total_qty,0)+ifnull(stock_out,0)+ifnull(stock_out_manual,0)-ifnull(stock_in,0)) as stok  ,ifnull(stock_in,0) as stock_in, ifnull(stock_out,0) as stock_out, ifnull(stock_out_manual,0) as stock_out_manual, ifnull(total_qty,0) as total_qty
-                                                    from tbl_item a 
-                                                    left join (select item_id, sum(stok_qty) as stock_in, stok_desc 
-                                                        from tbl_stockinout where stok_desc = 'STOCK IN' GROUP by item_id) b
-                                                        on a.item_id = b.item_id
-                                                    left join (select item_id, sum(stok_qty) as stock_out, stok_desc 
-                                                        from tbl_stockinout 
-                                                        where stok_desc = 'STOCK OUT' group by  item_id) c
-                                                        on a.item_id = c.item_id
-                                                    left join (select item_id, sum(stok_qty) as stock_out_manual, stok_desc 
-                                                        from tbl_stockinout where stok_desc = 'STOCK OUT MANUAL' group by  item_id) d
-                                                        on a.item_id = d.item_id
-                                                    left join (select item_id, total_qty from (select item_id, total_qty, row_number() over (partition by item_id order by create_date desc) as no_urut 
-                                                        from tbl_stockinout) as abc where no_urut = 1) e
-                                                        on a.item_id = e.item_id";
+                                                $sql = "select * from tbl_order a
+                                                        join (select cust_id, cust_name from tbl_customer )b on a.cust_id = b.cust_id";
 
-                                                $getStok = mysqli_query($conn, $sql);
+                                                $getPesanan = mysqli_query($conn, $sql);
                                             }
-                                            while ($data = mysqli_fetch_array($getStok)) { ?>
+                                            while ($data = mysqli_fetch_array($getPesanan)) { ?>
                                                 <tr>
                                                     <td><?php echo $i ?></td>
-                                                    <td><?php echo $data['item_name']; ?></td>
-                                                    <td><?php echo $data['stok']; ?></td>
-                                                    <td><?php echo $data['stock_in']; ?></td>
-                                                    <td><?php echo $data['stock_out']; ?></td>
-                                                    <td><?php echo $data['stock_out_manual']; ?></td>
-                                                    <td><?php echo $data['total_qty']; ?></td>
+                                                    <td><?php echo $data['id_pesanan']; ?></td>
+                                                    <td><?php echo $data['cust_name']; ?></td>
+                                                    <td>
+                                                        <a href="#"><?php echo $data['invoice']; ?></a>
+                                                    </td>
+                                                    <td><?php echo 'Rp ' . number_format($data['total_price']); ?></td>
                                                 </tr>
                                             <?php $i++;
                                             } ?>
