@@ -44,7 +44,7 @@ require('../connect/conn.php');
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Data stok barang</h3>
+                                    <h3 class="card-title">Data Pesanan PT. Media Langit Persada</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">

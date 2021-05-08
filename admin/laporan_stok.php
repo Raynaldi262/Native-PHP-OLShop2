@@ -44,7 +44,7 @@ require('../connect/conn.php');
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Data stok bahan</h3>
+                                    <h3 class="card-title">Data stok PT. Media Langit Persada</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -91,7 +91,7 @@ require('../connect/conn.php');
                                                 $start = $_POST['start'];
                                                 $end = $_POST['end'];
 
-                                                $sql = "select a.item_name, (ifnull(total_qty,0)+ifnull(stock_out,0)+ifnull(stock_out_manual,0)-ifnull(stock_in,0)) as stok  ,ifnull(stock_in,0) as stock_in, ifnull(stock_out,0) as stock_out, ifnull(stock_out_manual,0) as stock_out_manual, ifnull(total_qty,0) as total_qty
+                                                $sql = "select a.item_Type , a.item_name, (ifnull(total_qty,0)+ifnull(stock_out,0)+ifnull(stock_out_manual,0)-ifnull(stock_in,0)) as stok  ,ifnull(stock_in,0) as stock_in, ifnull(stock_out,0) as stock_out, ifnull(stock_out_manual,0) as stock_out_manual, ifnull(total_qty,0) as total_qty
                                                         from tbl_item a 
                                                         left join (select item_id, sum(stok_qty) as stock_in, stok_desc 
                                                             from tbl_stockinout where stok_desc = 'STOCK IN' and create_date >= '" . $start . " 00:00:00' and create_date <= '" . $end . " 23:59:59'
@@ -114,7 +114,7 @@ require('../connect/conn.php');
 
                                                 $getStok = mysqli_query($conn, $sql);
                                             } else {
-                                                $sql = "select a.item_name, (ifnull(total_qty,0)+ifnull(stock_out,0)+ifnull(stock_out_manual,0)-ifnull(stock_in,0)) as stok  ,ifnull(stock_in,0) as stock_in, ifnull(stock_out,0) as stock_out, ifnull(stock_out_manual,0) as stock_out_manual, ifnull(total_qty,0) as total_qty
+                                                $sql = "select a.item_Type ,a.item_name, (ifnull(total_qty,0)+ifnull(stock_out,0)+ifnull(stock_out_manual,0)-ifnull(stock_in,0)) as stok  ,ifnull(stock_in,0) as stock_in, ifnull(stock_out,0) as stock_out, ifnull(stock_out_manual,0) as stock_out_manual, ifnull(total_qty,0) as total_qty
                                                     from tbl_item a 
                                                     left join (select item_id, sum(stok_qty) as stock_in, stok_desc 
                                                         from tbl_stockinout where stok_desc = 'STOCK IN' GROUP by item_id) b
@@ -141,7 +141,7 @@ require('../connect/conn.php');
                                                     <td><?php echo $data['stock_in']; ?></td>
                                                     <td><?php echo $data['stock_out']; ?></td>
                                                     <td><?php echo $data['stock_out_manual']; ?></td>
-                                                    <td><?php echo $data['total_qty']; ?></td>
+                                                    <td><?php echo $data['total_qty'] . ' (' . $data['item_Type'] . ')'; ?></td>
                                                 </tr>
                                             <?php $i++;
                                             } ?>

@@ -60,7 +60,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Data Admin PT. Media Langit Persada</h3>
+                                    <h3 class="card-title">Data Stok PT. Media Langit Persada</h3>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-tambahBahan" id="tambahBahan">
                                         Tambah Bahan
                                     </button>
@@ -109,7 +109,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                                                     </td>
                                                     <td><?php echo $data['item_type']; ?></td>
                                                     <td><?php echo $data['item_qty']; ?></td>
-                                                    <td><?php echo $data['item_price']; ?></td>
+                                                    <td><?php echo 'Rp' . number_format($data['item_price']); ?></td>
                                                     <td><?php echo $data['item_desc']; ?></td>
                                                     <td>
                                                         <button type="button" class="btn btn-warning ubahBahan" data-toggle="modal" data-target="#modal-ubahBahan" id="<?php echo $data['item_id']; ?>">

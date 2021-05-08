@@ -60,7 +60,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Data Admin PT. Media Langit Persada</h3>
+                                    <h3 class="card-title">Data Stok PT. Media Langit Persada</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
