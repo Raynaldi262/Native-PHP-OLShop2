@@ -182,20 +182,21 @@ $totalharga = 0;
                                                         <td>
                                                             <?php echo $data_proses['create_date'] ?>
                                                         </td>
+                                                        <?php if( $data_proses['status'] != 'DiBatalkan'){?>
                                                         <td>
                                                             <a href="../mlp_printing/detailproses.php?id=<?php echo $data_proses['status_id']?>">Detail</a>
                                                         </td>
+                                                    <?php }else{?>
+                                                         <td>
+                                                            <span style='color:red;'>&#10008;</span>
+                                                        </td>
+                                                    <?php }?>
                                                     </tr>
                                             <?php } }?>
                                         </tbody>
                                         <tfoot>
                                         </tfoot>
                                     </table>
-                                    <tr>
-                                        <th colspan="3" class="text-right">Total</th>
-                                        <th><?php echo  "Rp. ", number_format($totalharga) ?></th>
-                                        <th></th>
-                                    </tr>
                                 </div>
                             </div>
                         </div>

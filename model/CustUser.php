@@ -61,6 +61,13 @@ function GetdataProduk($conn){
    return $item;
 }
 
+function GetDataOrder($id,$conn){
+   $sql = "SELECT * from tbl_order where status_id = '".$id."' ";
+   $item = mysqli_query($conn, $sql);
+   $data  = mysqli_fetch_assoc($item);
+   return $data;
+}
+
 function GetDataBahan($id,$conn){
    $sql = "SELECT * FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
    $item = mysqli_query($conn, $sql);

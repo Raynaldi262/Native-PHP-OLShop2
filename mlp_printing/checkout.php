@@ -61,7 +61,7 @@ $totalharga = 0;
                                             <a href="tel:<?php echo $datauser['cust_phone']; ?>"><i class="fa fa-phone-square mr-2"> +<?php echo $datauser['cust_phone']; ?></i></a>
                                         </li>
                                         <li>
-                                        <a href="mailto:<?php echo $datauser['cust_email']; ?>"><i class="fa fa-envelope mr-2"> <?php echo $datauser['cust_email']; ?></i></a>
+                                            <a href="mailto:<?php echo $datauser['cust_email']; ?>"><i class="fa fa-envelope mr-2"> <?php echo $datauser['cust_email']; ?></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -178,7 +178,6 @@ $totalharga = 0;
                                                 <th>Catatan</th>
                                                 <th>Harga</th>
                                                 <th>Tanggal</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -234,6 +233,7 @@ $totalharga = 0;
 
                 </main>
                 <!-- Main Content -->
+                <?php if (isset($_SESSION['cust_id'])) { ?>
             </div>
             <div class="col-12 mb-3 py-3 bg-white text-justify">
                 <div class="row">
@@ -246,15 +246,16 @@ $totalharga = 0;
                                     <h2><u>Data Pribadi</u></h2>
                                     <div class="col-12 text-justify py-2 mb-3 bg-gray">
                                         <div class="row">
+
                                             <div class="col-12">
                                                 <strong class="mr-2"><?php echo $datauser['cust_name'] ?></strong>
                                             </div>
                                             <ul>
-                                                <?php if (isset($_SESSION['cust_id'])) { ?>
-                                                    <li>Alamat : <?php echo $datauser['cust_address'] ?></li>
-                                                    <li>no Hp : <?php echo $datauser['cust_phone'] ?></li>
-                                                    <li>Email : <?php echo $datauser['cust_email'] ?></li>
-                                                <?php } ?>
+
+                                                <li>Alamat : <?php echo $datauser['cust_address'] ?></li>
+                                                <li>no Hp : <?php echo $datauser['cust_phone'] ?></li>
+                                                <li>Email : <?php echo $datauser['cust_email'] ?></li>
+
                                             </ul>
                                         </div>
                                     </div>
@@ -262,6 +263,7 @@ $totalharga = 0;
                             </div>
                         </div>
                     </div>
+
                     <!-- Details -->
 
                     <!-- Ratings & Reviews -->
@@ -293,6 +295,7 @@ $totalharga = 0;
                         </div>
                     </div>
                     <!-- Ratings & Reviews -->
+                <?php } ?>
 
                 </div>
             </div>

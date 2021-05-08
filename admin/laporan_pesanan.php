@@ -88,15 +88,28 @@ require('../connect/conn.php');
                                                 $start = $_POST['start'];
                                                 $end = $_POST['end'];
 
+                                                // ini buat isi tabel pesanan
                                                 $sql = "select * from tbl_order a
                                                         join (select cust_id, cust_name from tbl_customer )b on a.cust_id = b.cust_id
                                                          where create_date >= '" . $start . " 00:00:00' and create_date <= '" . $end . " 23:59:59'";
                                                 $getPesanan = mysqli_query($conn, $sql);
+
+                                                // ini buat itung omset
+                                                $sql2 = "Select sum(total_price) total from tbl_order
+                                                        where create_date >= '" . $start . " 00:00:00' and create_date <= '" . $end . " 23:59:59'";
+                                                $getTotal = mysqli_query($conn, $sql2);
+                                                $total = mysqli_fetch_assoc($getTotal);
                                             } else {
+                                                // ini buat isi tabel pesanan
                                                 $sql = "select * from tbl_order a
                                                         join (select cust_id, cust_name from tbl_customer )b on a.cust_id = b.cust_id";
 
                                                 $getPesanan = mysqli_query($conn, $sql);
+
+                                                // ini buat itung omset
+                                                $sql2 = "Select sum(total_price) total from tbl_order";
+                                                $getTotal = mysqli_query($conn, $sql2);
+                                                $total = mysqli_fetch_assoc($getTotal);
                                             }
                                             while ($data = mysqli_fetch_array($getPesanan)) { ?>
                                                 <tr>
@@ -104,13 +117,23 @@ require('../connect/conn.php');
                                                     <td><?php echo $data['id_pesanan']; ?></td>
                                                     <td><?php echo $data['cust_name']; ?></td>
                                                     <td>
-                                                        <a href="#"><?php echo $data['invoice']; ?></a>
+                                                        <a href='../mlp_printing/invoice.php?id=<?php echo $data['status_id']; ?>&idu=<?php echo $data['cust_id']; ?>'><?php echo $data['invoice']; ?></a>
                                                     </td>
-                                                    <td><?php echo 'Rp ' . number_format($data['total_price']); ?></td>
+                                                    <td align="right"><?php echo 'Rp ' . number_format($data['total_price']); ?></td>
                                                 </tr>
                                             <?php $i++;
                                             } ?>
                                         </tbody>
+
+                                        <tfoot>
+                                            <tr align="center">
+                                                <th></th>
+                                                <th>Total Omset:</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th align="center"><?php echo 'Rp ' . number_format($total['total']); ?></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                                 <!-- /.card-body -->

@@ -8,6 +8,7 @@ require('../model/CustUser.php');
 
 $item = getDataDetailProses($_GET['id'], $conn);
 $datauser = getDataUser($_GET['idu'], $conn);
+$data_order = getDataOrder($_GET['id'], $conn);
 
 // if (isset($_SESSION['cust_id'])) {
 // 	$data_cart = getcartCount($_GET['idu']);
@@ -61,8 +62,9 @@ $totalharga = 0;
 </style>
 <div style="text-align:center">
     <!-- <img width="100" src="images/home/logo.png"/> -->
-    <h1>Invoice <?php //echo $data_order['order_invoice'] 
-                ?></h1>
+    <h1>Invoice <?php echo $data_order['invoice'] ?></h1>
+    <h2><?php echo $data_order['create_date'] ?></h2>
+    <h3>Atas Nama <?php echo $datauser['cust_name'] ?></h3>
     <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -70,10 +72,8 @@ $totalharga = 0;
                 <th>Ukuran</th>
                 <th>Bahan</th>
                 <th>Finishing</th>
-                <th>Sisi</th>
                 <th>Qty</th>
                 <th>Harga</th>
-                <th>Tanggal</th>
             </tr>
         </thead>
         <tbody>
@@ -93,16 +93,10 @@ $totalharga = 0;
                         <?php echo $data_detail['finishing'] ?>
                     </td>
                     <td>
-                        <?php echo $data_detail['sisi'] ?>
-                    </td>
-                    <td>
                         <?php echo $data_detail['qty'] ?>
                     </td>
                     <td>
                         <?php echo number_format($data_detail['harga']) ?>
-                    </td>
-                    <td>
-                        <?php echo $data_detail['create_date'] ?>
                     </td>
                 </tr>
             <?php } ?>
@@ -110,15 +104,10 @@ $totalharga = 0;
     </table>
     <table id="example1" class="table table-bordered table-striped">
 
-        <!-- <thead>
-        <tr>
-        <th>Harga</th>
-        </tr>
-    </thead> -->
         <tbody>
             <tr>
                 <td style="background-color: gray; text-align: left;">Subtotal</td>
-                <td>Rp. <?php echo number_format($totalharga) ?></td>
+                <td>Rp. <?php echo number_format($data_order['total_price']) ?></td>
             </tr>
         </tbody>
     </table>
