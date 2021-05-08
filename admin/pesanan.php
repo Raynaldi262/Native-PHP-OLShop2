@@ -96,17 +96,15 @@ while ($datas = mysqli_fetch_assoc($getPesanan)) {
                           <td><?php echo $data['status']; ?></td>
                           <td>
                             <form action="../model/Pesanan.php" method="post">
+                              <input type='hidden' name='pesan_id' value="<?php echo $data['status_id']; ?>">
                               <?php if ($data['status'] == 'Mengunggu Konfirmasi') { ?>
-                                <input type='hidden' name='pesan_id' value="<?php echo $data['status_id']; ?>">
                                 <input type="submit" class="btn btn-success" name="acc_item" value="Terima">
                                 <input type="submit" class="btn btn-danger" name="dec_item" value="Tolak">
                               <?php } ?>
+                              <?php if ($data['status'] == 'Di Proses') { ?>
+                                <input type="submit" class="btn btn-primary" name="finish_item" value="Selesai">
+                              <?php } ?>
                             </form>
-                            <?php if ($data['status'] == 'Di Proses') { ?>
-                              <button type="button" class="btn btn-primary kirim" data-toggle="modal" data-target="#modal-kirim" id="<?php echo $data['status_id']; ?>">
-                                Kirim Pesanan
-                              </button>
-                            <?php } ?>
                           </td>
                         </tr>
                       <?php
