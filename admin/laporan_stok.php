@@ -74,7 +74,7 @@ require('../connect/conn.php');
                                     <br>
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
-                                            <tr>
+                                            <tr align="center">
                                                 <th>No</th>
                                                 <th>Nama</th>
                                                 <th>Stok</th>
@@ -84,7 +84,7 @@ require('../connect/conn.php');
                                                 <th>Total Stok</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody align="center">
                                             <?php $i = 1;
                                             if (isset($_POST['search'])) {
                                                 $start = $_POST['start'];

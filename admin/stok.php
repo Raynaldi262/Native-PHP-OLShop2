@@ -66,7 +66,7 @@
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped" style="width:100%">
                                         <thead>
-                                            <tr>
+                                            <tr align="center">
                                                 <th>No</th>
                                                 <th>Nama</th>
                                                 <th>Stok</th>
@@ -76,7 +76,7 @@
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody align="center">
                                             <?php $i = 1;
                                             while ($data = mysqli_fetch_assoc($getItemStok)) { ?>
                                                 <tr>

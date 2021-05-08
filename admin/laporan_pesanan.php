@@ -74,7 +74,7 @@ require('../connect/conn.php');
                                     <br>
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
-                                            <tr>
+                                            <tr align="center">
                                                 <th>No</th>
                                                 <th>Kode</th>
                                                 <th>Nama Customer</th>
@@ -112,7 +112,7 @@ require('../connect/conn.php');
                                                 $total = mysqli_fetch_assoc($getTotal);
                                             }
                                             while ($data = mysqli_fetch_array($getPesanan)) { ?>
-                                                <tr>
+                                                <tr align="center">
                                                     <td><?php echo $i ?></td>
                                                     <td><?php echo $data['id_pesanan']; ?></td>
                                                     <td><?php echo $data['cust_name']; ?></td>
