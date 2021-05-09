@@ -5,7 +5,6 @@ require('../connect/conn.php');
 if (isset($_SESSION['cust_id'])) {
     $item = getDataDetailProses($_GET['id'], $conn);
     $data_proses = getDataProses2($_GET['id'], $conn);
-    echo $data_proses['status'];
     $datauser = getDataUser($_SESSION['cust_id'], $conn);
 }
 $totalharga = 0;
