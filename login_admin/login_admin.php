@@ -52,7 +52,7 @@ if (logged_in()) {
                 <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" style="max-height: 150; width: auto;">
                 <div class="row">
                     <div class="col-6" style="text-align: right;">
-                        <h3><b>MPL Printing</b></h3>
+                        <h3><b>MLP Printing</b></h3>
                     </div>
 
                     <div class="col-6" style="text-align: left;">
