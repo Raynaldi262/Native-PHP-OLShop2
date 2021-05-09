@@ -62,10 +62,10 @@ $totalharga = 0;
 </style>
 <div style="text-align:center">
     <!-- <img width="100" src="images/home/logo.png"/> -->
-    <h1>Invoice <?php echo $data_order['invoice'] ?></h1>
-    <h2><?php echo $data_order['create_date'] ?></h2>
-    <h3>Atas Nama <?php echo $datauser['cust_name'] ?></h3>
-    <table id="example1" class="table table-bordered table-striped">
+    <h1>No Inv: <?php echo $data_order['invoice'] ?></h1>
+    <h2><?php echo date("d/m/Y", strtotime($data_order['create_date'])); ?></h2>
+    <h3>Nama: <?php echo $datauser['cust_name'] ?></h3>
+    <table id="example1" class="table table-bordered table-striped" align="center">
         <thead>
             <tr>
                 <th>Nama Produk</th>
@@ -101,15 +101,16 @@ $totalharga = 0;
                 </tr>
             <?php } ?>
         </tbody>
-    </table>
-    <table id="example1" class="table table-bordered table-striped">
-
-        <tbody>
+        <tfoot>
             <tr>
-                <td style="background-color: gray; text-align: left;">Subtotal</td>
+                <td style="background-color: gray;">Sub Total</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>Rp. <?php echo number_format($data_order['total_price']) ?></td>
             </tr>
-        </tbody>
+        </tfoot>
     </table>
     <br>
 </div>

@@ -12,7 +12,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | DataTables</title>
+    <title>Admin | Data Bahan</title>
 
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -67,7 +67,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-striped" style="width:120%">
+                                    <table id="example1" class="table table-bordered table-striped" style="width:140%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -113,7 +113,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                                                     <td><?php echo $data['item_desc']; ?></td>
                                                     <td>
                                                         <button type="button" class="btn btn-warning ubahBahan" data-toggle="modal" data-target="#modal-ubahBahan" id="<?php echo $data['item_id']; ?>">
-                                                            Ubah Bahan
+                                                            Edit
                                                         </button>
                                                         <button type="button" class="btn btn-danger hapus" data-toggle="modal" data-target="#modal-hapus" id="<?php echo $data['item_id']; ?>">
                                                             Hapus
@@ -351,24 +351,7 @@ while ($datas = mysqli_fetch_assoc($getProduk)) {
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
-                "scrollX": true,
-                "buttons": [{
-                    extend: "csv",
-                    exportOptions: {
-                        columns: [0, 2, 3, 4, 5, 6, 7, 8],
-                        modifier: {
-                            page: "current"
-                        }
-                    }
-                }, {
-                    extend: "pdf",
-                    exportOptions: {
-                        columns: [0, 2, 3, 4, 5, 6, 7, 8],
-                        modifier: {
-                            page: "current"
-                        }
-                    }
-                }, "colvis"]
+                "scrollX": true
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
 

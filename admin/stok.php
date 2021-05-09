@@ -217,6 +217,7 @@
     <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <script src="../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../plugins/pdfmake/vfs_fonts.js"></script>
     <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
@@ -236,7 +237,7 @@
                 "buttons": [{
                     extend: "csv",
                     exportOptions: {
-                        columns: [0, 2, 3, 4, 5, 6, 7, 8],
+                        columns: [0, 1, 2, 3, 4, 5],
                         modifier: {
                             page: "current"
                         }
@@ -244,7 +245,7 @@
                 }, {
                     extend: "pdf",
                     exportOptions: {
-                        columns: [0, 2, 3, 4, 5, 6, 7, 8],
+                        columns: [0, 1, 2, 3, 4, 5],
                         modifier: {
                             page: "current"
                         }

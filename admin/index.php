@@ -1,4 +1,4 @@
-<?php require('../model/AdminUser.php'); ?>
+<?php require('../model/AdminDash.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Dashboard</title>
 
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
@@ -53,10 +53,10 @@ confirm_logged_in();
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>Pesanan</h3>
-                  <p>New Orders</p>
+                  <h3><?php echo $pesanan['jmlh'] . ' pesanan' ?></h3>
+                  <p>Pesanan dalam proses</p>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="pesanan.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -64,10 +64,10 @@ confirm_logged_in();
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>Stok</h3>
-                  <p>Bounce Rate</p>
+                  <h3><?php echo $stok['jmlh'] . ' Stok ' ?></h3>
+                  <p>Stok Rendah</p>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="stok.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -75,10 +75,10 @@ confirm_logged_in();
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>Laporan</h3>
-                  <p>User Registrations</p>
+                  <h3><?php echo $laporan['jmlh'] . ' Transaksi ' ?></h3>
+                  <p>Transaksi Hari ini</p>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="laporan_pesanan.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -86,10 +86,10 @@ confirm_logged_in();
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>Customer</h3>
-                  <p>Unique Visitors</p>
+                  <h3><?php echo $cust['jmlh'] . ' Customer ' ?></h3>
+                  <p>Customer</p>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="customer.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->

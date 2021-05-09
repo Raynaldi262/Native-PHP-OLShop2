@@ -10,7 +10,7 @@ $getCust = mysqli_query($conn, $sql);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin | Data Admin</title>
+    <title>Admin | Data Customer</title>
 
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -129,7 +129,7 @@ $getCust = mysqli_query($conn, $sql);
                 "buttons": [{
                     extend: "csv",
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        columns: [0, 1, 2, 3, 4],
                         modifier: {
                             page: "current"
                         }
@@ -137,7 +137,7 @@ $getCust = mysqli_query($conn, $sql);
                 }, {
                     extend: "pdf",
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        columns: [0, 1, 2, 3, 4],
                         modifier: {
                             page: "current"
                         }
