@@ -67,7 +67,7 @@ $totalharga = 0;
     <h3>Nama: <?php echo $datauser['cust_name'] ?></h3>
     <table id="example1" class="table table-bordered table-striped" align="center">
         <thead>
-            <tr>
+            <tr align="center">
                 <th>Nama Produk</th>
                 <th>Ukuran</th>
                 <th>Bahan</th>
@@ -95,20 +95,20 @@ $totalharga = 0;
                     <td>
                         <?php echo $data_detail['qty'] ?>
                     </td>
-                    <td>
-                        <?php echo number_format($data_detail['harga']) ?>
+                    <td align="right">
+                        <?php echo 'Rp ' . number_format($data_detail['harga']) ?>
                     </td>
                 </tr>
             <?php } ?>
         </tbody>
         <tfoot>
             <tr>
-                <td style="background-color: gray;">Sub Total</td>
+                <td style="background-color: gray; color:white;"><b>Sub Total</b></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>Rp. <?php echo number_format($data_order['total_price']) ?></td>
+                <td align="right">Rp. <?php echo number_format($data_order['total_price']) ?></td>
             </tr>
         </tfoot>
     </table>

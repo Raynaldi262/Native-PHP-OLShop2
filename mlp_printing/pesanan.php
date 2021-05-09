@@ -34,6 +34,10 @@ $totalharga = 0;
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
 <body>
@@ -48,11 +52,11 @@ $totalharga = 0;
                             <div class="row">
                                 <div class="col-auto mr-auto">
                                     <ul class="top-nav">
-                                    <li>
+                                        <li>
                                             <a href="tel:<?php echo $datauser['cust_phone']; ?>"><i class="fa fa-phone-square mr-2"> +<?php echo $datauser['cust_phone']; ?></i></a>
                                         </li>
                                         <li>
-                                        <a href="mailto:<?php echo $datauser['cust_email']; ?>"><i class="fa fa-envelope mr-2"> <?php echo $datauser['cust_email']; ?></i></a>
+                                            <a href="mailto:<?php echo $datauser['cust_email']; ?>"><i class="fa fa-envelope mr-2"> <?php echo $datauser['cust_email']; ?></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -157,14 +161,13 @@ $totalharga = 0;
                         <div class="row">
                             <div class=" col-md-10 mx-auto table-responsive">
                                 <div class="col-12">
-                                    <table class="table table-striped table-hover">
+                                    <table id="example1" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Status</th>
                                                 <th>Tanggal</th>
                                                 <th>Detail</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -182,17 +185,18 @@ $totalharga = 0;
                                                         <td>
                                                             <?php echo $data_proses['create_date'] ?>
                                                         </td>
-                                                        <?php if( $data_proses['status'] != 'DiBatalkan'){?>
-                                                        <td>
-                                                            <a href="../mlp_printing/detailproses.php?id=<?php echo $data_proses['status_id']?>">Detail</a>
-                                                        </td>
-                                                    <?php }else{?>
-                                                         <td>
-                                                            <span style='color:red;'>&#10008;</span>
-                                                        </td>
-                                                    <?php }?>
+                                                        <?php if ($data_proses['status'] != 'DiBatalkan') { ?>
+                                                            <td>
+                                                                <a href="../mlp_printing/detailproses.php?id=<?php echo $data_proses['status_id'] ?>">Detail</a>
+                                                            </td>
+                                                        <?php } else { ?>
+                                                            <td>
+                                                                <span style='color:red;'>&#10008;</span>
+                                                            </td>
+                                                        <?php } ?>
                                                     </tr>
-                                            <?php } }?>
+                                            <?php }
+                                            } ?>
                                         </tbody>
                                         <tfoot>
                                         </tfoot>
@@ -324,6 +328,34 @@ $totalharga = 0;
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../plugins/datatables-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script>
+        $(function() {
+            var judul = $('.title').text();
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                "scrollX": true
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
 </body>
 
 </html>
