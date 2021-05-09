@@ -93,6 +93,13 @@ function getDataProses($cust_id,$conn){
    return $item;
 }
 
+function getDataProses2($id,$conn){
+   $sql = "SELECT * from tbl_proses where status_id = '".$id."' ";
+   $item = mysqli_query($conn, $sql);
+   $data = mysqli_fetch_assoc($item);
+   return $data;
+}
+
 function getDataCart($cust_id,$conn)
 {
    $sql = "SELECT * from tbl_cart where cust_id = '" . $cust_id . "' ";

@@ -4,18 +4,10 @@ require('../connect/conn.php');
 
 if (isset($_SESSION['cust_id'])) {
     $item = getDataDetailProses($_GET['id'], $conn);
+    $data_proses = getDataProses2($_GET['id'], $conn);
+    echo $data_proses['status'];
     $datauser = getDataUser($_SESSION['cust_id'], $conn);
-    // $datauser = getDataUser($_SESSION['cust_id']);
 }
-// if (isset($_SESSION['cust_id'])) {
-// 	$data_cart = getcartCount($_SESSION['cust_id']);
-// 	$data_check = getcheckCount($_SESSION['cust_id']);
-// 	$proses_count = getProsesCount($_SESSION['cust_id']);
-// } else {
-// 	$data_cart['juml'] = 0;
-// 	$data_check['juml'] = 0;
-// 	$proses_count['juml'] = 0;
-// }
 $totalharga = 0;
 
 ?>
@@ -97,18 +89,6 @@ $totalharga = 0;
                                 <div class="site-logo text-center text-lg-left">
                                     <a href="../mlp_printing/">E-Commerce</a>
                                 </div>
-                            </div>
-                            <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="search" class="form-control border-dark" placeholder="Search..." required>
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
 
@@ -270,11 +250,28 @@ $totalharga = 0;
                                                     <div class="col-12">
                                                          <h3><?php echo  "Rp. ", number_format($totalharga) ?></h3>
                                                 </div>
-                                                <a href="invoice.php?id=<?php echo $statusid?>&idu=<?php echo $_SESSION['cust_id']?>">
-								                	<button type="button" class="btn btn-success">
-								                		<i class="fa fa-print"> Print Invoice</i>
-								                	</button>
-								                </a>
+                                            <?php if($data_proses['status'] != 'Mengunggu Konfirmasi') {?>
+                                                <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                         <a href="invoice.php?id=<?php echo $statusid?>&idu=<?php echo $_SESSION['cust_id']?>">
+								                	        <button type="button" class="btn btn-success">
+								                		        <i class="fa fa-print"> Print Invoice</i>
+								                	        </button>
+								                        </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php }else{?>
+                                            
+                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                <div class="row">
+                                                     <div class="col-12">
+                                                         <p> Menunggu Konfirmasi</p>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                            <?php } ?>
                                             </div>
                                             <!-- Comments -->
                                         </div>

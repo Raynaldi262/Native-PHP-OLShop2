@@ -102,18 +102,6 @@ $totalharga = 0;
                                     <a href="../mlp_printing/">E-Commerce</a>
                                 </div>
                             </div>
-                            <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="search" class="form-control border-dark" placeholder="Search..." required>
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
 
                         <!-- Nav -->
