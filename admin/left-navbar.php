@@ -69,14 +69,16 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="bahan.php" class="nav-link" id="bahan">
-            <i class="nav-icon fas fa-print"></i>
-            <p>
-              Penambahan Bahan
-            </p>
-          </a>
-        </li>
+        <?php if ($_SESSION['role_id'] == 1) { ?>
+          <li class="nav-item">
+            <a href="bahan.php" class="nav-link" id="bahan">
+              <i class="nav-icon fas fa-print"></i>
+              <p>
+                Penambahan Bahan
+              </p>
+            </a>
+          </li>
+        <?php } ?>
         <li class="nav-item">
           <a href="stok.php" class="nav-link" id="stok">
             <i class="nav-icon fas fa-layer-group"></i>
@@ -85,38 +87,40 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="laporan_stok.php" class="nav-link" id="laporan_stok">
-            <i class="nav-icon fas fa-file-alt"></i>
-            <p>
-              Laporan Stok
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="laporan_pesanan.php" class="nav-link" id="laporan_pesanan">
-            <i class="nav-icon far fa-file-powerpoint"></i>
-            <p>
-              Laporan Pesanan
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="customer.php" class="nav-link" id="data_customer">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Data Pelanggan
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="data_admin.php" class="nav-link" id="data_admin">
-            <i class="nav-icon fas fa-user-cog"></i>
-            <p>
-              Data Admin
-            </p>
-          </a>
-        </li>
+        <?php if ($_SESSION['role_id'] == 1) { ?>
+          <li class="nav-item">
+            <a href="laporan_stok.php" class="nav-link" id="laporan_stok">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Laporan Stok
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="laporan_pesanan.php" class="nav-link" id="laporan_pesanan">
+              <i class="nav-icon far fa-file-powerpoint"></i>
+              <p>
+                Laporan Pesanan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="customer.php" class="nav-link" id="data_customer">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Data Pelanggan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="data_admin.php" class="nav-link" id="data_admin">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Data Admin
+              </p>
+            </a>
+          </li>
+        <?php } ?>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

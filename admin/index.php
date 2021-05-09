@@ -70,28 +70,30 @@ confirm_logged_in();
                 <a href="stok.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h3><?php echo $laporan['jmlh'] . ' Transaksi ' ?></h3>
-                  <p>Transaksi Hari ini</p>
+            <?php if ($_SESSION['role_id'] == 1) { ?>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><?php echo $laporan['jmlh'] . ' Transaksi ' ?></h3>
+                    <p>Transaksi Hari ini</p>
+                  </div>
+                  <a href="laporan_pesanan.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-                <a href="laporan_pesanan.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3><?php echo $cust['jmlh'] . ' Customer ' ?></h3>
-                  <p>Customer</p>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3><?php echo $cust['jmlh'] . ' Customer ' ?></h3>
+                    <p>Customer</p>
+                  </div>
+                  <a href="customer.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-                <a href="customer.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
-            </div>
+            <?php } ?>
             <!-- ./col -->
           </div>
           <!-- /.row (main row) -->
