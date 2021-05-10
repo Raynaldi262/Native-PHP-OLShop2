@@ -7,6 +7,7 @@ if (isset($_SESSION['cust_id'])) {
 }
 if (isset($_GET['id'])) {
     $data_detail = getDetailProduk($_GET['id'], $conn);
+    $harga_mulai = getHargaMulai($_GET['id'], $conn);
 }
 
 $getitem = getDataItem($conn);
@@ -146,7 +147,8 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                 <div class="col-12 product-name large">
                                     <?php echo $data_detail['produk_name'] ?>
                                 </div>
-                                <div class="col-12 px-0">
+                                <div class="col-12">
+                                Harga mulai <p style="color:red">Rp. <?php echo number_format($harga_mulai)?></p>
                                     <hr>
                                 </div>
                                 <div class="col-12">

@@ -135,6 +135,85 @@ function BatalCheck($conn){
    header("location: ../mlp_printing/checkout.php");
 }
 
+function getHargaMulai($id,$conn)
+{
+   if ($id == 1){
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $data = mysqli_fetch_assoc($item);
+      $dataharga = $data['harga']*3;
+      return $dataharga;
+   }
+   elseif ($id == 2){
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $data = mysqli_fetch_assoc($item);
+      $dataharga = $data['harga'];
+      return $dataharga;     
+   }
+   elseif ($id == 3){
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $data = mysqli_fetch_assoc($item);
+      $dataharga = $data['harga'];
+      return $dataharga; 
+   }
+   elseif ($id == 4){
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $bahan = mysqli_fetch_assoc($item);
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'FINISHING' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $finish = mysqli_fetch_assoc($item);
+      $dataharga = $bahan['harga']+$finish['harga'];
+      return $dataharga;
+   }
+   elseif ($id == 5){
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $bahan = mysqli_fetch_assoc($item);
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'FINISHING' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $finish = mysqli_fetch_assoc($item);
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'KAKI' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $kaki = mysqli_fetch_assoc($item);
+      $dataharga = $bahan['harga']+$finish['harga']+$kaki['harga'];
+      return $dataharga;
+   }
+   elseif ($id == 6){
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $bahan = mysqli_fetch_assoc($item);
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'FINISHING' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $finish = mysqli_fetch_assoc($item);
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'KAKI' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $kaki = mysqli_fetch_assoc($item);
+      $dataharga = $bahan['harga']+$finish['harga']+$kaki['harga'];
+      return $dataharga;
+   }
+   elseif ($id == 7){
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $data = mysqli_fetch_assoc($item);
+      $dataharga = $data['harga']*500;
+      return $dataharga;
+   }
+   else{
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $bahan = mysqli_fetch_assoc($item);
+      $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'FINISHING' && item_status = 'ACTIVE'";
+      $item = mysqli_query($conn, $sql);
+      $finish = mysqli_fetch_assoc($item);
+      $dataharga = $bahan['harga']+$finish['harga'];
+      return $dataharga;
+   }
+
+}
+
 function UbahPassword($conn)
 {
    $password = trim($_POST['passlama']);
