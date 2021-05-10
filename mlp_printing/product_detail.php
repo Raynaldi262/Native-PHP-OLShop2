@@ -148,7 +148,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                     <?php echo $data_detail['produk_name'] ?>
                                 </div>
                                 <div class="col-12">
-                                Harga mulai <p style="color:red">Rp. <?php echo number_format($harga_mulai)?></p>
+                                <?php echo $harga_mulai[0]?> <p style="color:red">Rp. <?php echo number_format($harga_mulai[1])?></p>
                                     <hr>
                                 </div>
                                 <div class="col-12">

@@ -141,21 +141,24 @@ function getHargaMulai($id,$conn)
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $data = mysqli_fetch_assoc($item);
-      $dataharga = $data['harga']*3;
+      $dataharga[0] = 'Harga Mulai / 1 Box';
+      $dataharga[1] = $data['harga']*3;
       return $dataharga;
    }
    elseif ($id == 2){
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $data = mysqli_fetch_assoc($item);
-      $dataharga = $data['harga'];
+      $dataharga[0] = 'Harga Mulai / 1 Pcs';
+      $dataharga[1] = $data['harga'];
       return $dataharga;     
    }
    elseif ($id == 3){
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $data = mysqli_fetch_assoc($item);
-      $dataharga = $data['harga'];
+      $dataharga[0] = 'Harga Mulai / 1 Pcs';
+      $dataharga[1] = $data['harga'];
       return $dataharga; 
    }
    elseif ($id == 4){
@@ -165,7 +168,8 @@ function getHargaMulai($id,$conn)
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'FINISHING' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $finish = mysqli_fetch_assoc($item);
-      $dataharga = $bahan['harga']+$finish['harga'];
+      $dataharga[0] = 'Harga Mulai / 1 Meter';
+      $dataharga[1] = $bahan['harga']+$finish['harga'];
       return $dataharga;
    }
    elseif ($id == 5){
@@ -178,7 +182,8 @@ function getHargaMulai($id,$conn)
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'KAKI' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $kaki = mysqli_fetch_assoc($item);
-      $dataharga = $bahan['harga']+$finish['harga']+$kaki['harga'];
+      $dataharga[0] = 'Harga Mulai / 1 Meter';
+      $dataharga[1] = $bahan['harga']+$finish['harga']+$kaki['harga'];
       return $dataharga;
    }
    elseif ($id == 6){
@@ -191,14 +196,16 @@ function getHargaMulai($id,$conn)
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'KAKI' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $kaki = mysqli_fetch_assoc($item);
-      $dataharga = $bahan['harga']+$finish['harga']+$kaki['harga'];
+      $dataharga[0] = 'Harga Mulai / 1 Meter';
+      $dataharga[1] = $bahan['harga']+$finish['harga']+$kaki['harga'];
       return $dataharga;
    }
    elseif ($id == 7){
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'BAHAN' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $data = mysqli_fetch_assoc($item);
-      $dataharga = $data['harga']*500;
+      $dataharga[0] = 'Harga Mulai / 1 Rim';
+      $dataharga[1] = $data['harga']*500;
       return $dataharga;
    }
    else{
@@ -208,7 +215,8 @@ function getHargaMulai($id,$conn)
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'FINISHING' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $finish = mysqli_fetch_assoc($item);
-      $dataharga = $bahan['harga']+$finish['harga'];
+      $dataharga[0] = 'Harga Mulai / 1 Meter';
+      $dataharga[1] = $bahan['harga']+$finish['harga'];
       return $dataharga;
    }
 
