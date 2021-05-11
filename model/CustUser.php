@@ -182,7 +182,7 @@ function getHargaMulai($id,$conn)
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'KAKI' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $kaki = mysqli_fetch_assoc($item);
-      $dataharga[0] = 'Harga Mulai / 1 Meter';
+      $dataharga[0] = 'Harga Mulai';
       $dataharga[1] = ($bahan['harga']*(9600/10000))+($finish['harga']*(9600/10000))+$kaki['harga'];
       return $dataharga;
    }
@@ -196,7 +196,7 @@ function getHargaMulai($id,$conn)
       $sql = "SELECT MIN(item_price) as harga FROM tbl_item INNER JOIN tbl_relasi on tbl_item.item_id = tbl_relasi.item_id where tbl_relasi.produk_id = '".$id."' && tbl_item.item_desc = 'KAKI' && item_status = 'ACTIVE'";
       $item = mysqli_query($conn, $sql);
       $kaki = mysqli_fetch_assoc($item);
-      $dataharga[0] = 'Harga Mulai / 1 Meter';
+      $dataharga[0] = 'Harga Mulai';
       $dataharga[1] = ($bahan['harga']*(9600/10000))+($finish['harga']*(9600/10000))+$kaki['harga'];
       return $dataharga;
    }
