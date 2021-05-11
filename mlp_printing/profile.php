@@ -20,6 +20,13 @@ if (isset($_SESSION['cust_id'])) {
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+<style>
+    #UbahPassword {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
 
 <body>
     <div class="container-fluid">
@@ -32,11 +39,11 @@ if (isset($_SESSION['cust_id'])) {
                             <div class="row">
                                 <div class="col-auto mr-auto">
                                     <ul class="top-nav">
-                                    <li>
+                                        <li>
                                             <a href="tel:<?php echo $datauser['cust_phone']; ?>"><i class="fa fa-phone-square mr-2"> +<?php echo $datauser['cust_phone']; ?></i></a>
                                         </li>
                                         <li>
-                                        <a href="mailto:<?php echo $datauser['cust_email']; ?>"><i class="fa fa-envelope mr-2"> <?php echo $datauser['cust_email']; ?></i></a>
+                                            <a href="mailto:<?php echo $datauser['cust_email']; ?>"><i class="fa fa-envelope mr-2"> <?php echo $datauser['cust_email']; ?></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -127,31 +134,31 @@ if (isset($_SESSION['cust_id'])) {
                 <main class="row">
                     <div class="col-lg-4 col-md-6 col-sm-8 mx-auto bg-white py-3 mb-4">
                         <div class="row">
-                            <div class="col-12">
-                            <div style="text-align:center;">
-						            <img src="images/Profile/<?php echo $datauser['cust_img'] ?>" style="object-fit:contain; width:300px;height: 300px; border: solid 1px #CCC; border-radius: 50%;" />
-					            </div>
+                            <div class="col-12" align="center">
+                                <div style="text-align:center;">
+                                    <img src="images/Profile/<?php echo $datauser['cust_img'] ?>" style="object-fit:contain; width:300px;height: 300px; border: solid 1px #CCC; border-radius: 50%;" />
+                                </div>
                                 <br>
-                                    <div class="form-group">
-                                        <label for="name">Nama :</label>
-                                        <?php echo $datauser['cust_name'] ?>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Alamat : </label>
-                                        <?php echo $datauser['cust_address'] ?>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">No Hp : </label>
-                                        <?php echo $datauser['cust_phone'] ?>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email : </label>
-                                        <?php echo $datauser['cust_email'] ?>
-                                    </div>
-                                    <div class="form-group">
+                                <div class="form-group">
+                                    <label for="name"><b> Nama :</b></label>
+                                    <?php echo $datauser['cust_name'] ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name"><b> Alamat : </b></label>
+                                    <?php echo $datauser['cust_address'] ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name"><b> No Hp : </b></label>
+                                    <?php echo $datauser['cust_phone'] ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email"><b> Email : </b></label>
+                                    <?php echo $datauser['cust_email'] ?>
+                                </div>
+                                <div class="form-group">
                                     <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Ubah Profile</button>
-						            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal1">Ubah Password</button>
-                                    </div>
+                                    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal1">Ubah Password</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -159,77 +166,79 @@ if (isset($_SESSION['cust_id'])) {
                 </main>
                 <!-- Main Content -->
             </div>
-	<!--/#do_action-->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
+            <!--/#do_action-->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Update Profile</h4>
-					<div class="signup-form">
-						<!--sign up form-->
-                        <form method="post" action="../model/CustUser.php" enctype="multipart/form-data">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Perbarui Profile</h4>
+                            <div class="signup-form">
+                                <!--sign up form-->
+                                <form method="post" action="../model/CustUser.php" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label for="name">Foto Profile</label>
+                                        <label for="name"><b> Foto Profile</b></label>
                                         <input type="file" name="img" />
-                                    </div>                        
+                                    </div>
                                     <div class="form-group">
-                                        <label for="name">Name</label>
+                                        <label for="name"><b> Name</b></label>
                                         <input type="text" name="nama" class="form-control" value="<?php echo $datauser['cust_name'] ?>" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Alamat</label>
+                                        <label for="name"><b>Alamat</b></label>
                                         <input type="text" name="address" class="form-control" value="<?php echo $datauser['cust_address'] ?>" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">No Hp</label>
+                                        <label for="name"><b> No Hp</b></label>
                                         <input type="number" name="nohp" class="form-control" value="<?php echo $datauser['cust_phone'] ?>" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">Email</label>
+                                        <label for="email"><b> Email</b></label>
                                         <input type="email" name="email" class="form-control" value="<?php echo $datauser['cust_email'] ?>" required>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" name="updateprofile" class="btn btn-outline-dark">Update</button>
+                                        <button type="submit" name="updateprofile" class="btn btn-outline-dark">Perbarui</button>
                                     </div>
                                 </form>
-					</div>
-					<!--/sign up form-->
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="myModal1" role="dialog">
-		<div class="modal-dialog">
+                            </div>
+                            <!--/sign up form-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal1" role="dialog">
+                <div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Ubah Password</h4>
-					<div class="signup-form">
-						<!--sign up form-->
-						<form action="../model/CustUser.php" method="post">
-                        <div class="form-group">
-                            <label for="password">Password Lama</label>
-                            <input type="password" name="passlama" class="form-control" required>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100" id="pass">Ubah Password</h4>
                         </div>
-                        <div class="form-group">
-                            <label for="password">Password Baru</label>
-                            <input type="password" name="pass1" class="form-control" required>
+                        <div class="modal-body">
+                            <div class="signup-form">
+                                <!--sign up form-->
+                                <form action="../model/CustUser.php" method="post">
+                                    <div class="form-group">
+                                        <label for="password"><b> Password Lama</b></label>
+                                        <input type="password" name="passlama" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><b> Password Baru</b></label>
+                                        <input type="password" name="pass1" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password-confirm"><b> Confirm Password</b></label>
+                                        <input type="password" name="pass2" class="form-control" required>
+                                    </div>
+                                    <button type="submit" name="UbahPassword" id="UbahPassword" class="btn btn-outline-success">Simpan</button>
+                                </form>
+                            </div>
+                            <!--/sign up form-->
                         </div>
-                        <div class="form-group">
-                            <label for="password-confirm">Confirm Password</label>
-                            <input type="password" name="pass2" class="form-control" required>
-                        </div>
-							<button type="submit" name="UbahPassword" class="btn btn-outline-success">Ubah</button>
-						</form>
-					</div>
-					<!--/sign up form-->
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
             <div class="col-12 align-self-end">
                 <!-- Footer -->
                 <footer class="row">

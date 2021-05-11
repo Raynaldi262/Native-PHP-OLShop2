@@ -32,11 +32,11 @@ if (isset($_SESSION['cust_id'])) {
                             <div class="row">
                                 <div class="col-auto mr-auto">
                                     <ul class="top-nav">
-                                    <li>
+                                        <li>
                                             <a href="tel:<?php echo $datauser['cust_phone']; ?>"><i class="fa fa-phone-square mr-2"> +<?php echo $datauser['cust_phone']; ?></i></a>
                                         </li>
                                         <li>
-                                        <a href="mailto:<?php echo $datauser['cust_email']; ?>"><i class="fa fa-envelope mr-2"> <?php echo $datauser['cust_email']; ?></i></a>
+                                            <a href="mailto:<?php echo $datauser['cust_email']; ?>"><i class="fa fa-envelope mr-2"> <?php echo $datauser['cust_email']; ?></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -153,7 +153,7 @@ if (isset($_SESSION['cust_id'])) {
                                         <label for="password-confirm">Confirm Password</label>
                                         <input type="password" name="password1" class="form-control" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group text-center">
                                         <button type="submit" name="register" class="btn btn-outline-dark">Register</button>
                                     </div>
                                 </form>
