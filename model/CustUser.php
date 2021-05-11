@@ -183,7 +183,7 @@ function getHargaMulai($id,$conn)
       $item = mysqli_query($conn, $sql);
       $kaki = mysqli_fetch_assoc($item);
       $dataharga[0] = 'Harga Mulai / 1 Meter';
-      $dataharga[1] = $bahan['harga']+$finish['harga']+$kaki['harga'];
+      $dataharga[1] = ($bahan['harga']*(9600/10000))+($finish['harga']*(9600/10000))+$kaki['harga'];
       return $dataharga;
    }
    elseif ($id == 6){
@@ -197,7 +197,7 @@ function getHargaMulai($id,$conn)
       $item = mysqli_query($conn, $sql);
       $kaki = mysqli_fetch_assoc($item);
       $dataharga[0] = 'Harga Mulai / 1 Meter';
-      $dataharga[1] = $bahan['harga']+$finish['harga']+$kaki['harga'];
+      $dataharga[1] = ($bahan['harga']*(9600/10000))+($finish['harga']*(9600/10000))+$kaki['harga'];
       return $dataharga;
    }
    elseif ($id == 7){
