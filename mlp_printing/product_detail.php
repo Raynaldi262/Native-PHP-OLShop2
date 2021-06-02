@@ -8,12 +8,14 @@ if (isset($_SESSION['cust_id'])) {
 if (isset($_GET['id'])) {
     $data_detail = getDetailProduk($_GET['id'], $conn);
     $harga_mulai = getHargaMulai($_GET['id'], $conn);
+    $gambar = gambardetail($_GET['id']);
 }
 
 $getitem = getDataItem($conn);
 while ($datas = mysqli_fetch_assoc($getitem)) {
     $dataitem[] = $datas; //assign whole values to array
 }
+
 
 ?>
 <!doctype html>
@@ -137,7 +139,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                             <!-- Product Images -->
                             <div class="col-lg-5 col-md-12 mb-3">
                                 <div class="col-12 mb-3">
-                                    <div class="img-large border" style="background-image: url('images/image-1.jpg')"></div>
+                                    <div class="img-large border" style="background-image: url('images/barang/<?php echo $gambar ?>')"></div>
                                 </div>
                             </div>
                             <!-- Product Images -->

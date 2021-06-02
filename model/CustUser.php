@@ -222,6 +222,34 @@ function getHargaMulai($id,$conn)
 
 }
 
+function gambardetail($id){
+   if($id == 1){
+      $gambar = 'kartunama.jpeg';
+   }
+   elseif($id ==2){
+      $gambar = 'hvs.jpeg';
+   }
+   elseif($id == 3){
+      $gambar = 'poster.jpeg';
+   }
+   elseif($id == 4){
+      $gambar = 'spanduk.jpeg';
+   }
+   elseif($id == 5){
+      $gambar = 'banner.jpeg';
+   }
+   elseif($id == 6){
+      $gambar = 'rollupbanner.jpeg';
+   }
+   elseif($id == 7){
+      $gambar = 'brosur.jpeg';
+   }
+   elseif($id == 8){
+      $gambar = 'sticker.jpeg';
+   }
+   return $gambar;
+}
+
 function UbahPassword($conn)
 {
    $password = trim($_POST['passlama']);

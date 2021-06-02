@@ -23,7 +23,11 @@ $data_produk = GetdataProduk($conn);
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
+<style>
+img {
+    width: 150px;
+}
+</style>
 <body>
     <div class="container-fluid">
 
@@ -172,7 +176,7 @@ $data_produk = GetdataProduk($conn);
                                             <div class="col-12 bg-white text-center h-100 product-item">
                                                 <div class="row h-100">
                                                     <div class="col-12 p-0 mb-3">
-                                                        <img src="images/image-1.jpg" class="img-fluid">
+                                                        <img src="images/barang/kartunama.jpeg" class="img-fluid">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <h3 class="product-name">Kartu Nama</h3>
@@ -189,7 +193,7 @@ $data_produk = GetdataProduk($conn);
                                             <div class="col-12 bg-white text-center h-100 product-item">
                                                 <div class="row h-100">
                                                     <div class="col-12 p-0 mb-3">
-                                                        <img src="images/image-1.jpg" class="img-fluid">
+                                                        <img src="images/barang/hvs.jpeg" class="img-fluid">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <h3 class="product-name">Dokumen (HVS)</h3>
@@ -206,7 +210,7 @@ $data_produk = GetdataProduk($conn);
                                             <div class="col-12 bg-white text-center h-100 product-item">
                                                 <div class="row h-100">
                                                     <div class="col-12 p-0 mb-3">
-                                                        <img src="images/image-1.jpg" class="img-fluid">
+                                                        <img src="images/barang/poster.jpeg" class="img-fluid">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <h3 class="product-name">Poster A3+</h3>
@@ -223,7 +227,7 @@ $data_produk = GetdataProduk($conn);
                                             <div class="col-12 bg-white text-center h-100 product-item">
                                                 <div class="row h-100">
                                                     <div class="col-12 p-0 mb-3">
-                                                        <img src="images/image-1.jpg" class="img-fluid">
+                                                        <img src="images/barang/spanduk.jpeg" class="img-fluid">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <h3 class="product-name">Banner Standart</h3>
@@ -240,7 +244,7 @@ $data_produk = GetdataProduk($conn);
                                             <div class="col-12 bg-white text-center h-100 product-item">
                                                 <div class="row h-100">
                                                     <div class="col-12 p-0 mb-3">
-                                                        <img src="images/image-1.jpg" class="img-fluid">
+                                                        <img src="images/barang/banner.jpeg" class="img-fluid">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <h3 class="product-name">X Banner</h3>
@@ -257,7 +261,7 @@ $data_produk = GetdataProduk($conn);
                                             <div class="col-12 bg-white text-center h-100 product-item">
                                                 <div class="row h-100">
                                                     <div class="col-12 p-0 mb-3">
-                                                        <img src="images/image-1.jpg" class="img-fluid">
+                                                        <img src="images/barang/rollupbanner.jpeg" class="img-fluid">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <h3 class="product-name">Roll Up Banner</h3>
@@ -273,7 +277,7 @@ $data_produk = GetdataProduk($conn);
                                             <div class="col-12 bg-white text-center h-100 product-item">
                                                 <div class="row h-100">
                                                     <div class="col-12 p-0 mb-3">
-                                                        <img src="images/image-1.jpg" class="img-fluid">
+                                                        <img src="images/barang/brosur.jpeg" class="img-fluid">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <h3 class="product-name">Brosur/Flyer</h3>
@@ -290,7 +294,7 @@ $data_produk = GetdataProduk($conn);
                                             <div class="col-12 bg-white text-center h-100 product-item">
                                                 <div class="row h-100">
                                                     <div class="col-12 p-0 mb-3">
-                                                        <img src="images/image-1.jpg" class="img-fluid">
+                                                        <img src="images/barang/sticker.jpeg" class="img-fluid">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <h3 class="product-name">Sticker Promosi</h3>
