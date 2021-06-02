@@ -24,10 +24,16 @@ $data_produk = GetdataProduk($conn);
     <link rel="stylesheet" href="css/style.css">
 </head>
 <style>
-img {
-    width: 150px;
-}
+    img {
+        width: 150px;
+    }
+
+    .img-fluid {
+        margin-top: 20px;
+        max-height: 200px;
+    }
 </style>
+
 <body>
     <div class="container-fluid">
 
@@ -227,6 +233,7 @@ img {
                                             <div class="col-12 bg-white text-center h-100 product-item">
                                                 <div class="row h-100">
                                                     <div class="col-12 p-0 mb-3">
+                                                        <br><br>
                                                         <img src="images/barang/spanduk.jpeg" class="img-fluid">
                                                     </div>
                                                     <div class="col-12 mb-3">
