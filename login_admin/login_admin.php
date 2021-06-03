@@ -32,6 +32,11 @@
     p {
         color: white !important;
     }
+
+    .card-header>img {
+        max-height: 150px;
+        width: auto;
+    }
 </style>
 
 <?php       // kalau masih login
@@ -49,7 +54,7 @@ if (logged_in()) {
         <!-- /.login-logo -->
         <div class="card card-outline">
             <div class="card-header text-center">
-                <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" style="max-height: 150; width: auto;">
+                <img src="../dist/img/logo.jpg" class="img-circle elevation-2">
                 <div class="row">
                     <div class="col-6" style="text-align: right;">
                         <h3><b>MLP Printing</b></h3>
