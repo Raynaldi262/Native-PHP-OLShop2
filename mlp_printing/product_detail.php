@@ -139,7 +139,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                             <!-- Product Images -->
                             <div class="col-lg-5 col-md-12 mb-3">
                                 <div class="col-12 mb-3">
-                                    <div class="img-large border" style="background-image: url('images/barang/<?php echo $gambar ?>')"></div>
+                                    <div class="img-large border" style="background-image: url('images/barang/<?php echo $gambar[0] ?>')"></div>
                                 </div>
                             </div>
                             <!-- Product Images -->
@@ -154,13 +154,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                     <hr>
                                 </div>
                                 <div class="col-12">
-                                    <ul>
-                                        <li>Processor 8th Generation Intel Core i9-8950HK (6-Core, 12MB Cache, Overclocking up to 5.0GHz)</li>
-                                        <li>Memory 32GB DDR4-2666MHz, 2x16GB Ram Speed Gaming Performance</li>
-                                        <li>Hard Drive 1TB SSD RAID 0 (2x 512GB PCIe NVME M.2 SSDs) + 1TB (+8GB SSHD) Hybrid Drive</li>
-                                        <li>17.3" Full HD display 1920 x 1080 resolution boasts impressive color and clarity. IPS technology for wide viewing angles.</li>
-                                        <li>Video Card NVIDIA® GeForce® RTX 2080 with 8GB GDDR6</li>
-                                    </ul>
+                                        <?php echo $gambar[1] ?>
                                 </div>
                             </div>
                             <!-- Product Info -->

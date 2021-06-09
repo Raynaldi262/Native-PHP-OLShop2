@@ -223,29 +223,38 @@ function getHargaMulai($id,$conn)
 }
 
 function gambardetail($id){
+   $gambar = [];
    if($id == 1){
-      $gambar = 'kartunama.jpeg';
+      $gambar[0] = 'kartunama.jpeg';
+      $gambar[1] = 'Cetak kebutuhan kartu nama anda disini dengan kualitas hasil terbaik.';
    }
    elseif($id ==2){
-      $gambar = 'hvs.jpeg';
+      $gambar[0] = 'hvs.jpeg';
+      $gambar[1] = 'Cetak kebutuhan Dokumen Hvs anda disini dengan kualitas hasil terbaik.';
    }
    elseif($id == 3){
-      $gambar = 'poster.jpeg';
+      $gambar[0] = 'poster.jpeg';
+      $gambar[1] = 'Gunakan poster berbahan art carton untuk segala kebutuhan promosi anda.';
    }
    elseif($id == 4){
-      $gambar = 'spanduk.jpeg';
+      $gambar[0] = 'spanduk.jpeg';
+      $gambar[1] = 'Gunakan Banner atau spanduk untuk menyampaikan pesan dari brand anda. Banner Premium dengan Banner sangat cocok untuk grand opening toko, promosi, pameran, ataupun untuk kegiatan lainnya mengambil perhatian orang. Banner Premium adalah solusi bagi yang membutuhkan banner indoor dengan warna yang lebih tajam dan tahan lama.';
    }
    elseif($id == 5){
-      $gambar = 'banner.jpeg';
+      $gambar[0] = 'banner.jpeg';
+      $gambar[1] = 'Promosikan kebutuhan promosi dan branding anda dengan X Banner.';
    }
    elseif($id == 6){
-      $gambar = 'rollupbanner.jpeg';
+      $gambar[0] = 'rollupbanner.jpeg';
+      $gambar[1] = 'Promosikan kebutuhan promosi dan branding anda dengan Roll Up Banner.';
    }
    elseif($id == 7){
-      $gambar = 'brosur.jpeg';
+      $gambar[0] = 'brosur.jpeg';
+      $gambar[1] = 'Cetak kebutuhan brosur anda disini.';
    }
    elseif($id == 8){
-      $gambar = 'sticker.jpeg';
+      $gambar[0] = 'sticker.jpeg';
+      $gambar[1] = 'Cetak kebutuhan Sticker anda disini dengan kualitas hasil terbaik.';
    }
    return $gambar;
 }
