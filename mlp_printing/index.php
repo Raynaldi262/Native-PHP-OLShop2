@@ -15,7 +15,7 @@ $data_produk = GetdataProduk($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>E-Commerce Template</title>
+    <title>Mlp Printing</title>
 
     <link href="//fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
@@ -93,7 +93,7 @@ $data_produk = GetdataProduk($conn);
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a href="../mlp_printing/">E-Commerce</a>
+                                    <a href="../mlp_printing/">Mlp Printing</a>
                                 </div>
                             </div>
                         </div>
@@ -364,13 +364,12 @@ $data_produk = GetdataProduk($conn);
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="footer-logo">
-                                            <a href="../mlp_printing/">E-Commerce</a>
+                                            <a href="../mlp_printing/">MLP Printing</a>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <address>
-                                            221B Baker Street<br>
-                                            London, England
+                                        Pt media langit persada
                                         </address>
                                     </div>
                                 </div>
@@ -387,9 +386,6 @@ $data_produk = GetdataProduk($conn);
                                             </li>
                                             <li>
                                                 <a href="contact.php">Contact Us</a>
-                                            </li>
-                                            <li>
-                                                <a href="about.php">About Us</a>
                                             </li>
                                         </ul>
                                     </div>

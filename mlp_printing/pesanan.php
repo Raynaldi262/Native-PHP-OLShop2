@@ -99,7 +99,7 @@ $totalharga = 0;
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a href="../mlp_printing/">E-Commerce</a>
+                                    <a href="../mlp_printing/">Mlp Printing</a>
                                 </div>
                             </div>
                         </div>
@@ -204,16 +204,15 @@ $totalharga = 0;
                     <div class="col-12 bg-dark text-white pb-3 pt-5">
                         <div class="row">
                             <div class="col-6 text-center">
-                                <div class="row">
+                            <div class="row">
                                     <div class="col-12">
                                         <div class="footer-logo">
-                                            <a href="../mlp_printing/">E-Commerce</a>
+                                            <a href="../mlp_printing/">MLP Printing</a>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <address>
-                                            221B Baker Street<br>
-                                            London, England
+                                        Pt media langit persada
                                         </address>
                                     </div>
                                 </div>
@@ -230,9 +229,6 @@ $totalharga = 0;
                                             </li>
                                             <li>
                                                 <a href="contact.php">Contact Us</a>
-                                            </li>
-                                            <li>
-                                                <a href="about.php">About Us</a>
                                             </li>
                                         </ul>
                                     </div>
