@@ -274,12 +274,33 @@ $totalharga = 0;
                                 </div>
                                 <!-- Review -->
                             </div>
-                            <div class=" text-right">
-                                <form action="../model/CustUser.php" method="post" style="text-align:center;">
-                                    <button type="submit" name="batalcheck" class="btn btn-outline-danger">Batal</button>
-                                    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Bayar</button>
-                                </form>
+                            <form action="../model/CustUser.php" method="post" style="text-align:center;">
+                            <div class="row">
+                                <div class="col-12">
+
+                                    <!-- Comments -->
+                                    <h3><u>Opsi Antar / Ambil Sendiri</u></h3>
+                                    <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                        <div class="row">
+                                            <div class="col-12">
+                                            Pilih =
+                                                <select name="antar" required>
+                                                  <option value="Antar">Antar</option>
+                                                  <option value="Ambil Sendiri">Ambil Sendiri</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Comments -->
+                                    </div>
+                                </div>
+                                <!-- Review -->
                             </div>
+                            <div class=" text-right">
+                            <input type="hidden" name="total_harga" value="<?php echo $totalharga ?>">
+                                <button type="submit" name="batalcheck" class="btn btn-outline-danger">Batal</button>
+                                <button type="submit" name="pesan" class="btn btn-outline-success">Pesan</button>
+                            </div>
+                            </form>
                         </div>
                     </div>
                     <!-- Ratings & Reviews -->
@@ -287,28 +308,8 @@ $totalharga = 0;
 
                 </div>
             </div>
-            <!-- Modal content-->
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Unggah Bukti Pembayaran</h4>
-                            <div class="signup-form">
-                                <form action="../model/CustUser.php" method="post" enctype="multipart/form-data">
-                                    <h5>Masukan Bukti Pembayaran :</h5>
-                                    <input type="file" name="img" />
-                                    <br>
-                                    <input type="hidden" name="total_harga" value="<?php echo $totalharga ?>">
-                                    <button type="submit" name="bayar" class="btn btn-outline-success">Upload</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    <!-- Modal content-->
 
     <div class="col-12 align-self-end">
         <!-- Footer -->

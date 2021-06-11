@@ -154,6 +154,7 @@ $totalharga = 0;
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Status</th>
+                                                <th>Opsi</th>
                                                 <th>Tanggal</th>
                                                 <th>Detail</th>
                                             </tr>
@@ -169,6 +170,9 @@ $totalharga = 0;
                                                         </td>
                                                         <td>
                                                             <?php echo $data_proses['status'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $data_proses['antar'] ?>
                                                         </td>
                                                         <td>
                                                             <?php echo $data_proses['create_date'] ?>

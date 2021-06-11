@@ -249,7 +249,38 @@ $totalharga = 0;
                                             <div class="col-12">
                                                 <h3><?php echo  "Rp. ", number_format($totalharga) ?></h3>
                                             </div>
-                                            <?php if ($data_proses['status'] != 'Mengunggu Konfirmasi') { ?>
+                                            <?php if ($data_proses['status'] == 'Belum Bayar') { ?>
+                                                <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                <form action="../model/CustUser.php" method="post" style="text-align:center;">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                        <input type="hidden" name="status_id" value="<?php echo $_GET['id'] ?>">
+                                                        <button type="submit" name="batalpesan" class="btn btn-outline-danger">Batal</button>
+                                                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Bayar</button>
+                                                        </div>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            <?php } elseif ($data_proses['status'] == 'Menunggu Konfirmasi' ) {?>
+                                                <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <p> Menunggu Konfirmasi</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <?php } elseif ($data_proses['status'] == 'Dibatalkan' ) {?>
+                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <p style="color:red"> DiBatalkan</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <?php } else { ?>
+
                                                 <div class="col-12 text-justify py-2 mb-3 bg-gray">
                                                     <div class="row">
                                                         <div class="col-12">
@@ -261,15 +292,7 @@ $totalharga = 0;
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <?php } else { ?>
 
-                                                <div class="col-12 text-justify py-2 mb-3 bg-gray">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <p> Menunggu Konfirmasi</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             <?php } ?>
                                         </div>
                                         <!-- Comments -->
@@ -280,7 +303,39 @@ $totalharga = 0;
                         </div>
                     </div>
                     <!-- Ratings & Reviews -->
-
+                                    <!-- Modal content-->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Unggah Bukti Pembayaran</h4>
+                                    <div class="signup-form">
+                                        <form action="../model/CustUser.php" method="post" enctype="multipart/form-data">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                    <h2><u>BCA</u></h2>
+                                                    <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <h3>No Rek : 13312213</h3>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Comments -->
+                                                    </div>
+                                                </div>
+                                                <!-- Review -->
+                                            </div>
+                                            <h5>Masukan Bukti Pembayaran :</h5>
+                                            <input type="file" name="img" />
+                                            <br>
+                                            <input type="hidden" name="status_id" value="<?php echo $_GET['id'] ?>">
+                                            <button type="submit" name="bayar" class="btn btn-outline-success">Upload</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12 align-self-end">

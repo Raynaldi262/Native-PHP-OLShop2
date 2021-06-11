@@ -20,8 +20,14 @@ if (isset($_POST['checkout'])) {
 if (isset($_POST['batalcheck'])) {
    BatalCheck($conn);
 }
+if (isset($_POST['batalpesan'])) {
+   BatalPesan($conn);
+}
 if (isset($_POST['bayar'])) {
    ProsesBayar($conn);
+}
+if (isset($_POST['pesan'])) {
+   ProsesPesanan($conn);
 }
 if (isset($_POST['UbahPassword'])) {
    UbahPassword($conn);
@@ -133,6 +139,13 @@ function BatalCheck($conn){
    $sql = "DELETE FROM tbl_checkout WHERE tbl_checkout . cust_id = '" . $_SESSION['cust_id'] . "' ";
    mysqli_query($conn, $sql);
    header("location: ../mlp_printing/checkout.php");
+}
+
+function BatalPesan($conn){
+   $sql = "UPDATE tbl_proses SET status = 'DiBatalkan'  WHERE status_id = '" . $_POST['status_id'] . "' ";
+   $result = mysqli_query($conn, $sql);
+
+   header("location: ../mlp_printing/pesanan.php");
 }
 
 function getHargaMulai($id,$conn)
@@ -385,10 +398,7 @@ function addChart($conn)
 
 
 function ProsesBayar($conn)
-{  
-  if ($_POST['total_harga'] == 0){
-    msg('Checkout Tidak ada Isi!!', '../mlp_printing/checkout.php');
-  }else{
+{ 
    date_default_timezone_set("Asia/Bangkok");
    $date_id = date("his") . date("Ymd");
    $nama = $_FILES['img']['name'];
@@ -401,7 +411,33 @@ function ProsesBayar($conn)
       if ($ukuran < 4044070) {        // max 4 mb
          move_uploaded_file($file_tmp, '../mlp_printing/images/bayar/' . $date_id . $nama);
          $name_img = $date_id.$nama;
-         $sql = "INSERT INTO tbl_proses (cust_id,status_id,status,bukti_bayar, create_date) VALUES ('" .$_SESSION['cust_id']. "','" . $date_id . "', 'Mengunggu Konfirmasi', '".$name_img."' , now()) ";
+         echo $_POST['status_id'];
+         //$sql = "INSERT INTO tbl_proses (cust_id,status_id,status,bukti_bayar, create_date) VALUES ('" .$_SESSION['cust_id']. "','" . $date_id . "', 'Menunggu Konfirmasi', '".$name_img."' , now()) ";
+         $sql = "UPDATE tbl_proses SET status = 'Menunggu Konfirmasi', bukti_bayar = '".$name_img."'  WHERE status_id = '" . $_POST['status_id'] . "' ";
+         $result = mysqli_query($conn, $sql);
+
+         if ($result) {
+            header("location: ../mlp_printing/pesanan.php");
+         } else {
+            msg('Gagal Upload data!!', '../mlp_printing/pesanan.php');
+         }
+      } else {
+         msg('Ukuran file max 4mb!!', '../mlp_printing/pesanan.php');
+      }
+   } else {
+      msg('Ekstensi File yang diupload hanya diperbolehkan png, jpg, Jpeg!!', '../mlp_printing/pesanan.php');
+   }
+  
+}
+
+function ProsesPesanan($conn)
+{  
+  if ($_POST['total_harga'] == 0){
+    msg('Checkout Tidak ada Isi!!', '../mlp_printing/checkout.php');
+  }else{
+   date_default_timezone_set("Asia/Bangkok");
+   $date_id = date("his") . date("Ymd");
+         $sql = "INSERT INTO tbl_proses (cust_id,status_id,antar,status,bukti_bayar, create_date) VALUES ('" .$_SESSION['cust_id']. "','" . $date_id . "','" .$_POST['antar']. "' , 'Belum Bayar', 'blumbayar' , now()) ";
          $result = mysqli_query($conn, $sql);
 
 
@@ -437,12 +473,6 @@ function ProsesBayar($conn)
          } else {
             msg('Gagal Upload data!!', '../mlp_printing/checkout.php');
          }
-      } else {
-         msg('Ukuran file max 4mb!!', '../mlp_printing/checkout.php');
-      }
-   } else {
-      msg('Ekstensi File yang diupload hanya diperbolehkan png, jpg, Jpeg!!', '../mlp_printing/checkout.php');
-   }
   }
 }
 
