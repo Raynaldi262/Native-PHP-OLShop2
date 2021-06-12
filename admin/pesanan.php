@@ -74,6 +74,7 @@ while ($datas = mysqli_fetch_assoc($getPesanan)) {
                         <th>Pesanan</th>
                         <th>Total Harga</th>
                         <th>Bukti Transfer</th>
+                        <th>Pengiriman</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
@@ -93,15 +94,22 @@ while ($datas = mysqli_fetch_assoc($getPesanan)) {
                           <td> <a href='../mlp_printing/images/bayar/<?php echo $data['bukti_bayar']; ?>' data-toggle="lightbox" data-gallery="gallery">
                               <img src="../mlp_printing/images/bayar/<?php echo $data['bukti_bayar']; ?> " alt=""></a></td>
 
+                          <td><?php echo $data['antar']; ?></td>
                           <td><?php echo $data['status']; ?></td>
                           <td>
                             <form action="../model/Pesanan.php" method="post">
                               <input type='hidden' name='pesan_id' value="<?php echo $data['status_id']; ?>">
-                              <?php if ($data['status'] == 'Mengunggu Konfirmasi') { ?>
+                              <?php if ($data['status'] == 'Menunggu Konfirmasi') { ?>
                                 <input type="submit" class="btn btn-success" name="acc_item" value="Terima">
                                 <input type="submit" class="btn btn-danger" name="dec_item" value="Tolak">
                               <?php } ?>
-                              <?php if ($data['status'] == 'Di Proses') { ?>
+                              <?php if ($data['status'] == 'Di Proses' && $data['antar'] == 'Antar') { ?>
+                                <input type="submit" class="btn btn-success" name="deliver_item" value="Kirim">
+                              <?php } ?>
+                              <?php if ($data['status'] == 'Dalam Pengiriman') { ?>
+                                <input type="submit" class="btn btn-primary" name="finish_item" value="Selesai">
+                              <?php } ?>
+                              <?php if ($data['status'] == 'Di Proses' && $data['antar'] == 'Ambil Sendiri') { ?>
                                 <input type="submit" class="btn btn-primary" name="finish_item" value="Selesai">
                               <?php } ?>
                             </form>

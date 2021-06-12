@@ -208,7 +208,7 @@ $totalharga = 0;
                     <div class="col-12 bg-dark text-white pb-3 pt-5">
                         <div class="row">
                             <div class="col-6 text-center">
-                            <div class="row">
+                                <div class="row">
                                     <div class="col-12">
                                         <div class="footer-logo">
                                             <a href="../mlp_printing/">MLP Printing</a>
@@ -216,7 +216,7 @@ $totalharga = 0;
                                     </div>
                                     <div class="col-12">
                                         <address>
-                                        Pt media langit persada
+                                            Pt media langit persada
                                         </address>
                                     </div>
                                 </div>
@@ -273,6 +273,9 @@ $totalharga = 0;
                 "lengthMenu": [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
+                ],
+                "order": [
+                    [3, "desc"]
                 ],
                 "scrollX": true
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');

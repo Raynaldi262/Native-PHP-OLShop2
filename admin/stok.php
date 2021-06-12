@@ -246,6 +246,15 @@
                         modifier: {
                             page: "current"
                         }
+                    },
+                    customize: function(doc) {
+                        doc.pageMargins = [20, 10, 10, 20];
+                        doc.defaultStyle.fontSize = 10;
+                        doc.styles.tableHeader.fontSize = 10;
+                        doc.styles.title.fontSize = 12;
+                        doc.defaultStyle.alignment = 'center';
+                        // Remove spaces around page title
+                        // doc.content[0].text = doc.content[0].text.trim();
                     }
                 }, "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');

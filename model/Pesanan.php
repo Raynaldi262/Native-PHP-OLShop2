@@ -3,12 +3,12 @@
 require('../connect/conn.php');
 require('../session/session.php');
 
-$sql = "select a.status_id, a.create_date, id_pesanan, cust_name, cust_address, cust_email, cust_phone, sum(harga) harga, bukti_bayar , status
+$sql = "select antar,a.status_id, a.create_date, id_pesanan, cust_name, cust_address, cust_email, cust_phone, sum(harga) harga, bukti_bayar , status
         from tbl_detailproses a
-        left join (select status, status_id, bukti_bayar from tbl_proses) b on a.status_id = b.status_id
+        left join (select status,antar, status_id, bukti_bayar from tbl_proses) b on a.status_id = b.status_id
         left join tbl_customer c on a.cust_id = c.cust_id
         group by a.status_id
-        having status != 'Selesai' and status != 'DiBatalkan'
+        having status not in ('Selesai', 'DiBatalkan', 'Belum Bayar')
         order by create_date desc";
 $getPesanan = mysqli_query($conn, $sql);
 
@@ -19,6 +19,10 @@ if (isset($_POST['acc_item'])) {
 
 if (isset($_POST['dec_item'])) {
     decPesanan($conn);
+}
+
+if (isset($_POST['deliver_item'])) {
+    delivPesanan($conn);
 }
 
 if (isset($_POST['finish_item'])) {
@@ -104,7 +108,29 @@ function decPesanan($conn)  // tolak pesanan
     }
 }
 
-function finPesanan($conn)  // tolak pesanan
+function delivPesanan($conn)  // kirim pesanan
+{
+    $id = $_POST['pesan_id'];
+    $sql = "Update tbl_proses
+            set status = 'Dalam Pengiriman'
+            where status_id ='" . $id . "'";
+
+    $result = mysqli_query($conn, $sql);
+
+    $sql2 = "update tbl_order 
+    set order_status = 'Dalam Pengiriman'
+    where status_id = '" . $id . "'";
+
+    $result2 = mysqli_query($conn, $sql2);
+
+    if ($result == 1 && $result2 == 1) {
+        msg('Status pesanan berhasil diubah!!', '../admin/pesanan.php');
+    } else {
+        msg('Status pesanan gagal diubah!!', '../admin/pesanan.php');
+    }
+}
+
+function finPesanan($conn)  // selesaikan pesanan
 {
     $id = $_POST['pesan_id'];
     $sql = "Update tbl_proses
