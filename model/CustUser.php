@@ -416,6 +416,25 @@ function ProsesBayar($conn)
          $sql = "UPDATE tbl_proses SET status = 'Menunggu Konfirmasi', bukti_bayar = '".$name_img."'  WHERE status_id = '" . $_POST['status_id'] . "' ";
          $result = mysqli_query($conn, $sql);
 
+         $sql = "SELECT MAX(SUBSTR(id_pesanan, 5)) as custnum from tbl_detailproses ";
+         $check = mysqli_query($conn, $sql); // untuk mencari id terakhir
+         $check_data = mysqli_fetch_assoc($check);
+         $increment = $check_data['custnum']+1; // tambah id terakhir
+         $spktid = "SPK-".$increment;
+
+
+               if( !$check_data['custnum'] ){
+
+                   $sql = "UPDATE tbl_detailproses SET id_pesanan = 'SPK-1' where status_id = '" . $_POST['status_id'] . "' ";
+                   $result = mysqli_query($conn, $sql);  
+
+               }else{
+
+                  $sql = "UPDATE tbl_detailproses SET id_pesanan = '". $spktid."' where status_id = '" . $_POST['status_id'] . "' ";
+                  $result = mysqli_query($conn, $sql);          
+
+               }
+
          if ($result) {
             header("location: ../mlp_printing/pesanan.php");
          } else {
@@ -453,13 +472,13 @@ function ProsesPesanan($conn)
                     if( !$check_data['custnum'] ){
 
                $sql = "INSERT INTO tbl_detailproses ( date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi,hasil_meter, upload_name,status_id,id_pesanan) 
-                  VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "', '" . $data['hasil_meter'] . "' , '" . $data['upload_name'] . "', '" . $date_id . "', 'SPK-1')";
+                  VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "', '" . $data['hasil_meter'] . "' , '" . $data['upload_name'] . "', '" . $date_id . "', 'NULL')";
                   $result = mysqli_query($conn, $sql);
                  $sql = "DELETE FROM tbl_checkout WHERE tbl_checkout . checkout_id = " . $data['checkout_id'] . "";
                  mysqli_query($conn, $sql);                      
                     }else{
                $sql = "INSERT INTO tbl_detailproses ( date_id ,produk_id, finishing_id, bahan_id, kaki_id , cust_id, produk_name, ukuran, bahan, finishing, qty, harga, create_date, deskripsi, sisi,hasil_meter, upload_name,status_id,id_pesanan) 
-                  VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "' , '" . $data['hasil_meter'] . "', '" . $data['upload_name'] . "', '" . $date_id . "', '" . $spktid . "')";
+                  VALUES ( '" . $data['date_id'] . "','" . $data['produk_id'] . "', '" . $data['finishing_id'] . "' ,'" . $data['bahan_id'] . "', '" . $data['kaki_id'] . "' ,'" . $data['cust_id'] . "', '" . $data['produk_name'] . "', '" . $data['ukuran'] . "', '" . $data['bahan'] . "', '" . $data['finishing'] . "', '" . $data['qty'] . "','" . $data['harga'] . "', now(), '" . $data['deskripsi'] . "', '" . $data['sisi'] . "' , '" . $data['hasil_meter'] . "', '" . $data['upload_name'] . "', '" . $date_id . "', 'NULL')";
                   $result = mysqli_query($conn, $sql);
                  $sql = "DELETE FROM tbl_checkout WHERE tbl_checkout . checkout_id = " . $data['checkout_id'] . "";
                  mysqli_query($conn, $sql);                
