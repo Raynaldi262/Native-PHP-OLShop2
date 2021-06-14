@@ -56,7 +56,7 @@ require('../connect/conn.php');
                                                 </td>
                                                 <td><b>Sampai Tanggal</b></td>
                                                 <td><input type="date" id="end" name="end" required></td>
-                                                <td><input type="submit" value="Cari" class="btn-info" name="search"></td>
+                                                <td><input type="submit" value="Cari" class="btn-info" id="cari" name="search"></td>
                                             </tr>
                                         </table>
                                     </form>
@@ -67,7 +67,18 @@ require('../connect/conn.php');
                                         $end = date("d-m-Y", strtotime($_POST['end']));
                                     ?> <p align="center" class="title"><?php
                                                                         echo 'Data tanggal ' . $start . ' sampai tanggal ' . $end;  ?>
-                                        </p>
+                                        </p><?php ?>
+                                        <form action="">
+                                            <input type='hidden' name='ins_start' id='ins_start' value='<?php echo $_POST['start']; ?>'>
+                                            <input type='hidden' name='ins_end' id='ins_end' value='<?php echo $_POST['end']; ?>'>
+                                        </form>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <form action="">
+                                            <input type='hidden' name='ins_start' id='ins_start' value=''>
+                                            <input type='hidden' name='ins_end' id='ins_end' value=''>
+                                        </form>
                                     <?php
                                     }
                                     ?>
@@ -202,33 +213,41 @@ require('../connect/conn.php');
                 ],
                 "scrollX": true,
                 "buttons": [{
-                    extend: "csv",
-                    messageTop: judul,
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6],
-                        modifier: {
-                            page: "current"
+                        extend: "csv",
+                        messageTop: judul,
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6],
+                            modifier: {
+                                page: "current"
+                            }
                         }
-                    }
-                }, {
-                    extend: "pdf",
-                    messageTop: judul,
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6],
-                        modifier: {
-                            page: "current"
+                    }, {
+                        text: 'PDF',
+                        action: function(e, dt, node, config) {
+                            var start = $('#ins_start').val();
+                            var end = $('#ins_end').val();
+                            window.location.href = 'laporan_stok_pdf.php?start=' + start + '&end=' + end;
                         }
                     },
-                    customize: function(doc) {
-                        doc.pageMargins = [20, 10, 10, 20];
-                        doc.defaultStyle.fontSize = 10;
-                        doc.styles.tableHeader.fontSize = 10;
-                        doc.styles.title.fontSize = 12;
-                        doc.defaultStyle.alignment = 'center';
-                        // Remove spaces around page title
-                        // doc.content[0].text = doc.content[0].text.trim();
-                    }
-                }, "colvis"]
+                    //  {
+                    //     extend: "pdf",
+                    //     messageTop: judul,
+                    //     exportOptions: {
+                    //         columns: [0, 1, 2, 3, 4, 5, 6],
+                    //         modifier: {
+                    //             page: "current"
+                    //         }
+                    //     },
+                    //     customize: function(doc) {
+                    //         doc.pageMargins = [20, 10, 10, 20];
+                    //         doc.defaultStyle.fontSize = 10;
+                    //         doc.styles.tableHeader.fontSize = 10;
+                    //         doc.styles.title.fontSize = 12;
+                    //         doc.defaultStyle.alignment = 'center'; 
+                    //     }
+                    // },
+                    "colvis"
+                ]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
 

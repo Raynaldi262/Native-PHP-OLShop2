@@ -251,17 +251,17 @@ $totalharga = 0;
                                             </div>
                                             <?php if ($data_proses['status'] == 'Belum Bayar') { ?>
                                                 <div class="col-12 text-justify py-2 mb-3 bg-gray">
-                                                <form action="../model/CustUser.php" method="post" style="text-align:center;">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                        <input type="hidden" name="status_id" value="<?php echo $_GET['id'] ?>">
-                                                        <button type="submit" name="batalpesan" class="btn btn-outline-danger">Batal</button>
-                                                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Bayar</button>
+                                                    <form action="../model/CustUser.php" method="post" style="text-align:center;">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <input type="hidden" name="status_id" value="<?php echo $_GET['id'] ?>">
+                                                                <button type="submit" name="batalpesan" class="btn btn-outline-danger">Batal</button>
+                                                                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Bayar</button>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     </form>
                                                 </div>
-                                            <?php } elseif ($data_proses['status'] == 'Menunggu Konfirmasi' ) {?>
+                                            <?php } elseif ($data_proses['status'] == 'Menunggu Konfirmasi') { ?>
                                                 <div class="col-12 text-justify py-2 mb-3 bg-gray">
                                                     <div class="row">
                                                         <div class="col-12">
@@ -270,14 +270,14 @@ $totalharga = 0;
                                                     </div>
                                                 </div>
 
-                                            <?php } elseif ($data_proses['status'] == 'Dibatalkan' ) {?>
-                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <p style="color:red"> DiBatalkan</p>
+                                            <?php } elseif ($data_proses['status'] == 'Dibatalkan') { ?>
+                                                <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <p style="color:red"> DiBatalkan</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
                                             <?php } else { ?>
 
@@ -303,16 +303,16 @@ $totalharga = 0;
                         </div>
                     </div>
                     <!-- Ratings & Reviews -->
-                                    <!-- Modal content-->
+                    <!-- Modal content-->
                     <div class="modal fade" id="myModal" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Unggah Bukti Pembayaran</h4>
+                                    <h4 class="modal-title">Unggah <br> Bukti Pembayaran</h4>
                                     <div class="signup-form">
                                         <form action="../model/CustUser.php" method="post" enctype="multipart/form-data">
-                                                <div class="row">
-                                                    <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-12">
                                                     <h2><u>BCA</u></h2>
                                                     <div class="col-12 text-justify py-2 mb-3 bg-gray">
                                                         <div class="row">
@@ -325,10 +325,11 @@ $totalharga = 0;
                                                 </div>
                                                 <!-- Review -->
                                             </div>
-                                            <h5>Masukan Bukti Pembayaran :</h5>
+                                            <h5>Upload Bukti Pembayaran :</h5>
                                             <input type="file" name="img" />
                                             <br>
                                             <input type="hidden" name="status_id" value="<?php echo $_GET['id'] ?>">
+                                            <br>
                                             <button type="submit" name="bayar" class="btn btn-outline-success">Upload</button>
                                         </form>
                                     </div>
@@ -344,7 +345,7 @@ $totalharga = 0;
                     <div class="col-12 bg-dark text-white pb-3 pt-5">
                         <div class="row">
                             <div class="col-6 text-center">
-                            <div class="row">
+                                <div class="row">
                                     <div class="col-12">
                                         <div class="footer-logo">
                                             <a href="../mlp_printing/">MLP Printing</a>
@@ -352,7 +353,7 @@ $totalharga = 0;
                                     </div>
                                     <div class="col-12">
                                         <address>
-                                        Pt media langit persada
+                                            Pt media langit persada
                                         </address>
                                     </div>
                                 </div>
