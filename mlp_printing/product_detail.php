@@ -33,6 +33,12 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+<style>
+    .guide {
+        display: block;
+        margin-left: 26%;
+    }
+</style>
 
 <body>
     <div class="container-fluid">
@@ -154,7 +160,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                     <hr>
                                 </div>
                                 <div class="col-12">
-                                        <?php echo $gambar[1] ?>
+                                    <?php echo $gambar[1] ?>
                                 </div>
                             </div>
                             <!-- Product Info -->
@@ -222,11 +228,15 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <div class="input-group-append">
                                                                 </div>
                                                             </div>
-                                                            <div class="input-group mb-3">
+                                                            <div class="input-group">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
-                                                                <input type="url" name="upload_name" class="form-control" required>
+                                                                <input type="url" name="upload_name" class="form-control" placeholder="Url File" required>
+                                                                <br>
                                                             </div>
-                                                            <div class="input-group mb-3">
+                                                            <a class="guide" href="images/gdrive_guide.pdf" download>
+                                                                *Cara Unggah Berkas
+                                                            </a>
+                                                            <div class="input-group mb-3 mt-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
                                                                 <textarea name="catatan" class="form-control"></textarea>
                                                             </div>
@@ -671,7 +681,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                     <div class="col-12 bg-dark text-white pb-3 pt-5">
                         <div class="row">
                             <div class="col-6 text-center">
-                            <div class="row">
+                                <div class="row">
                                     <div class="col-12">
                                         <div class="footer-logo">
                                             <a href="../mlp_printing/">MLP Printing</a>
@@ -679,7 +689,7 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                     </div>
                                     <div class="col-12">
                                         <address>
-                                        Pt media langit persada
+                                            Pt media langit persada
                                         </address>
                                     </div>
                                 </div>

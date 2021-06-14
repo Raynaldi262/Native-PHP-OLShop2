@@ -114,7 +114,7 @@ require('../connect/conn.php');
                                             while ($data = mysqli_fetch_array($getPesanan)) { ?>
                                                 <tr align="center">
                                                     <td><?php echo $i ?></td>
-                                                    <td><?php echo $data['id_pesanan']; ?></td>
+                                                    <td><?php echo $data['status_id']; ?></td>
                                                     <td><?php echo $data['cust_name']; ?></td>
                                                     <td>
                                                         <a href='../mlp_printing/invoice.php?id=<?php echo $data['status_id']; ?>&idu=<?php echo $data['cust_id']; ?>'><?php echo $data['invoice']; ?></a>
