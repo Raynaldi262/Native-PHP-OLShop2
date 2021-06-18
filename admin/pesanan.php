@@ -84,7 +84,7 @@ while ($datas = mysqli_fetch_assoc($getPesanan)) {
                       foreach ($pesanan as $data) { ?>
                         <tr>
                           <td><?php echo $data['create_date']; ?></td>
-                          <td><?php echo $data['id_pesanan']; ?></td>
+                          <td><?php echo $data['status_id']; ?></td>
                           <td><?php echo $data['cust_name']; ?></td>
                           <td><?php echo $data['cust_address']; ?> <br> (<?php echo $data['cust_phone']; ?>) <br> (<?php echo $data['cust_email']; ?>)</td>
                           <td> <button type="button" class="btn btn-primary detailPesanan" data-toggle="modal" data-target="#modal-detailPesanan" id="<?php echo $data['status_id']; ?>">

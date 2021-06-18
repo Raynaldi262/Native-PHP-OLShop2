@@ -1,5 +1,6 @@
 <?php
 require('../connect/conn.php');
+ob_start();
 ?>
 <style>
     table {
@@ -106,8 +107,8 @@ require('../connect/conn.php');
     <br>
 </div>
 <?php
-$html = ob_get_contents();
-ob_end_clean();
+$html = ob_get_clean();
+
 
 require __DIR__ . '../../vendor/autoload.php';
 
