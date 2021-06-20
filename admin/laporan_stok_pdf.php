@@ -1,5 +1,22 @@
 <?php
 require('../connect/conn.php');
+
+$sql = "SELECT admin_name from tbl_admin where admin_id = " . $_GET['user'] . "";
+$user = mysqli_query($conn, $sql);
+$user = mysqli_fetch_assoc($user);
+
+if ($_GET['start'] == null) {
+    $sql = "SELECT min(create_date) as a, max(create_date) as b FROM tbl_stockinout";
+    $getdate = mysqli_query($conn, $sql);
+    $date = mysqli_fetch_assoc($getdate);
+
+    $getStart = date("d-m-Y", strtotime($date['a']));
+    $getEnd = date("d-m-Y", strtotime($date['b']));
+} else {
+    $getStart = date("d-m-Y", strtotime($_GET['start']));
+    $getEnd = date("d-m-Y", strtotime($_GET['end']));
+}
+
 ob_start();
 ?>
 <style>
@@ -28,17 +45,25 @@ ob_start();
     }
 </style>
 <div style="text-align:center">
-    <!-- <img width="100" src="images/home/logo.png"/> -->
-    <table id="example1" class="table table-bordered table-striped" align="center">
+    <table id="example1" class="table table-borderless" align="center">
         <thead>
+            <tr>
+                <td>
+                    <img width="100" src="../dist/img/logo.jpg" />
+                </td>
+                <td colspan="6" align="center" style="font-size: 20px;">
+                    <h4>Laporan Stok</h4>
+                    <h4><?php echo 'Periode ' . $getStart . ' s/d ' . $getEnd ?></h4>
+                </td>
+            </tr>
             <tr align="center">
                 <th>No</th>
                 <th>Nama</th>
-                <th>Stok</th>
+                <th>Stok Awal</th>
                 <th>Total Bahan <br>Masuk</th>
                 <th>Total Bahan <br>Keluar by sistem</th>
                 <th>Total Bahan <br>Keluar Manual</th>
-                <th>Total Stok</th>
+                <th>Stok Akhir</th>
             </tr>
         </thead>
         <tbody align="center">
@@ -103,6 +128,31 @@ ob_start();
             <?php $i++;
             } ?>
         </tbody>
+        <tfoot>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+                <td align="center">Dibuat Oleh</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+                <td align="center"><?php echo $user['admin_name'] ?></td>
+            </tr>
+        </tfoot>
     </table>
     <br>
 </div>

@@ -1,5 +1,22 @@
 <?php
 require('../connect/conn.php');
+
+$sql = "SELECT admin_name from tbl_admin where admin_id = " . $_GET['user'] . "";
+$user = mysqli_query($conn, $sql);
+$user = mysqli_fetch_assoc($user);
+
+if ($_GET['start'] == null) {
+    $sql = "SELECT min(create_date) as a, max(create_date) as b FROM tbl_order";
+    $getdate = mysqli_query($conn, $sql);
+    $date = mysqli_fetch_assoc($getdate);
+
+    $getStart = date("d-m-Y", strtotime($date['a']));
+    $getEnd = date("d-m-Y", strtotime($date['b']));
+} else {
+    $getStart = date("d-m-Y", strtotime($_GET['start']));
+    $getEnd = date("d-m-Y", strtotime($_GET['end']));
+}
+
 ob_start();
 ?>
 <style>
@@ -31,6 +48,15 @@ ob_start();
     <!-- <img width="100" src="images/home/logo.png"/> -->
     <table id="example1" class="table table-bordered table-striped" align="center">
         <thead>
+            <tr>
+                <td>
+                    <img width="100" src="../dist/img/logo.jpg" />
+                </td>
+                <td colspan="4" align="center" style="font-size: 20px;">
+                    <h4>Laporan Pesanan</h4>
+                    <h4><?php echo 'Periode ' . $getStart . ' s/d ' . $getEnd ?></h4>
+                </td>
+            </tr>
             <tr align="center">
                 <th>No</th>
                 <th>Kode</th>
@@ -90,19 +116,43 @@ ob_start();
                 <th></th>
                 <th align="center"><?php echo 'Rp ' . number_format($total['total']); ?></th>
             </tr>
+
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td align="center">Dibuat Oleh</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td align="center"><?php echo $user['admin_name'] ?></td>
+            </tr>
         </tfoot>
     </table>
     <br>
 </div>
 <?php
-$html = ob_get_clean();
+// $html = ob_get_clean();
 
 
-require __DIR__ . '../../vendor/autoload.php';
+// require __DIR__ . '../../vendor/autoload.php';
 
-use Spipu\Html2Pdf\Html2Pdf;
+// use Spipu\Html2Pdf\Html2Pdf;
 
-$html2pdf = new Html2Pdf('P', 'A4', 'en');
-$html2pdf->writeHTML($html);
-$html2pdf->output('laporan_stok.pdf', 'D');
+// $html2pdf = new Html2Pdf('P', 'A4', 'en');
+// $html2pdf->writeHTML($html);
+// $html2pdf->output('laporan_stok.pdf', 'D');
 ?>

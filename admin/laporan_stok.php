@@ -1,5 +1,6 @@
 <?php
 require('../connect/conn.php');
+require('../session/session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -226,7 +227,7 @@ require('../connect/conn.php');
                         action: function(e, dt, node, config) {
                             var start = $('#ins_start').val();
                             var end = $('#ins_end').val();
-                            window.location.href = 'laporan_stok_pdf.php?start=' + start + '&end=' + end;
+                            window.location.href = 'laporan_stok_pdf.php?start=' + start + '&end=' + end + '&user=<?php echo $_SESSION['admin_id'] ?>';
                         }
                     },
                     //  {
