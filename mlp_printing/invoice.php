@@ -53,19 +53,34 @@ ob_start();
         background-color: Orange;
         color: white;
     }
-
-    img {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        z-index: -1;
-    }
 </style>
 <div style="text-align:center">
     <!-- <img width="100" src="images/home/logo.png"/> -->
-    <h1>No Inv: <?php echo $data_order['invoice'] ?></h1>
-    <h2><?php echo date("d/m/Y", strtotime($data_order['create_date'])); ?></h2>
-    <h3>Nama: <?php echo $datauser['cust_name'] ?></h3>
+    <table id="example1" class="table table-bordered table-striped" align="center">
+        <thead>
+            <tr>
+                <td>
+                    <img width="100" src="../dist/img/logo.jpg" />
+                </td>
+                <td colspan="5" align="center">
+                    <h1><u>Invoice</u></h1>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tanggal invoice : </td>
+                <td>Penerima : </td>
+            </tr>
+            <tr>
+                <td colspan="1">No Invoice : </td>
+            </tr>
+            <tr>
+                <td colspan="1">ID Pemesanan : </td>
+            </tr>
+        </tbody>
+    </table>
+
     <table id="example1" class="table table-bordered table-striped" align="center">
         <thead>
             <tr align="center">
@@ -104,7 +119,7 @@ ob_start();
         </tbody>
         <tfoot>
             <tr>
-                <td style="background-color: gray; color:white;"><b>Sub Total</b></td>
+                <td style="background-color: gray; color:white;"><b>Total</b></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -116,14 +131,14 @@ ob_start();
     <br>
 </div>
 <?php
-$html = ob_get_clean();
+// $html = ob_get_clean();
 
-require __DIR__ . '../../vendor/autoload.php';
+// require __DIR__ . '../../vendor/autoload.php';
 
-use Spipu\Html2Pdf\Html2Pdf;
+// use Spipu\Html2Pdf\Html2Pdf;
 
-$html2pdf = new Html2Pdf('P', 'A4', 'en');
-$html2pdf->writeHTML($html);
-$html2pdf->output('Invoice_Pemesanan.pdf', 'D');
+// $html2pdf = new Html2Pdf('P', 'A4', 'en');
+// $html2pdf->writeHTML($html);
+// $html2pdf->output('Invoice_Pemesanan.pdf', 'D');
 
 ?>
