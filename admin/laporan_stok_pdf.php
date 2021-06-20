@@ -45,7 +45,7 @@ ob_start();
     }
 </style>
 <div style="text-align:center">
-    <table id="example1" class="table table-borderless" align="center">
+    <table id="example1" class="table table-borderless" align="center"  style=" border-bottom-style: none; border-right-style: none; border-left-style: none;">
         <thead>
             <tr>
                 <td>
@@ -130,27 +130,27 @@ ob_start();
         </tbody>
         <tfoot>
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="6"></td>
-                <td align="center">Dibuat Oleh</td>
+                <td colspan="6" style="border:none;"></td>
+                <td style="border:none;" align="center">Dibuat Oleh</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;" >&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;" >&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;" >&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;" >&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="6"></td>
-                <td align="center"><?php echo $user['admin_name'] ?></td>
+                <td style="border:none;" colspan="6"></td>
+                <td style="border:none;" align="center"><?php echo $user['admin_name'] ?></td>
             </tr>
         </tfoot>
     </table>
