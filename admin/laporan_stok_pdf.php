@@ -48,9 +48,9 @@ ob_start();
     <table id="example1" class="table table-borderless" align="center"  style=" border-bottom-style: none; border-right-style: none; border-left-style: none;">
         <thead>
             <tr>
-                <td>
+                <td style="border:none;">
                     <img width="100" src="../dist/img/logo.jpg" />
-                </td>
+                </td style="border:none;">
                 <td colspan="6" align="center" style="font-size: 20px;">
                     <h4>Laporan Stok</h4>
                     <h4><?php echo 'Periode ' . $getStart . ' s/d ' . $getEnd ?></h4>
