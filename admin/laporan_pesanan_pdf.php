@@ -46,7 +46,7 @@ ob_start();
 </style>
 <div style="text-align:center">
     <!-- <img width="100" src="images/home/logo.png"/> -->
-    <table id="example1" class="table table-bordered table-striped" align="center">
+    <table id="example1" class="table table-bordered table-striped" align="center" style=" border-bottom-style: none; border-right-style: none; border-left-style: none;">
         <thead>
             <tr>
                 <td>
@@ -118,41 +118,41 @@ ob_start();
             </tr>
 
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;" >&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="4"></td>
-                <td align="center">Dibuat Oleh</td>
+                <td style="border:none;" colspan="4"></td>
+                <td style="border:none;" align="center">Dibuat Oleh</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;">&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;">&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;">&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td style="border:none;">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="4"></td>
-                <td align="center"><?php echo $user['admin_name'] ?></td>
+                <td style="border:none;" colspan="4"></td>
+                <td style="border:none;" align="center"><?php echo $user['admin_name'] ?></td>
             </tr>
         </tfoot>
     </table>
     <br>
 </div>
 <?php
-// $html = ob_get_clean();
+$html = ob_get_clean();
 
 
-// require __DIR__ . '../../vendor/autoload.php';
+require __DIR__ . '../../vendor/autoload.php';
 
-// use Spipu\Html2Pdf\Html2Pdf;
+use Spipu\Html2Pdf\Html2Pdf;
 
-// $html2pdf = new Html2Pdf('P', 'A4', 'en');
-// $html2pdf->writeHTML($html);
-// $html2pdf->output('laporan_stok.pdf', 'D');
+$html2pdf = new Html2Pdf('P', 'A4', 'en');
+$html2pdf->writeHTML($html);
+$html2pdf->output('laporan_stok.pdf', 'D');
 ?>
