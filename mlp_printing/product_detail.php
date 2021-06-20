@@ -288,10 +288,13 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Hidden" name="item_id" class="form-control" value='item_id' id="idbahan">
                                                                 <input type="Hidden" name="total_harga" class="form-control" id="total_harga" value='total_harga'>
                                                             </div>
-                                                            <div class="input-group mb-3">
+                                                            <div class="input-group">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
                                                                 <input type="url" name="upload_name" class="form-control" required>
                                                             </div>
+                                                            <a class="guide" href="images/gdrive_guide.pdf" download>
+                                                                *Cara Unggah Berkas
+                                                            </a>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
                                                                 <textarea name="catatan" class="form-control"></textarea>
@@ -332,10 +335,13 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='3'>
                                                                 <input type="Hidden" name="total_harga" class="form-control" id="total_harga" value='total_harga'>
                                                             </div>
-                                                            <div class="input-group mb-3">
+                                                            <div class="input-group">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
                                                                 <input type="url" name="upload_name" class="form-control" required>
                                                             </div>
+                                                            <a class="guide" href="images/gdrive_guide.pdf" download>
+                                                                *Cara Unggah Berkas
+                                                            </a>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
                                                                 <textarea name="catatan" class="form-control"></textarea>
@@ -383,10 +389,13 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='4'>
                                                                 <input type="Hidden" name="total_harga" id="total_harga" class="form-control" value='total_harga'>
                                                             </div>
-                                                            <div class="input-group mb-3">
+                                                            <div class="input-group">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
                                                                 <input type="url" name="upload_name" class="form-control" required>
                                                             </div>
+                                                            <a class="guide" href="images/gdrive_guide.pdf" download>
+                                                                *Cara Unggah Berkas
+                                                            </a>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
                                                                 <textarea name="catatan" class="form-control"></textarea>
@@ -434,10 +443,13 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Hidden" name="total_harga" class="form-control" id="total_harga" value='total_harga'>
                                                                 <input type="Hidden" name="kaki" class="form-control" value='<?php echo $data_kaki['item_id'] ?>' id="kaki">
                                                             </div>
-                                                            <div class="input-group mb-3">
+                                                            <div class="input-group">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
                                                                 <input type="url" name="upload_name" class="form-control" required>
                                                             </div>
+                                                            <a class="guide" href="images/gdrive_guide.pdf" download>
+                                                                *Cara Unggah Berkas
+                                                            </a>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
                                                                 <textarea name="catatan" class="form-control"></textarea>
@@ -487,10 +499,13 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='6'>
                                                                 <input type="Hidden" name="total_harga" class="form-control" id="total_harga" value='total_harga'>
                                                             </div>
-                                                            <div class="input-group mb-3">
+                                                            <div class="input-group">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
                                                                 <input type="url" name="upload_name" class="form-control" required>
                                                             </div>
+                                                            <a class="guide" href="images/gdrive_guide.pdf" download>
+                                                                *Cara Unggah Berkas
+                                                            </a>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
                                                                 <textarea name="catatan" class="form-control"></textarea>
@@ -535,10 +550,13 @@ while ($datas = mysqli_fetch_assoc($getitem)) {
                                                                 <input type="Hidden" name="produk_id" class="form-control" value='7'>
                                                                 <input type="Hidden" name="total_harga" id="total_harga" class="form-control" value='total_harga'>
                                                             </div>
-                                                            <div class="input-group mb-3">
+                                                            <div class="input-group">
                                                                 <div class="col-3 input-group-text"><b> Unggah Berkas : </b></div>
                                                                 <input type="url" name="upload_name" class="form-control" required>
                                                             </div>
+                                                            <a class="guide" href="images/gdrive_guide.pdf" download>
+                                                                *Cara Unggah Berkas
+                                                            </a>
                                                             <div class="input-group mb-3">
                                                                 <div class="col-3 input-group-text"><b> Catatan : </b></div>
                                                                 <textarea name="catatan" class="form-control"></textarea>
