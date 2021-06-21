@@ -8,7 +8,7 @@ require('../model/CustUser.php');
 
 $item = getDataDetailProses($_GET['id'], $conn);
 $datauser = getDataUser($_GET['idu'], $conn);
-$data_order = getDataOrder($_GET['id'], $conn);
+$data_order = getDataOrder($_GET['id'], $conn); 
 
 // if (isset($_SESSION['cust_id'])) {
 // 	$data_cart = getcartCount($_GET['idu']);
@@ -54,34 +54,47 @@ ob_start();
         color: white;
     }
 </style>
-<div style="text-align:center">
-    <!-- <img width="100" src="images/home/logo.png"/> -->
-    <table id="example1" class="table table-bordered table-striped" align="center">
-        <thead>
+<div align="center">
+<img  style="display: inline; margin-right: 500px; position: relative;" width="200" src="../dist/img/logo.jpg" />
+</div>
+ 
+<div  style="text-align:center;">
+    <table id="example1" class="table table-bordered table-striped" align="center" >
+<!--         <thead>
             <tr>
-                <td>
-                    <img width="100" src="../dist/img/logo.jpg" />
+                <td style=" border-right: none; border-left: none;border-top: none;border-bottom: : none;">
+                    <img width="200" src="../dist/img/logo.jpg" />
                 </td>
-                <td colspan="5" align="center">
-                    <h1><u>Invoice</u></h1>
+                <td align="center" style=" border-right: none; border-left: none;border-top: none;border-bottom: : none;">
+                    &nbsp;
                 </td>
             </tr>
-        </thead>
+        </thead> -->
         <tbody>
             <tr>
-                <td>Tanggal invoice : </td>
-                <td>Penerima : </td>
+                <td style=" border-right: none; border-left: none;border-top: none;" >&nbsp;</td>
+                <td style=" border-right: none; border-left: none;border-top: none;"><h4><u>Invoice</u></h4></td>
             </tr>
             <tr>
-                <td colspan="1">No Invoice : </td>
+                <td style="border-bottom: none; text-align: left;" >Tanggal invoice : <?php echo $data_order['create_date']?> </td>
+                <td style="border-bottom: none; text-align: left;">Penerima : <?php echo $datauser['cust_name']?> </td>
             </tr>
             <tr>
-                <td colspan="1">ID Pemesanan : </td>
+                <td colspan="1" style="border-bottom: none;border-top: none; text-align: left;">No Invoice : <?php echo $data_order['invoice']?> </td>
+                <td  style="border-bottom: none;border-top: none;">&nbsp;</td>
             </tr>
+            <tr>
+                <td colspan="1"  style="border-top: none; text-align: left;">ID Pemesanan : <?php echo $data_order['status_id']?> </td>
+                <td  style="border-top: none;">&nbsp;</td>
+            </tr>
+<!--             <tr>
+                <td style="border:none;" >&nbsp;</td>
+            </tr> -->
+
         </tbody>
     </table>
-
-    <table id="example1" class="table table-bordered table-striped" align="center">
+    <br>
+    <table id="example1" class="table table-bordered table-striped" align="center"  style=" border-bottom-style: none; border-right-style: none; border-left-style: none;border-top-style: none;">
         <thead>
             <tr align="center">
                 <th>Nama Produk</th>
@@ -89,7 +102,7 @@ ob_start();
                 <th>Bahan</th>
                 <th>Finishing</th>
                 <th>Qty</th>
-                <th>Harga</th>
+                <th>Harga Per Unit</th>
             </tr>
         </thead>
         <tbody>
@@ -119,11 +132,11 @@ ob_start();
         </tbody>
         <tfoot>
             <tr>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
                 <td style="background-color: gray; color:white;"><b>Total</b></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
                 <td align="right">Rp. <?php echo number_format($data_order['total_price']) ?></td>
             </tr>
         </tfoot>
@@ -131,14 +144,14 @@ ob_start();
     <br>
 </div>
 <?php
-// $html = ob_get_clean();
+$html = ob_get_clean();
 
-// require __DIR__ . '../../vendor/autoload.php';
+require __DIR__ . '../../vendor/autoload.php';
 
-// use Spipu\Html2Pdf\Html2Pdf;
+use Spipu\Html2Pdf\Html2Pdf;
 
-// $html2pdf = new Html2Pdf('P', 'A4', 'en');
-// $html2pdf->writeHTML($html);
-// $html2pdf->output('Invoice_Pemesanan.pdf', 'D');
+$html2pdf = new Html2Pdf('P', 'A4', 'en');
+$html2pdf->writeHTML($html);
+$html2pdf->output('Invoice_Pemesanan.pdf', 'D');
 
 ?>

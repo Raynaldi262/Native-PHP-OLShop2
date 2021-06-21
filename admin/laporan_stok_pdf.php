@@ -50,8 +50,8 @@ ob_start();
             <tr>
                 <td style="border:none;">
                     <img width="100" src="../dist/img/logo.jpg" />
-                </td style="border:none;">
-                <td colspan="6" align="center" style="font-size: 20px;">
+                </td>
+                <td colspan="6" align="center" style="font-size: 20px; border:none;">
                     <h4>Laporan Stok</h4>
                     <h4><?php echo 'Periode ' . $getStart . ' s/d ' . $getEnd ?></h4>
                 </td>
