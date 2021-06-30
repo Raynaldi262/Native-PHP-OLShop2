@@ -139,9 +139,44 @@ ob_start();
                 <td style="background-color: gray; color:white;"><b>Total</b></td>
                 <td align="right">Rp. <?php echo number_format($data_order['total_price']) ?></td>
             </tr>
+            <tr>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+            </tr>
+            <tr>
+                <td style="border:none;">Dibuat Oleh</td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;">Menyetujui,</td>
+            </tr>
+            <tr>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+            </tr>
+            <tr>
+                <td style="border:none;">Admin</td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;"></td>
+                <td style="border:none;">Manager</td>
+            </tr>
         </tfoot>
     </table>
     <br>
+    Apabila ada Kendala Hubungi nomor yang tertera
+    <br>
+    No Telp : 084566622254 Email : dea@gmail.com
 </div>
 <?php
 $html = ob_get_clean();
