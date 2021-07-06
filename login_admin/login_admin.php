@@ -34,8 +34,8 @@
     }
 
     .card-header>img {
-        max-height: 150px;
-        width: auto;
+        height: 130px;
+        width: 200px;
     }
 </style>
 
