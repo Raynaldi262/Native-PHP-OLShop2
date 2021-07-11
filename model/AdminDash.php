@@ -2,7 +2,7 @@
 require('../connect/conn.php');
 require('../session/session.php');
 
-$sql = "SELECT count(proses_id) jmlh from tbl_proses where status != 'Selesai' and status != 'DiBatalkan'";
+$sql = "SELECT count(proses_id) jmlh from tbl_proses where status not in ('Selesai','DiBatalkan','Belum Bayar')";
 $result = mysqli_query($conn, $sql);
 $pesanan = mysqli_fetch_assoc($result);
 
