@@ -133,7 +133,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="col-5 input-group-text">No Telepon : </div>
-                            <input type="text" class="form-control" placeholder="No. Telp" name="ins_hp">
+                            <input type="number" class="form-control" placeholder="No. Telp" name="ins_hp">
                             <div class="input-group-append">
                             </div>
                         </div>

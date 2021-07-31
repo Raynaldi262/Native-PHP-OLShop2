@@ -255,6 +255,12 @@ require('../session/session.php');
         $(function() {
             $("#include-navbar").load("left-navbar.php");
         });
+
+        $('#start').change(function() {
+            var a = $(this).val();
+            $('#end').attr('min', a);
+            $('#end').val('');
+        })
     </script>
 </body>
 
