@@ -60,7 +60,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama</th>
-                                                <th>No Telephon</th>
+                                                <th>No Telepon</th>
                                                 <th>Status</th>
                                                 <th>Wewenang</th>
                                                 <th>Aksi</th>
@@ -186,8 +186,8 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <div class="col-5 input-group-text">No Telephon : </div>
-                            <input type="text" class="form-control" placeholder="No. Telephon" id="phone" name="phone">
+                            <div class="col-5 input-group-text">No Telepon : </div>
+                            <input type="number" class="form-control" placeholder="No. Telephon" id="phone" name="phone">
                             <div class="input-group-append">
                             </div>
                         </div>
